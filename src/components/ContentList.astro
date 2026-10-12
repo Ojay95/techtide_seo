@@ -1,0 +1,21 @@
+---
+import PostCard from './PostCard.astro';
+const { items, kind, featured = false } = Astro.props;
+const first = featured ? items[0] : null;
+const rest = featured ? items.slice(1) : items;
+const cats = [...new Set(items.map((e: any) => e.data.category))];
+---
+<section class="sec" style="padding-top:48px"><div class="w">
+  {first && <PostCard entry={first} kind={kind} featured />}
+  {cats.length > 1 && <div class="chips" role="group" aria-label="Filter by category"><button class="chip" type="button" data-cat="all" aria-pressed="true">All</button>{cats.map((c: any) => <button class="chip" type="button" data-cat={c} aria-pressed="false">{c}</button>)}</div>}
+  <div class="cardgrid">{rest.map((e: any) => <PostCard entry={e} kind={kind} />)}</div>
+</div></section>
+<script is:inline>
+  document.querySelectorAll('.chip').forEach(function (c) {
+    c.addEventListener('click', function () {
+      var v = c.dataset.cat;
+      document.querySelectorAll('.chip').forEach(function (x) { x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); });
+      document.querySelectorAll('.cardgrid .post-card').forEach(function (p) { p.hidden = !(v === 'all' || p.dataset.cat === v); });
+    });
+  });
+</script>

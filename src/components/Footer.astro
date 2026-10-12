@@ -1,0 +1,13 @@
+---
+import { SITE } from '../data/site';
+import { SERVICES } from '../data/services';
+const analytics = Boolean(import.meta.env.PUBLIC_GA_ID || import.meta.env.PUBLIC_CLARITY_ID);
+---
+<footer class="site-foot">
+  <div class="w grid">
+    <div><b style="font:800 20px 'Sora Variable',sans-serif">TechTide <span class="acc" style="font-weight:400">SEO</span></b><p>{SITE.tagline}</p><p><a href={`mailto:${SITE.email}`}>{SITE.email}</a><br />{SITE.address}</p></div>
+    <div><b>Services</b><p style="line-height:2">{SERVICES.map((s) => <><a href={`/services/${s.slug}/`}>{s.name}</a><br /></>)}</p></div>
+    <div><b>Company</b><p style="line-height:2"><a href="/how-we-work/">How we work</a><br /><a href="/guides/">Guides</a><br /><a href="/blog/">Blog</a><br /><a href="/about/">About</a><br /><a href="/contact/">Contact</a><br /><a href="/free-seo-audit/">Free SEO audit</a></p></div>
+    <div><b>Legal</b><p style="line-height:2"><a href="/privacy/">Privacy</a><br /><a href="/cookies/">Cookies</a><br /><a href="/terms/">Terms</a><br /><a href="/accessibility/">Accessibility</a>{analytics && <><br /><button type="button" data-cookie-settings style="background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer">Cookie settings</button></>}</p></div>
+  </div>
+</footer>

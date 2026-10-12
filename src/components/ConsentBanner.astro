@@ -1,0 +1,36 @@
+---
+const ga = import.meta.env.PUBLIC_GA_ID ?? '';
+const clarity = import.meta.env.PUBLIC_CLARITY_ID ?? '';
+const enabled = Boolean(ga || clarity);
+---
+{enabled && (
+  <>
+    <div id="consent" class="p" role="dialog" aria-labelledby="consent-title" hidden style="position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;z-index:50;box-shadow:0 10px 40px rgba(0,0,0,.3)">
+      <b id="consent-title" style="font-family:'Sora Variable',sans-serif">Cookies and analytics</b>
+      <p class="m" style="margin:8px 0 14px;font-size:15px">We use optional analytics cookies to understand how the site is used. They stay off unless you accept. See our <a href="/cookies/">cookie policy</a>.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><button id="consent-accept" class="btn sm" type="button">Accept analytics</button><button id="consent-reject" class="btn sm ghost" type="button" style="margin-left:0">Reject</button></div>
+    </div>
+    <script is:inline define:vars={{ ga, clarity }}>
+      (function () {
+        var KEY = 'consent-v1', box = document.getElementById('consent');
+        function load() {
+          if (window.__ttLoaded) return; window.__ttLoaded = 1;
+          if (ga) {
+            var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ga; document.head.appendChild(s);
+            window.dataLayer = window.dataLayer || []; window.gtag = function () { dataLayer.push(arguments); };
+            gtag('js', new Date()); gtag('config', ga, { anonymize_ip: true });
+          }
+          if (clarity) {
+            (function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); }; t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y); })(window, document, 'clarity', 'script', clarity);
+          }
+        }
+        function save(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+        var v = null; try { v = localStorage.getItem(KEY); } catch (e) {}
+        if (v === 'yes') load(); else if (v !== 'no') box.hidden = false;
+        document.getElementById('consent-accept').addEventListener('click', function () { save('yes'); box.hidden = true; load(); });
+        document.getElementById('consent-reject').addEventListener('click', function () { save('no'); box.hidden = true; if (window.__ttLoaded) location.reload(); });
+        document.querySelectorAll('[data-cookie-settings]').forEach(function (b) { b.addEventListener('click', function () { box.hidden = false; }); });
+      })();
+    </script>
+  </>
+)}

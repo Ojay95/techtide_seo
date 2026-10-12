@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTA from '../../components/CTA.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+const when = (e: any) => (e.data.published ?? e.data.updated).valueOf();
+const guides = (await getCollection('guides')).filter((e) => !e.data.draft).sort((a, b) => a.data.title.localeCompare(b.data.title)).slice(0, 6);
+const posts = (await getCollection('blog')).filter((e) => !e.data.draft).sort((a, b) => when(b) - when(a)).slice(0, 6);
+---
+<Base title="SEO Guides and Resources | TechTide SEO" description="Practical SEO guides, checklists and articles from TechTide SEO. Learn how search works and how to get more customers from Google.">
+  <section class="gridbg" style="padding:72px 0"><div class="w"><nav class="mono crumb" aria-label="Breadcrumb"><a href="/">Home</a> / Resources</nav><h1 class="h1" style="max-width:780px">SEO resources that <span class="acc">get to the point</span></h1><p class="m lead">Clear, practical guides and articles on how search works and how to win more customers from Google.</p></div></section>
+  <section class="sec"><div class="w"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px"><div class="mono">Guides</div><a href="/guides/" style="font-weight:700;text-decoration:none">All guides →</a></div><div class="cardgrid">{guides.map((e) => <PostCard entry={e} kind="guides" />)}</div></div></section>
+  {posts.length > 0 && <section class="sec alt"><div class="w"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px"><div class="mono">Latest from the blog</div><a href="/blog/" style="font-weight:700;text-decoration:none">All posts →</a></div><div class="cardgrid">{posts.map((e) => <PostCard entry={e} kind="blog" />)}</div></div></section>}
+  <CTA />
+</Base>

@@ -1,0 +1,20 @@
+---
+const { compact = false, source = 'audit-page' } = Astro.props;
+const id = import.meta.env.PUBLIC_FORMSPREE_ID;
+const action = id ? `https://formspree.io/f/${id}` : '';
+const sfx = compact ? '-c' : '';
+---
+<form class="audit-form" method="POST" action={action || undefined} data-ready={id ? 'yes' : 'no'} data-done="Thank you. We have your details and will email your audit soon.">
+  {!compact && <><label for={`name${sfx}`}>Name</label><input class="in" id={`name${sfx}`} name="name" type="text" autocomplete="name" required /></>}
+  <label for={`email${sfx}`} class={compact ? 'sr-only' : ''}>Work email</label>
+  <input class="in" id={`email${sfx}`} name="email" type="email" autocomplete="email" placeholder={compact ? 'you@company.com' : undefined} required />
+  <label for={`site${sfx}`} class={compact ? 'sr-only' : ''}>Website address</label>
+  <input class="in" id={`site${sfx}`} name="website" type="url" placeholder="https://yourwebsite.com" required />
+  {!compact && <><label for="country">Country</label><input class="in" id="country" name="country" type="text" autocomplete="country-name" required />
+  <label for="goal">What would you like to achieve? (optional)</label><input class="in" id="goal" name="goal" type="text" /></>}
+  <input type="hidden" name="source" value={source} />
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
+  <button class="btn" type="submit" style="width:100%">Send me my free audit</button>
+  <p class="status m" role="status" aria-live="polite" style="font-size:14px;margin:12px 0 0"></p>
+  {!compact && <p class="m" style="font-size:13px;margin:8px 0 0">We use your details only to prepare your audit and reply to you. See our <a href="/privacy/">privacy policy</a>.</p>}
+</form>

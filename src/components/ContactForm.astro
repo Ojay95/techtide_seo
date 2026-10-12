@@ -1,0 +1,15 @@
+---
+const id = import.meta.env.PUBLIC_FORMSPREE_ID;
+const action = id ? `https://formspree.io/f/${id}` : '';
+---
+<form class="audit-form" method="POST" action={action || undefined} data-ready={id ? 'yes' : 'no'} data-done="Thank you. We have your message and will reply soon.">
+  <label for="c-name">Name</label><input class="in" id="c-name" name="name" type="text" autocomplete="name" required />
+  <label for="c-email">Email</label><input class="in" id="c-email" name="email" type="email" autocomplete="email" required />
+  <label for="c-site">Website (optional)</label><input class="in" id="c-site" name="website" type="url" placeholder="https://" />
+  <label for="c-msg">Message</label><textarea class="in" id="c-msg" name="message" rows="5" required style="resize:vertical"></textarea>
+  <input type="hidden" name="source" value="contact" />
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
+  <button class="btn" type="submit" style="width:100%">Send message</button>
+  <p class="status m" role="status" aria-live="polite" style="font-size:14px;margin:12px 0 0"></p>
+  <p class="m" style="font-size:13px;margin:8px 0 0">We use your details only to reply to you. See our <a href="/privacy/">privacy policy</a>.</p>
+</form>

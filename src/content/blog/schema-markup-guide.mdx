@@ -1,0 +1,148 @@
+---
+title: "Schema markup: a practical guide to structured data for SEO"
+metaTitle: "Schema Markup Guide: Structured Data for SEO"
+description: "A practical guide to schema markup and structured data: what it is, which types to use, how to add JSON-LD step by step and how to test it correctly."
+category: "Technical SEO"
+published: 2026-09-02
+updated: 2026-09-02
+draft: false
+---
+
+Search engines are good at reading text, but they still have to guess what it means. Is "Apple" a fruit or a company? Is that number a price, a phone number or a year? Schema markup removes the guesswork. It is a layer of code that tells search engines in a standard format exactly what a page is about, who the business is and what it offers.
+
+This guide explains schema markup in practical terms. You will learn what it does and doesn't do, which types most websites need, how to add it step by step, how to test it and the mistakes that cause problems.
+
+## What schema markup is
+
+Schema markup, also called structured data, is code added to a page that describes its content using a shared vocabulary from [Schema.org](https://schema.org/). It labels things such as the business name, address, phone number, opening hours, article author, product price and the path of pages leading to the current one. Visitors don't see it, but search engines read it.
+
+Google explains the idea in its [introduction to structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data).
+
+![Diagram: how schema markup moves from your page to a search result](/images/diagrams/schema-markup-guide.svg)
+
+*Figure 1: Structured data helps search engines understand a page and may make it eligible for richer results.*
+
+## What it can and can't do
+
+Schema markup can help in three ways:
+
+- Search engines understand who you are, what you offer and how pages relate.
+- Some pages become eligible for richer search results, such as breadcrumbs, product details or review stars.
+- Your business details stay consistent across the web.
+
+It does not give automatic ranking boosts, and adding it doesn't guarantee any special display. Google decides what to show, and it has changed or limited several rich result types over the years, so always check its [Search Gallery](https://developers.google.com/search/docs/appearance/structured-data/search-gallery) for what is currently supported.
+
+## The formats: JSON-LD, Microdata and RDFa
+
+Structured data can be written in three formats. Google recommends **JSON-LD**, a block of code placed in the page that is separate from the visible text. It is easier to add, maintain and test than Microdata or RDFa, which mix labels into the page's HTML. Use JSON-LD unless you have a strong reason not to.
+
+## Schema types most websites need
+
+| Type | Use it for | Notes |
+|---|---|---|
+| Organization or LocalBusiness | Your business details | Include name, logo, address, contact and links to profiles |
+| WebSite | The site as a whole | Usually on the home page |
+| Service or Product | What you sell | Use accurate names and descriptions |
+| Article or BlogPosting | Guides and posts | Include author, headline and dates |
+| BreadcrumbList | Page paths | Helps results show a clear trail |
+| Review | Genuine reviews | Follow Google's guidelines and never invent reviews |
+| FAQPage | Questions and answers | Rich results are limited to certain sites, so check current rules |
+
+For local businesses, see Google's [local business structured data guidance](https://developers.google.com/search/docs/appearance/structured-data/local-business).
+
+## How to add schema markup, step by step
+
+### Step 1: Choose the right type
+
+Match the markup to the page. The home page might carry Organization and WebSite markup, a service page carries Service and BreadcrumbList, and a blog post carries Article and BreadcrumbList.
+
+### Step 2: Write the JSON-LD
+
+Here is a simple example for an organisation. Replace every value with your real details.
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Example Company",
+  "url": "https://www.example.com",
+  "logo": "https://www.example.com/logo.png",
+  "email": "hello@example.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1 Example Street",
+    "addressLocality": "Example City",
+    "addressCountry": "NG"
+  }
+}
+```
+
+This block sits inside a script tag of type application/ld+json in the page. Don't worry if that looks technical. Most platforms add it for you.
+
+### Step 3: Place it on the page
+
+There are three common ways:
+- A **CMS or SEO plugin** that generates markup from your settings.
+- **Google Tag Manager**, which injects the code without editing the site.
+- **Your page templates**, if you or a developer control the code.
+
+### Step 4: Test it
+
+Paste the page address into Google's [Rich Results Test](https://search.google.com/test/rich-results) to see which features the page is eligible for and whether there are errors. Use the [Schema Markup Validator](https://validator.schema.org/) for general checks against the full vocabulary.
+
+![Screenshot placeholder: Rich Results Test showing detected structured data](/images/screenshots/rich-results-test.png)
+
+*Figure 2: The Rich Results Test lists detected items, warnings and errors.*
+
+### Step 5: Monitor in Search Console
+
+After indexing, the Enhancements section of Search Console shows reports for the types Google found, with errors and warnings. Fix errors first, then warnings that matter. Our [Search Console guide](/blog/how-to-use-google-search-console/) explains how to read the reports.
+
+## Rules that keep you safe
+
+1. **Match the visible page.** Markup must describe content users can see. Hidden or misleading markup can lead to manual actions.
+2. **Never fake reviews or ratings.** Only mark up genuine reviews that appear on the page.
+3. **Keep details consistent.** Name, address and phone should match your website, Google Business Profile and listings. See [local citations explained](/blog/local-citations-explained/).
+4. **Keep it current.** Update prices, hours and addresses when they change.
+5. **Don't over-mark.** Use the types that fit rather than adding everything.
+
+## Common mistakes
+
+- Copying markup from another site without changing the details.
+- Marking up content that isn't on the page.
+- Leaving test or placeholder values in the code.
+- Using several plugins that each output the same markup, causing duplicates.
+- Ignoring warnings that show missing recommended fields.
+- Expecting immediate rich results.
+
+## Does your business need schema?
+
+Almost every website benefits from Organization, WebSite and Breadcrumb markup, and local businesses should add LocalBusiness details. Content-heavy sites gain from Article markup. It is a low-cost foundation that supports other SEO work, though it is not a substitute for helpful content or strong technical health.
+
+## Frequently asked questions
+
+### Is schema markup a ranking factor?
+Google has said structured data helps it understand pages and can enable rich results, but it isn't a direct ranking factor on its own.
+
+### Do I need a developer?
+Not always. Plugins and tag managers can add standard markup, though custom or complex setups may need technical help.
+
+### How long until rich results appear?
+It varies. Google needs to crawl, process and decide to show them, and it may never show them for some pages.
+
+### Can wrong schema hurt my site?
+Misleading or spammy markup can cause Google to ignore it or take action, so keep it accurate.
+
+### Should every page have schema?
+Every page can carry at least WebSite or Breadcrumb data, and key pages should have the type that matches their content.
+
+## Next steps
+
+Structured data is one part of technical SEO. Work through our [technical SEO checklist](/guides/technical-seo-checklist/), or request a [free SEO audit](/free-seo-audit/) and we'll review your markup along with the rest of your site. See how our [technical SEO service](/services/technical-seo/) can help.
+
+## Sources and further reading
+
+- [Schema.org](https://schema.org/): the shared vocabulary.
+- [Introduction to structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data): Google's overview.
+- [Search Gallery](https://developers.google.com/search/docs/appearance/structured-data/search-gallery): the features Google supports.
+- [Rich Results Test](https://search.google.com/test/rich-results) and [Schema Markup Validator](https://validator.schema.org/): free testing tools.

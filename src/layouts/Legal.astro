@@ -1,0 +1,12 @@
+---
+import Base from './Base.astro';
+const { title, description, updated = '[DATE]' } = Astro.props;
+---
+<Base title={`${title} | TechTide SEO`} description={description}>
+  <section class="gridbg" style="padding:56px 0 40px"><div class="w">
+    <nav class="mono crumb" aria-label="Breadcrumb"><a href="/">Home</a> / {title}</nav>
+    <h1 class="h1" style="font-size:clamp(32px,4.4vw,48px);margin:14px 0">{title}</h1>
+    <div class="mono m">Last updated {updated}</div>
+  </div></section>
+  <section class="sec" style="padding-top:40px"><div class="w"><div class="prose"><slot /></div></div></section>
+</Base>

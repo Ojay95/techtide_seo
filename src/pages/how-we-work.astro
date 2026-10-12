@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import CTA from '../components/CTA.astro';
+const steps = [['Audit','We review your site, search presence and competitors, and agree goals with you.'],['Fix','We tackle the biggest blockers and quick wins first.'],['Grow','Content, links and local work build visibility every month.'],['Report','A monthly report in plain language, plus a call to review it.']];
+const plans = [
+  ['Local Starter', 'from $500', 'For businesses serving one area.', ['Google Business Profile management', 'Citation cleanup', 'Review system', 'Core on-page fixes', 'Monthly report'], false],
+  ['Growth', 'from $1,500', 'Everything in Local Starter, plus more.', ['Technical fixes', '2–4 content pieces a month', 'Service and location pages', 'Link building', 'Monthly strategy call'], true],
+  ['Authority', 'from $3,500', 'Everything in Growth, plus more.', ['Multi-location or competitive markets', 'Digital PR', 'Conversion work', 'Dedicated strategist'], false],
+];
+const faq = [['Why is there a minimum commitment?','SEO builds over time. A few months gives the work a fair chance to show results.'],['Can I change plans?','Yes. Move up or down with [30 days] notice.'],['How do you report?','Monthly, focused on leads, calls and visibility, with a call to discuss them.'],['What if I already have a developer?','We work alongside them and give clear briefs.']];
+---
+<Base title="How We Work and SEO Plans | TechTide SEO" description="See our SEO process and plans. Audit, fix, grow, report. Local, growth and authority plans from $500 per month.">
+  <section class="gridbg" style="padding:72px 0"><div class="w"><nav class="mono crumb" aria-label="Breadcrumb"><a href="/">Home</a> / How we work</nav><h1 class="h1" style="max-width:780px">A clear process. <span class="acc">Plans that fit.</span></h1><p class="m lead">Four steps from first audit to monthly reporting, with plans for different sizes of business.</p></div></section>
+  <section class="sec"><div class="w"><div class="mono">Our process</div><div class="grid" style="margin-top:20px;gap:28px">{steps.map(([a, b], i) => <div class="step"><div class="mono">0{i + 1}</div><h3>{a}</h3><p class="m" style="margin:0">{b}</p></div>)}</div></div></section>
+  <section class="sec alt"><div class="w"><div class="mono">Plans</div><h2 class="h2">Pick the level that fits your goals</h2>
+    <div class="grid" style="margin-top:24px;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))">{plans.map(([n, price, d, inc, hl]) => <div class="p" style={hl ? 'border:2px solid var(--accent)' : ''}><div class="mono">{n}</div><div style="font:800 34px 'Sora Variable',sans-serif;margin:8px 0">{price}<span class="m" style="font-size:16px;font-weight:400"> / month</span></div><p class="m">{d}</p><ul class="ul">{inc.map((i) => <li>{i}</li>)}</ul></div>)}</div>
+    <p class="m" style="margin-top:20px">The final price depends on your site, market and goals. Minimum commitment: [3 months].</p></div></section>
+  <section class="sec"><div class="w"><div class="mono">FAQ</div><h2 class="h2">Frequently asked questions</h2><div class="grid" style="margin-top:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))">{faq.map(([q, a]) => <div class="p"><h3 style="font-size:18px">{q}</h3><p class="m">{a}</p></div>)}</div>
+    <p style="margin-top:24px">Learn more: <a href="/guides/how-much-does-seo-cost/">How much does SEO cost?</a> · <a href="/guides/how-long-does-seo-take/">How long does SEO take?</a></p></div></section>
+  <CTA />
+</Base>

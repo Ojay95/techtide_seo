@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import CTA from '../components/CTA.astro';
+const beliefs = [['Clarity first','If you can\'t understand it, we haven\'t explained it well.'],['Honesty over hype','We don\'t guarantee rankings. We show our work.'],['Customers, not clicks','Success is calls, leads and sales.'],['Long-term thinking','Sustainable results beat tricks that get sites penalised.']];
+---
+<Base title="About TechTide SEO" description="TechTide SEO helps businesses in any market grow through search with clear plans, honest reporting and no jargon.">
+  <section class="gridbg" style="padding:72px 0"><div class="w"><nav class="mono crumb" aria-label="Breadcrumb"><a href="/">Home</a> / About</nav><h1 class="h1" style="max-width:780px">Search growth for <span class="acc">businesses in any market</span></h1><p class="m lead">TechTide SEO exists to make search growth clear and trustworthy. Many businesses have been burned by jargon, empty promises and reports that don't connect to sales. We do it differently.</p></div></section>
+  <section class="sec"><div class="w"><div class="mono">What we believe</div><div class="grid" style="margin-top:20px">{beliefs.map(([a, b], i) => <div class="p"><div class="mono">0{i + 1}</div><h3>{a}</h3><p class="m">{b}</p></div>)}</div></div></section>
+  <section class="sec alt"><div class="w two"><div><div class="mono">Our method</div><h2 class="h2">Five parts, one plan</h2><p class="m" style="margin:0">We cover technical, on-page, local, content and authority work in one plan, because each part supports the others. <a href="/services/">See our services</a>.</p></div>
+    <div class="p"><div class="mono">Our story</div><p style="margin:10px 0 0">[YOUR STORY: why you started TechTide SEO, in 3–5 sentences.]</p></div></div></section>
+  <section class="sec"><div class="w"><div class="mono">Business details</div><p class="m" style="margin-top:10px">TechTide SEO · 2 Iyalla Street, Alausa, Ikeja, Lagos, Nigeria · info@techtideseo.com · [REGISTERED BUSINESS NAME AND NUMBER]</p></div></section>
+  <CTA />
+</Base>

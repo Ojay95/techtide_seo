@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import AuditForm from '../components/AuditForm.astro';
+const got = ['Your top three issues holding the site back', 'Three quick wins you can act on', 'A snapshot of how you compare with a key competitor'];
+const next = [['We review', 'We check your site, search presence and one competitor.'], ['We send your audit', 'A short summary with your top issues and quick wins.'], ['You decide', 'Act on it yourself, or talk to us about a plan.']];
+---
+<Base title="Free SEO Audit | TechTide SEO" description="Get a free SEO audit of your website. We'll show your top opportunities and quick wins. No obligation. TechTide SEO.">
+  <section class="gridbg" style="padding:72px 0"><div class="w two" style="align-items:start">
+    <div>
+      <div class="mono">Free · No obligation</div>
+      <h1 class="h1" style="font-size:clamp(34px,4.6vw,50px);margin-top:14px">Get your free <span class="acc">SEO audit</span></h1>
+      <p class="m lead">Tell us about your website. We'll review it and send you a short summary of your biggest opportunities.</p>
+      <div class="mono" style="margin-bottom:12px">What you'll receive</div>
+      <div style="display:grid;gap:12px">{got.map((g, i) => <div class="p" style="display:flex;gap:14px;align-items:center;padding:14px 18px"><span class="pill">0{i + 1}</span><span>{g}</span></div>)}</div>
+      <p class="m" style="font-size:14px;margin-top:14px">Delivered within [X] business days.</p>
+    </div>
+    <div class="p" style="padding:28px"><AuditForm source="audit-page" /></div>
+  </div></section>
+  <section class="sec alt"><div class="w"><div class="mono">What happens next</div><div class="grid" style="margin-top:20px;gap:28px">{next.map(([a, b], i) => <div class="step"><div class="mono">0{i + 1}</div><h3>{a}</h3><p class="m" style="margin:0">{b}</p></div>)}</div></div></section>
+</Base>

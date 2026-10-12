@@ -1,0 +1,12 @@
+---
+import AuditForm from './AuditForm.astro';
+const { heading = "See what's holding you back" } = Astro.props;
+---
+<section class="sec gridbg">
+  <div class="w"><div class="p" style="padding:40px;text-align:center;border-color:var(--accent)">
+    <div class="mono">Free SEO audit</div>
+    <h2 class="h2">{heading}</h2>
+    <p class="m" style="margin:0 auto 24px;max-width:520px">Enter your website and email. We'll send your top three issues and three quick wins. No obligation.</p>
+    <div style="max-width:460px;margin:0 auto;text-align:left"><AuditForm compact source="cta" /></div>
+  </div></div>
+</section>

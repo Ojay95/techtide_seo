@@ -1,0 +1,37 @@
+---
+const { kind = 'chart' } = Astro.props;
+const cells: string[] = [];
+for (let r = 0; r < 5; r++) for (let c = 0; c < 7; c++) {
+  const a = Math.max(0.12, 1 - Math.hypot(c - 3, (r - 2) * 1.3) * 0.28);
+  cells.push(`background:rgba(${a > 0.45 ? '25,195,181' : '245,184,61'},${a.toFixed(2)})`);
+}
+const bars = [30, 38, 45, 52, 60, 72, 86];
+---
+{kind === 'chart' && (
+  <svg viewBox="0 0 420 150" width="100%" role="img" aria-label="Sample chart: search visibility rising over time">
+    <defs><linearGradient id="vg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--accent);stop-opacity:.35" /><stop offset="1" style="stop-color:var(--accent);stop-opacity:0" /></linearGradient></defs>
+    <path d="M0 40H420M0 80H420M0 120H420" style="stroke:var(--line)" />
+    <path d="M0 120C40 118 60 100 100 96S160 104 200 80S270 70 310 48S380 30 420 14L420 150L0 150Z" fill="url(#vg)" />
+    <path d="M0 120C40 118 60 100 100 96S160 104 200 80S270 70 310 48S380 30 420 14" fill="none" style="stroke:var(--accent)" stroke-width="3" stroke-linecap="round" />
+    <circle cx="416" cy="15" r="5" fill="#F5B83D" />
+  </svg>
+)}
+{kind === 'heat' && (
+  <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px" role="img" aria-label="Sample map-pack coverage heatmap">{cells.map((s) => <i style={`${s};border-radius:4px;aspect-ratio:1`}></i>)}</div>
+)}
+{kind === 'tech' && (
+  <div role="img" aria-label="Sample technical health bars"><div class="m" style="font-size:13px">Indexed pages</div><div class="bar"><i style="width:94%"></i></div><div class="m" style="font-size:13px">Mobile speed</div><div class="bar"><i style="width:82%"></i></div><div class="m" style="font-size:13px">Errors fixed</div><div class="bar"><i style="width:70%"></i></div></div>
+)}
+{kind === 'serp' && (
+  <div style="background:#fff;border-radius:10px;padding:12px 14px;color:#0F1B2D"><div style="color:#0B7A4B;font-size:12px">example.com › services</div><div style="color:#1A55C8;font-size:17px;font-weight:500">Emergency Plumber | 24/7 Repairs</div><div style="color:#4A5A6B;font-size:13px">Fast, upfront-priced repairs. Call now.</div></div>
+)}
+{kind === 'bars' && (
+  <div style="display:flex;align-items:flex-end;gap:6px;height:90px" role="img" aria-label="Sample rising traffic bars">{bars.map((v) => <i style={`flex:1;height:${v}%;background:var(--accent);opacity:${(0.45 + v / 200).toFixed(2)};border-radius:3px 3px 0 0`}></i>)}</div>
+)}
+{kind === 'net' && (
+  <svg viewBox="0 0 200 90" width="100%" role="img" aria-label="Sample link network">
+    <path d="M100 45L30 15M100 45L40 75M100 45L170 20M100 45L165 72M100 45L100 8" style="stroke:var(--field-line)" />
+    <circle cx="100" cy="45" r="13" style="fill:var(--accent)" />
+    <g fill="#F5B83D"><circle cx="30" cy="15" r="6" /><circle cx="40" cy="75" r="6" /><circle cx="170" cy="20" r="6" /><circle cx="165" cy="72" r="6" /><circle cx="100" cy="8" r="6" /></g>
+  </svg>
+)}

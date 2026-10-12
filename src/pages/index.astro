@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import CTA from '../components/CTA.astro';
+import Visual from '../components/Visual.astro';
+const pillars = [
+  ['s3', '01 · Technical', 'Make your site fast and crawlable', 'Fix indexing, speed and errors so Google can read every page.', 'tech', '/services/technical-seo/'],
+  ['s3', '02 · Local', 'Win the map pack', 'Profile, reviews and citations that put you in the top three.', 'heat', '/services/local-seo/'],
+  ['s2', '03 · On-page', 'Match what people search', 'Titles, content and links built for each search.', 'serp', '/services/on-page-seo/'],
+  ['s2', '04 · Content', 'Earn traffic that compounds', 'Guides and pages that answer buyer questions.', 'bars', '/services/content-seo/'],
+  ['s2', '05 · Authority', 'Earn trusted links', 'Partnerships and PR, never paid schemes.', 'net', '/services/link-building/'],
+];
+const steps = [['Audit','We review your site, search presence and competitors.'],['Fix','We repair the issues holding you back, quick wins first.'],['Grow','Content, links and local presence, month after month.'],['Report','A plain-language report on leads, not jargon.']];
+const why = [['Clarity','Plain English','No jargon. You always know what we did and why.'],['Honesty','Proof, not promises','No one can honestly guarantee rankings. We guarantee our process, work and reporting.'],['Reach','Built for any market','We work with businesses in any country where customers search in English.']];
+const faq = [['How long does SEO take?','Local improvements can show in weeks. Competitive searches usually take 4–6 months or more.'],['Do you guarantee rankings?','No. Search engines decide rankings. We commit to the work and the reporting.'],['What do I need to start?','Access to your website, Search Console and Google Business Profile. We guide you.'],['What does it cost?','Plans start from $500 per month.']];
+const rows = [['Organic clicks',78],['Calls from Google',62],['Form leads',48],['Top-3 keywords',70]];
+---
+<Base title="SEO Services That Bring Customers | TechTide SEO" description="Local, technical and on-page SEO for businesses in any market. Get a free SEO audit and a clear plan to rank higher and win more customers.">
+  <section class="gridbg" style="padding:80px 0 72px"><div class="w two">
+    <div>
+      <div class="mono">Search growth for businesses in any market</div>
+      <h1 class="h1" style="margin:14px 0 0">Rise in search.<br /><span class="acc">Win more customers.</span></h1>
+      <p class="m lead">We fix what holds your site back, build pages people search for, and report on what matters: calls, leads and sales.</p>
+      <a class="btn" href="/free-seo-audit/">Get your free SEO audit</a><a class="btn ghost" href="/services/">See our services</a>
+    </div>
+    <div class="p" role="group" aria-label="Illustrative sample dashboard">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="mono">Search visibility</span><span class="pill">Sample data</span></div>
+      <Visual kind="chart" />
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><span class="pill">LCP 2.1s</span><span class="pill">INP 120ms</span><span class="pill">CLS 0.05</span></div>
+    </div>
+  </div></section>
+  <section class="alt" style="border-block:1px solid var(--line)"><div class="w grid" style="padding-top:26px;padding-bottom:26px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+    {[['5','pillars, one plan'],['4','step process'],['Monthly','plain-language reports'],['0','ranking guarantees']].map(([a, b]) => <div class="stat"><b>{a}</b><span class="mono m">{b}</span></div>)}
+  </div></section>
+  <section class="sec"><div class="w">
+    <div class="mono">The system</div><h2 class="h2">Five pillars. One dashboard.</h2>
+    <p class="m" style="max-width:600px;margin:0 0 32px">Each part of SEO supports the others, so we plan and measure them together.</p>
+    <div class="bento">{pillars.map(([sp, n, t, d, v, h]) => <div class={`p ${sp}`}><div class="mono">{n}</div><h3>{t}</h3><p class="m">{d}</p><div style="margin:14px 0"><Visual kind={v} /></div><a href={h} style="font-weight:700;text-decoration:none">Explore →</a></div>)}</div>
+  </div></section>
+  <section class="sec alt"><div class="w"><div class="mono">Process</div><h2 class="h2">From audit to report in four steps</h2>
+    <div class="grid" style="margin-top:28px;gap:28px">{steps.map(([a, b], i) => <div class="step"><div class="mono">0{i + 1}</div><h3>{a}</h3><p class="m" style="margin:0">{b}</p></div>)}</div></div></section>
+  <section class="sec"><div class="w two">
+    <div><div class="mono">Reporting</div><h2 class="h2">A report built around leads</h2><p class="m" style="margin:0">Every month you see what changed, what it means and what we do next, in plain language. Clicks matter only when they turn into calls and customers.</p></div>
+    <div class="p"><div style="display:flex;justify-content:space-between"><b>Monthly report layout</b><span class="pill">Sample</span></div>
+      {rows.map(([l, v]) => <div style="display:grid;grid-template-columns:140px 1fr 24px;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)"><span style="font-size:14px">{l}</span><div class="bar" style="margin:0"><i style={`width:${v}%`}></i></div><b style="color:var(--good)">▲</b></div>)}
+    </div>
+  </div></section>
+  <section class="sec alt"><div class="w"><div class="mono">Why TechTide SEO</div><h2 class="h2">Measured, honest and clear</h2>
+    <div class="grid" style="margin-top:24px">{why.map(([k, t, d]) => <div class="p"><div class="mono">{k}</div><h3>{t}</h3><p class="m">{d}</p></div>)}</div></div></section>
+  {/* Add a "Results" section here after your first real case study. */}
+  <section class="sec"><div class="w"><div class="mono">FAQ</div><h2 class="h2">Questions we hear often</h2>
+    <div class="grid" style="margin-top:24px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))">{faq.map(([q, a]) => <div class="p"><h3 style="font-size:18px">{q}</h3><p class="m">{a}</p></div>)}</div></div></section>
+  <CTA />
+</Base>

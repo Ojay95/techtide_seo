@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTA from '../../components/CTA.astro';
+import ContentList from '../../components/ContentList.astro';
+import { getCollection } from 'astro:content';
+const items = (await getCollection('guides')).filter((e) => !e.data.draft).sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+<Base title="SEO Guides and Checklists | TechTide SEO" description="In-depth SEO guides and checklists from TechTide SEO covering local, technical and on-page SEO, pricing, timelines and audits.">
+  <section class="gridbg" style="padding:72px 0"><div class="w"><nav class="mono crumb" aria-label="Breadcrumb"><a href="/">Home</a> / Guides</nav><h1 class="h1" style="max-width:780px">SEO guides that <span class="acc">get to the point</span></h1><p class="m lead">In-depth walkthroughs and checklists. For longer articles, visit the <a href="/blog/">blog</a>.</p><div class="mono m">{items.length} guides</div></div></section>
+  <ContentList items={items} kind="guides" />
+  <CTA />
+</Base>
