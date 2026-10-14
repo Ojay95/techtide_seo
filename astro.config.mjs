@@ -5,6 +5,7 @@ import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 import rehypeExternalLinks from 'rehype-external-links';
 
+
 // The admin only runs on your own computer (npm run dev). The live site is plain static pages.
 const isDev = process.argv.includes('dev');
 

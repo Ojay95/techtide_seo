@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import AuditForm from '../components/AuditForm.astro';
+const covers = [
+  ['Page basics', 'HTTPS, redirects, response time, title, description, H1, canonical, indexing and mobile settings.'],
+  ['Content', 'Amount of text, subheadings, image descriptions and links.'],
+  ['Technical', 'robots.txt, XML sitemap, compression, page size and mixed content.'],
+  ['Structured data and sharing', 'Schema markup, social sharing tags and favicon.'],
+  ['Security headers', 'HSTS, content type and clickjacking protection.'],
+  ['Mobile speed', 'Google PageSpeed Insights scores, loading time, layout stability and the biggest speed fixes.'],
+];
+---
+<Base title="Free SEO Audit Tool: Check Your Website | TechTide SEO" description="Enter your website address for an instant SEO check of page basics, content, technical health, structured data and mobile speed, with plain-English fixes.">
+  <section class="gridbg" style="padding:72px 0"><div class="w">
+    <nav class="mono crumb" aria-label="Breadcrumb"><a href="/">Home</a> / SEO audit tool</nav>
+    <h1 class="h1" style="max-width:820px;margin-top:14px">Free <span class="acc">SEO audit tool</span></h1>
+    <p class="m lead" style="max-width:640px">Enter your website address for an instant check of page basics, content, technical health, structured data and mobile speed, with plain-English fixes.</p>
+    <form id="au-form" class="au-form" novalidate>
+      <label for="au-url" class="sr-only">Website address</label>
+      <input id="au-url" class="in" type="text" inputmode="url" autocomplete="url" placeholder="example.com" style="margin:0;flex:1;min-width:240px" />
+      <button id="au-btn" class="btn" type="submit">Check my website</button>
+    </form>
+    <p class="m" style="font-size:13px;margin-top:10px">We check one page and do not store your results. See our <a href="/privacy/">privacy policy</a>.</p>
+  </div></section>
+
+  <section class="sec" id="au-results" hidden><div class="w" id="au-out" aria-live="polite"></div></section>
+
+  <section class="sec alt"><div class="w">
+    <div class="mono">What we check</div><h2 class="h2">Six areas, explained in plain English</h2>
+    <div class="grid" style="margin-top:20px">{covers.map(([t, d]) => <div class="p"><h3>{t}</h3><p class="m">{d}</p></div>)}</div>
+    <p class="m" style="margin-top:20px;max-width:760px">This tool checks the page you enter. It cannot see your rankings, keywords or backlinks, and it does not replace an expert review. If a page builds its content with JavaScript, some checks may be incomplete.</p>
+  </div></section>
+
+  <section class="sec"><div class="w two" style="align-items:start">
+    <div><div class="mono">Next step</div><h2 class="h2">Want an expert to fix what the tool finds?</h2><p class="m">Send us your website and we'll review it by hand. You'll get your top three issues, three quick wins and a comparison with a key competitor.</p></div>
+    <div class="p" style="padding:28px"><AuditForm source="audit-tool" /></div>
+  </div></section>
+</Base>
+
+<script is:inline>
+(function () {
+  var form = document.getElementById('au-form'), inp = document.getElementById('au-url'), btn = document.getElementById('au-btn');
+  var box = document.getElementById('au-results'), out = document.getElementById('au-out');
+  var ICON = { pass: '\u2713', warn: '!', fail: '\u2715', info: 'i' }, LABEL = { pass: 'Pass', warn: 'Improve', fail: 'Problem', info: 'Note' };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var row = function (c) { return '<li class="au-row au-' + c.status + '"><span class="au-ic" aria-hidden="true">' + ICON[c.status] + '</span><div><b>' + esc(c.label) + '</b> <span class="sr-only">' + LABEL[c.status] + '.</span><div class="au-d">' + esc(c.detail) + '</div>' + (c.fix && c.status !== 'pass' ? '<div class="au-fix"><b>How to fix:</b> ' + esc(c.fix) + '</div>' : '') + '</div></li>'; };
+  var tone = function (v) { return v == null ? 'au-n' : v >= 90 ? 'au-g' : v >= 50 ? 'au-w' : 'au-b'; };
+  var sec = function (ms, good, ok) { return ms == null ? 'info' : ms <= good ? 'pass' : ms <= ok ? 'warn' : 'fail'; };
+
+  function renderAudit(d) {
+    var groups = [], map = {};
+    d.checks.forEach(function (c) { if (!map[c.group]) { map[c.group] = []; groups.push(c.group); } map[c.group].push(c); });
+    var html = '<div class="mono">Results for</div><h2 class="h2" style="word-break:break-all">' + esc(d.url) + '</h2>' +
+      '<div class="au-sum"><span class="au-chip au-g">' + d.counts.pass + ' passed</span><span class="au-chip au-w">' + d.counts.warn + ' to improve</span><span class="au-chip au-b">' + d.counts.fail + ' problems</span></div>';
+    groups.forEach(function (g) { html += '<div class="p au-card"><h3>' + esc(g) + '</h3><ul class="au-list">' + map[g].map(row).join('') + '</ul></div>'; });
+    html += '<div class="p au-card" id="au-speed"><h3>Mobile speed (Google PageSpeed Insights)</h3><p class="m" style="margin:8px 0 0">Testing mobile speed. This takes about 20 to 40 seconds...</p></div>';
+    out.innerHTML = html;
+  }
+  function renderSpeed(s) {
+    var el = document.getElementById('au-speed'); if (!el) return;
+    if (s.error) { el.innerHTML = '<h3>Mobile speed (Google PageSpeed Insights)</h3><p class="m">' + esc(s.error) + '</p>'; return; }
+    var L = s.lab, F = s.field;
+    var sc = function (n, v) { return '<div style="text-align:center"><div class="au-sc ' + tone(v) + '">' + (v == null ? '-' : v) + '</div><div class="au-d">' + n + '</div></div>'; };
+    var m = function (label, m, status, text) { return row({ status: status, label: label, detail: text, fix: '' }); };
+    var html = '<h3>Mobile speed (Google PageSpeed Insights)</h3><div class="au-scores">' + sc('Performance', s.scores.performance) + sc('Accessibility', s.scores.accessibility) + sc('SEO', s.scores.seo) + sc('Best practices', s.scores.bestPractices) + '</div>';
+    html += '<ul class="au-list">' +
+      m('Largest Contentful Paint (lab)', L.lcp, sec(L.lcp.value, 2500, 4000), L.lcp.display + ' (good is 2.5 s or less)') +
+      m('Total Blocking Time (lab)', L.tbt, sec(L.tbt.value, 200, 600), L.tbt.display + ' (good is 200 ms or less)') +
+      m('Cumulative Layout Shift (lab)', L.cls, sec(L.cls.value, 0.1, 0.25), L.cls.display + ' (good is 0.1 or less)') +
+      m('First Contentful Paint (lab)', L.fcp, sec(L.fcp.value, 1800, 3000), L.fcp.display + ' (good is 1.8 s or less)') + '</ul>';
+    if (F.lcp != null || F.inp != null || F.cls != null) {
+      html += '<h3 style="margin-top:16px;font-size:17px">Real visitor data (75th percentile)</h3><ul class="au-list">' +
+        (F.lcp != null ? m('Largest Contentful Paint', F.lcp, sec(F.lcp, 2500, 4000), (F.lcp / 1000).toFixed(1) + ' s') : '') +
+        (F.inp != null ? m('Interaction to Next Paint', F.inp, sec(F.inp, 200, 500), F.inp + ' ms') : '') +
+        (F.cls != null ? m('Cumulative Layout Shift', F.cls, sec(F.cls, 0.1, 0.25), String(F.cls)) : '') + '</ul>';
+    }
+    if (s.opportunities && s.opportunities.length) {
+      html += '<h3 style="margin-top:16px;font-size:17px">Biggest speed fixes</h3><ul class="au-list">' + s.opportunities.map(function (o) { return row({ status: 'warn', label: o.title, detail: o.display, fix: '' }); }).join('') + '</ul>';
+    }
+    el.innerHTML = html;
+  }
+  function jget(u) { return fetch(u).then(function (r) { return r.json(); }); }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = inp.value.trim();
+    if (!v) { inp.focus(); return; }
+    btn.disabled = true; btn.textContent = 'Checking...';
+    box.hidden = false; out.innerHTML = '<p class="m">Checking your website. Page checks take a few seconds...</p>';
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var q = encodeURIComponent(v);
+    var speed = jget('/api/speed?url=' + q).catch(function () { return { error: 'The speed test is not available right now.' }; });
+    jget('/api/audit?url=' + q).then(function (d) {
+      btn.disabled = false; btn.textContent = 'Check my website';
+      if (d.error) { out.innerHTML = '<div class="p"><h3>We could not check that website</h3><p class="m">' + esc(d.error) + '</p></div>'; return; }
+      renderAudit(d);
+      var site = document.getElementById('site'); if (site) site.value = d.url;
+      var f = document.querySelector('form.audit-form');
+      if (f) { var h = f.querySelector('input[name=audit_summary]') || document.createElement('input'); h.type = 'hidden'; h.name = 'audit_summary'; h.value = d.counts.pass + ' passed, ' + d.counts.warn + ' to improve, ' + d.counts.fail + ' problems'; f.appendChild(h); }
+      speed.then(renderSpeed);
+    }).catch(function () {
+      btn.disabled = false; btn.textContent = 'Check my website';
+      out.innerHTML = '<div class="p"><h3>The audit service is not available</h3><p class="m">Please try again in a moment. If you are testing locally, check the setup notes.</p></div>';
+    });
+  });
+})();
+</script>
+
+<style is:global>
+.au-form{display:flex;gap:10px;flex-wrap:wrap;max-width:680px;margin-top:20px}
+.au-sum{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 22px}
+.au-chip{border-radius:20px;padding:6px 14px;font-weight:700;border:2px solid}
+.au-card{margin-bottom:16px}.au-card h3{font-size:20px}
+.au-list{list-style:none;margin:10px 0 0;padding:0}
+.au-row{display:flex;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.au-ic{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px;color:#fff;margin-top:2px}
+.au-pass .au-ic{background:#0B7A4B}.au-warn .au-ic{background:#8A5E00}.au-fail .au-ic{background:#B3342C}.au-info .au-ic{background:#5B7691}
+.au-d{color:var(--muted);font-size:14.5px}.au-fix{font-size:14px;margin-top:4px}
+.au-scores{display:flex;gap:18px;flex-wrap:wrap;margin:14px 0}
+.au-sc{min-width:72px;padding:10px 14px;border-radius:14px;border:3px solid;font:800 26px 'Sora Variable',sans-serif;text-align:center}
+.au-g{color:#0B7A4B;border-color:#0B7A4B}.au-w{color:#8A5E00;border-color:#8A5E00}.au-b{color:#B3342C;border-color:#B3342C}.au-n{color:#5B7691;border-color:#5B7691}
+[data-theme=dark] .au-g{color:#4FD08F;border-color:#4FD08F}[data-theme=dark] .au-w{color:#F2C14E;border-color:#F2C14E}[data-theme=dark] .au-b{color:#FF8A80;border-color:#FF8A80}
+</style>
