@@ -8,6 +8,7 @@ export const SITE = {
   city: 'Ikeja',
   region: 'Lagos',
   country: 'NG',
+  sameAs: [] as string[],
 };
 
 export const NAV = [
@@ -18,3 +19,4 @@ export const NAV = [
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
 ];
+

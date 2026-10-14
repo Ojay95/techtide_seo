@@ -11,11 +11,16 @@ import { SITE } from '../data/site';
 const { title, description, schema = [], noindex = false } = Astro.props;
 const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
 const canonical = new URL(path, SITE.url).href;
-const base = [
-  { '@context': 'https://schema.org', '@type': 'Organization', name: SITE.name, url: SITE.url, logo: `${SITE.url}/favicon.svg`, email: SITE.email,
-    address: { '@type': 'PostalAddress', streetAddress: SITE.street, addressLocality: SITE.city, addressRegion: SITE.region, addressCountry: SITE.country } },
-  { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url },
-];
+   const org = {
+     '@context': 'https://schema.org', '@type': ['Organization', 'ProfessionalService'], '@id': `${SITE.url}/#organization`,
+     name: SITE.name, url: SITE.url, logo: `${SITE.url}/favicon.svg`, email: SITE.email,
+     description: 'TechTide SEO is an SEO agency based in Ikeja, Lagos, Nigeria, helping businesses in Nigeria and worldwide get found on Google.',
+     address: { '@type': 'PostalAddress', streetAddress: SITE.street, addressLocality: SITE.city, addressRegion: SITE.region, addressCountry: SITE.country },
+     areaServed: ['Nigeria', 'Worldwide'],
+     knowsAbout: ['Search engine optimisation', 'Local SEO', 'Technical SEO', 'On-page SEO', 'Content marketing', 'Link building'],
+     ...(SITE.sameAs.length ? { sameAs: SITE.sameAs } : {}),
+   };
+   const base = [org, { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url }];
 ---
 <!doctype html>
 <html lang="en" data-theme="light">
