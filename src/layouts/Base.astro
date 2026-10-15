@@ -6,11 +6,12 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
-import { SITE } from '../data/site';
+import { SITE, NAV } from '../data/site';
 
-const { title, description, schema = [], noindex = false } = Astro.props;
+const { title, description, schema = [], noindex = false, image = '/images/og-default.jpg' } = Astro.props;
 const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
 const canonical = new URL(path, SITE.url).href;
+const ogImage = new URL(image, SITE.url).href;
    const org = {
      '@context': 'https://schema.org', '@type': ['Organization', 'ProfessionalService'], '@id': `${SITE.url}/#organization`,
      name: SITE.name, url: SITE.url, logo: `${SITE.url}/favicon.svg`, email: SITE.email,
@@ -20,7 +21,20 @@ const canonical = new URL(path, SITE.url).href;
      knowsAbout: ['Search engine optimisation', 'Local SEO', 'Technical SEO', 'On-page SEO', 'Content marketing', 'Link building'],
      ...(SITE.sameAs.length ? { sameAs: SITE.sameAs } : {}),
    };
-   const base = [org, { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url }];
+   const base: any[] = [org, { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url }];
+   // Auto-generate BreadcrumbList for every non-home page unless the page already provides one.
+   const segs = path.split('/').filter(Boolean);
+   const hasCrumbs = schema.some((s: any) => s['@type'] === 'BreadcrumbList');
+   if (segs.length && !noindex && !hasCrumbs) {
+     const label = (href: string, seg: string) => NAV.find((n) => n.href === href)?.label ?? seg.replace(/-/g, ' ').replace(/^./, (c) => c.toUpperCase()).replace(/\bseo\b/gi, 'SEO');
+     const items = [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` }];
+     segs.forEach((seg, i) => {
+       const href = `/${segs.slice(0, i + 1).join('/')}/`;
+       const last = i === segs.length - 1;
+       items.push({ '@type': 'ListItem', position: i + 2, name: last ? String(title).split(' | ')[0] : label(href, seg), item: `${SITE.url}${href}` });
+     });
+     base.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items });
+   }
 ---
 <!doctype html>
 <html lang="en" data-theme="light">
@@ -40,7 +54,14 @@ const canonical = new URL(path, SITE.url).href;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="TechTide SEO: Get found on Google" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     {[...base, ...schema].map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
   </head>
   <body>

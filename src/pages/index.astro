@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
 import Visual from '../components/Visual.astro';
+import Pricing from '../components/Pricing.astro';
 const pillars = [
   ['s3', '01 · Technical', 'Make your site fast and crawlable', 'Fix indexing, speed and errors so Google can read every page.', 'tech', '/services/technical-seo/'],
   ['s3', '02 · Local', 'Win the map pack', 'Profile, reviews and citations that put you in the top three.', 'heat', '/services/local-seo/'],
@@ -46,8 +47,11 @@ const rows = [['Organic clicks',78],['Calls from Google',62],['Form leads',48],[
   </div></section>
   <section class="sec alt"><div class="w"><div class="mono">Why TechTide SEO</div><h2 class="h2">Measured, honest and clear</h2>
     <div class="grid" style="margin-top:24px">{why.map(([k, t, d]) => <div class="p"><div class="mono">{k}</div><h3>{t}</h3><p class="m">{d}</p></div>)}</div></div></section>
+  <section class="sec" id="pricing"><div class="w"><div class="mono">Pricing</div><h2 class="h2">Clear plans, no surprises</h2>
+    <p class="m" style="max-width:600px;margin:0">Every plan starts with a free audit, so you know exactly what we'll fix before you commit. <a href="/how-we-work/">See how we work</a>.</p>
+    <Pricing /></div></section>
   {/* Add a "Results" section here after your first real case study. */}
-  <section class="sec"><div class="w"><div class="mono">FAQ</div><h2 class="h2">Questions we hear often</h2>
+  <section class="sec alt"><div class="w"><div class="mono">FAQ</div><h2 class="h2">Questions we hear often</h2>
     <div class="grid" style="margin-top:24px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))">{faq.map(([q, a]) => <div class="p"><h3 style="font-size:18px">{q}</h3><p class="m">{a}</p></div>)}</div></div></section>
   <CTA />
 </Base>

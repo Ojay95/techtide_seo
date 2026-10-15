@@ -1,0 +1,16 @@
+---
+import { PLANS } from '../data/services';
+---
+<div class="grid" style="margin-top:24px;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))">
+  {PLANS.map(([n, price, d, inc, hl]) => (
+    <div class="p plan" style={hl ? 'border:2px solid var(--accent)' : ''}>
+      <div style="display:flex;justify-content:space-between;align-items:center"><div class="mono">{n}</div>{hl && <span class="pill">Most popular</span>}</div>
+      <div style="font:800 34px 'Sora Variable',sans-serif;margin:8px 0">{price}<span class="m" style="font-size:16px;font-weight:400"> / month</span></div>
+      <p class="m">{d}</p>
+      <ul class="ul">{inc.map((i) => <li>{i}</li>)}</ul>
+      <a class={hl ? 'btn' : 'btn ghost'} href="/free-seo-audit/" style="width:100%;text-align:center;margin-top:12px">Start with a free audit</a>
+    </div>
+  ))}
+</div>
+<p class="m" style="margin-top:20px">The final price depends on your site, market and goals. Minimum commitment: 3 months. One-time SEO audits start from $500.</p>
+<style>.plan{transition:transform .2s ease,box-shadow .2s ease}.plan:hover{transform:translateY(-4px)}</style>

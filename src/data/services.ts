@@ -62,3 +62,10 @@ export const SERVICES: Service[] = [
     price: 'Paid audits start from $500',
     related: [['/guides/how-to-do-an-seo-audit/','How to do an SEO audit']] },
 ];
+
+// Monthly plans: shown on the homepage and /how-we-work/. [name, price, description, includes, highlighted]
+export const PLANS: [string, string, string, string[], boolean][] = [
+  ['Local Starter', 'from $500', 'For businesses serving one area.', ['Google Business Profile management', 'Citation cleanup', 'Review system', 'Core on-page fixes', 'Monthly report'], false],
+  ['Growth', 'from $1,500', 'Everything in Local Starter, plus more.', ['Technical fixes', '2–4 content pieces a month', 'Service and location pages', 'Link building', 'Monthly strategy call'], true],
+  ['Authority', 'from $3,500', 'Everything in Growth, plus more.', ['Multi-location or competitive markets', 'Digital PR', 'Conversion work', 'Dedicated strategist'], false],
+];
