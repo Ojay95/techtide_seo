@@ -1,0 +1,171 @@
+---
+title: "How to get your website indexed on Google faster"
+metaTitle: "How to Get Your Website Indexed on Google Faster"
+description: "Pages not showing on Google? Learn how indexing works, why pages get stuck and the exact steps to help new pages get indexed faster, with fixes."
+category: "Technical SEO"
+published: 2026-01-20
+updated: 2026-01-20
+draft: false
+---
+
+You publish a new page, share it proudly, and search for it on Google. Nothing. A week later, still nothing. It's one of the most frustrating moments in SEO, because a page that isn't indexed can't bring in a single visitor from search.
+
+The good news is that indexing isn't a mystery. It follows a set of steps, and when pages get stuck, there's nearly always a reason you can find and fix. Even better, you can make it easier for Google to find and trust your pages from the start.
+
+This guide explains how indexing works in plain English, how to check what's going on, how to fix the usual blockers and how to speed things up. There are no tricks, just the steps that work.
+
+## What "indexed" actually means
+
+Google keeps a huge database of web pages, called its index. When someone searches, Google picks from pages in that index. If your page isn't in it, it can't appear in results, however good it is.
+
+Getting there takes several steps. Google must **discover** the address, **crawl** the page (visit it), **evaluate** it and then decide whether to **store** it in the index. It doesn't index every page it finds. It chooses what it thinks is useful and not a duplicate of something it already has.
+
+![Diagram: how a page gets into Google, from discovery to crawling, evaluation, indexing and ranking](/images/diagrams/how-to-get-your-website-indexed-faster.svg)
+
+*Figure 1: Each step can stall. Fix the blocker at the right step and the page moves on.*
+
+Google explains the basics in its guide to [how Search works](https://developers.google.com/search/docs/fundamentals/how-search-works).
+
+## How long does indexing take?
+
+There's no fixed answer. A new page on an established, frequently updated site can be indexed within hours or days. A page on a brand-new site can take days or weeks, and some pages are never indexed if they look thin, duplicated or unimportant.
+
+So set expectations: give a new page about a week before worrying, and two to four weeks for a new site. If it's longer than that, investigate.
+
+## Step 1: Check whether the page is really missing
+
+Don't guess. Use [Google Search Console](https://search.google.com/search-console), which is free.
+
+1. Paste the page address into the search bar at the top.
+2. Read the verdict. "URL is on Google" means it's indexed. "URL is not on Google" means it isn't.
+3. Look at the reason shown, such as "Discovered, currently not indexed" or "Crawled, currently not indexed".
+
+![Screenshot placeholder: the URL inspection tool in Google Search Console](/images/screenshots/url-inspection.png)
+
+*Figure 2: URL inspection tells you whether a page is indexed and why not.*
+
+You can also type `site:yourwebsite.com/page-address` into Google as a rough check, but Search Console is more accurate. Our guide to [five quick checks](/blog/five-quick-checks-can-google-find-your-website/) covers more ways to look.
+
+## Step 2: Remove anything that blocks indexing
+
+Before trying to speed things up, make sure nothing is actively holding the page back.
+
+**A noindex tag.** This tells search engines not to index the page. It's often left on from the time a site was being built, or switched on by a plugin setting. Check the page source or the SEO plugin's setting for that page.
+
+**A robots.txt block.** If your robots.txt file disallows the page's folder, Google can't crawl it. Google explains the file in its [robots.txt introduction](https://developers.google.com/search/docs/crawling-indexing/robots/intro). Check yours at `yourwebsite.com/robots.txt`.
+
+**A wrong canonical tag.** If the page's canonical tag points to a different address, Google may index that one instead. Each page should normally point to itself, unless it's a deliberate duplicate. See Google's guide to [consolidating duplicate URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls).
+
+**A login wall or error.** If the page returns an error (404, 500) or needs a password, Google can't index it.
+
+**Redirects.** If the address redirects elsewhere, the destination page is what Google considers.
+
+## Step 3: Make the page easy to discover
+
+Google finds pages by following links and reading sitemaps. Give it both.
+
+**Link to the page from other pages.** A page with no links pointing to it is an "orphan", and it's much harder to find. Add links from your home page, menus, related posts and category pages. Our guide to [internal linking](/blog/internal-linking-guide/) shows how to do it well.
+
+**Keep an XML sitemap.** It's a list of the pages you want indexed. Most website platforms and SEO plugins create one automatically. Submit it in Search Console under **Sitemaps**. Google's [sitemap overview](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview) explains the format.
+
+![Screenshot placeholder: the Sitemaps report in Google Search Console](/images/screenshots/search-console-sitemaps.png)
+
+*Figure 3: Submit your sitemap once. Google rechecks it regularly.*
+
+**Earn a link or two from elsewhere.** A mention from another site, a social post or a listing can help Google find the page sooner. It doesn't need to be a big site.
+
+## Step 4: Ask Google to crawl it
+
+Once the page is clean and linked, you can request indexing.
+
+1. Open URL inspection in Search Console and paste the address.
+2. Click **Request indexing**.
+
+It's a nudge, not a command. Requesting the same page over and over doesn't speed things up, and there's a daily limit. Use it for important new or updated pages. Google's guide to [asking for a recrawl](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl) explains what to expect.
+
+## Step 5: Make the page worth indexing
+
+This is the part many people skip. If Google crawls a page and chooses not to index it, the page usually has a quality or duplication problem. Ask yourself:
+
+- Does the page offer something useful and original?
+- Is it long enough to answer the question properly?
+- Is it nearly identical to another page on your site, or to a page elsewhere?
+- Does it have a clear purpose and a clear topic?
+
+Thin pages, copied text and near-duplicate location or product pages are common causes. Improve the page with real information, examples, photos and answers, and make sure it adds something your other pages don't. Google's [guidance on helpful content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) is a good checklist.
+
+## Step 6: Fix technical problems that slow crawling
+
+Google visits sites at a pace that suits them. If your site is slow or throws errors, it may crawl less often.
+
+- Keep the site fast. See [Core Web Vitals explained](/blog/core-web-vitals-explained/).
+- Fix server errors and broken links.
+- Avoid long redirect chains.
+- Make sure important content is in the page's HTML, not only loaded later by scripts.
+
+## What the Search Console messages mean
+
+You'll see a few common statuses in the Pages report. Here's what to do about each.
+
+| Status | What it usually means | What to do |
+|---|---|---|
+| Discovered, currently not indexed | Google knows the address but hasn't crawled it yet | Add internal links, submit a sitemap, be patient |
+| Crawled, currently not indexed | Google looked and decided not to index it for now | Improve quality, fix duplication, add links |
+| Duplicate without user-selected canonical | Google sees it as a copy of another page | Set a clear canonical tag or merge pages |
+| Excluded by noindex tag | The page tells Google not to index it | Remove the tag if you want it indexed |
+| Blocked by robots.txt | Google isn't allowed to crawl it | Update your robots.txt rules |
+| Page with redirect | The address redirects elsewhere | Usually fine, link to the final address |
+
+## Don't forget other search engines
+
+Bing and some other search engines support a protocol called [IndexNow](https://www.indexnow.org), which lets a site tell them instantly when pages are added or changed. Google doesn't use it, but it's worth switching on if your platform supports it, since some AI tools rely on Bing's index. You can also submit your site in [Bing Webmaster Tools](https://www.bing.com/webmasters).
+
+## Mistakes that slow indexing down
+
+- Publishing pages with no internal links.
+- Leaving a noindex setting on after launch.
+- Submitting a sitemap full of redirected or erroring addresses.
+- Requesting indexing for dozens of pages a day.
+- Publishing hundreds of thin pages at once.
+- Blocking CSS or script files, so Google can't see the page properly.
+- Expecting a brand-new, unlinked site to be indexed overnight.
+
+## A quick checklist
+
+1. Check the page in URL inspection.
+2. Remove noindex, robots and canonical problems.
+3. Link to the page from at least two relevant pages.
+4. Confirm it's in your sitemap, and the sitemap is submitted.
+5. Request indexing once.
+6. Improve the content if it's thin or similar to another page.
+7. Wait a week or two, then recheck.
+
+## Frequently asked questions
+
+### Why is my new website not showing on Google?
+Often it's simply new. Google may not have discovered or crawled it yet. Submit a sitemap, link to the site from a few places and check Search Console for blocks such as noindex.
+
+### Does requesting indexing guarantee a page will be indexed?
+No. It asks Google to crawl the page sooner, but Google still decides whether to index it.
+
+### Can I pay to get indexed faster?
+No. Advertising and organic indexing are separate. Beware of services selling "instant indexing".
+
+### Why was my page indexed and then removed?
+It might have been judged low quality or duplicated, blocked by a setting you changed or returned errors. Check URL inspection for the reason.
+
+### How many pages should I request at once?
+Only your most important new or updated pages, a few at a time. Let the sitemap and internal links handle the rest.
+
+## Next steps
+
+Pick one page that isn't indexed and walk through steps 1 to 5. Most problems are found within the first two. If you'd like an expert to check your whole site for indexing problems, request a [free SEO audit](/free-seo-audit/) or run your page through our [SEO audit tool](/seo-audit-tool/).
+
+## Sources and further reading
+
+- [How Google Search works](https://developers.google.com/search/docs/fundamentals/how-search-works): crawling, indexing and ranking explained.
+- [Ask Google to recrawl your URLs](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl): what to expect from the request.
+- [Sitemaps overview](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview): how to build and submit one.
+- [Introduction to robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro): controlling what gets crawled.
+- [Consolidate duplicate URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls): canonical tags and duplicates.
+- [IndexNow](https://www.indexnow.org): instant update notices for Bing and other engines.

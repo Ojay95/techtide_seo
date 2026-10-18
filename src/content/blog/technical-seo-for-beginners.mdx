@@ -1,0 +1,215 @@
+---
+title: "Technical SEO for beginners: 12 fixes that matter most"
+metaTitle: "Technical SEO for Beginners: 12 Fixes That Matter Most"
+description: "New to technical SEO? Here are 12 plain-English fixes, in the right order, to help Google find, understand and trust your website, with tools and a checklist."
+category: "Technical SEO"
+published: 2026-04-01
+updated: 2026-04-01
+draft: false
+---
+
+"Technical SEO" sounds like something only developers should touch. In reality, most of it is basic housekeeping: making sure Google can reach your pages, understand them and trust them, and that visitors have a smooth experience when they arrive.
+
+You can have the best content in the world, and if your site is slow, blocked, broken or confusing, it won't get the attention it deserves. The good news is that a small number of fixes cover most of the problems, and many need no coding at all.
+
+This guide walks through 12 technical SEO fixes in a sensible order. For each one you'll see what it is, why it matters, how to check it and how to fix it. You'll also get the free tools to use and a checklist at the end.
+
+## How to use this guide
+
+Work through the fixes in order. Early ones, like security and indexability, affect everything after them. You don't have to finish all 12 in a day. Doing two or three a week is plenty.
+
+You'll need two free tools: [Google Search Console](https://search.google.com/search-console) and [PageSpeed Insights](https://pagespeed.web.dev/). A crawler such as [Screaming Frog](https://www.screamingfrog.co.uk/seo-spider/) helps too, and the free version covers small sites.
+
+![Diagram: 12 technical SEO fixes in a sensible order](/images/diagrams/technical-seo-for-beginners.svg)
+
+*Figure 1: Start at 1 and work through. Each fix makes the next one easier.*
+
+## 1. Use HTTPS on every page
+
+**What it is:** HTTPS encrypts the connection between your site and the visitor. You can spot it by the padlock and "https" at the start of the address.
+
+**Why it matters:** Browsers warn visitors about sites without it, and it's a basic trust signal. Google has supported HTTPS as a good practice for years. See Google's explainer on [why HTTPS matters](https://web.dev/articles/why-https-matters).
+
+**How to check:** Visit your site and look at the address bar. Then check that old "http" addresses redirect to the "https" version.
+
+**How to fix it:** Most hosts offer a free certificate. Turn it on, then make sure every page and image loads securely, with no "mixed content" warnings.
+
+## 2. Choose one version of your website
+
+**What it is:** Your site may be reachable at several addresses: with and without "www", and with "http" and "https". Search engines can treat each as a separate site.
+
+**Why it matters:** It splits your authority and creates duplicate content.
+
+**How to check:** Type each version into a browser. They should all end up at one address.
+
+**How to fix it:** Pick one preferred version, usually https without www or with www, and redirect the others to it permanently. Make your canonical tags point to that version.
+
+## 3. Make sure your pages can be indexed
+
+**What it is:** Indexing means Google stores your page so it can appear in results. Sometimes pages are blocked by mistake.
+
+**Why it matters:** A page that can't be indexed can't rank.
+
+**How to check:** In Search Console, open the Pages report under Indexing and look at your important pages. Look for "Excluded by noindex tag" or "Blocked by robots.txt". Also visit `yourwebsite.com/robots.txt` and make sure it doesn't block the whole site.
+
+**How to fix it:** Remove stray noindex tags, which are often a setting in your CMS or SEO plugin. Update robots.txt so it doesn't block anything important. Our guide to [getting indexed faster](/blog/how-to-get-your-website-indexed-faster/) goes deeper.
+
+## 4. Create and submit an XML sitemap
+
+**What it is:** A sitemap is a list of the pages you want search engines to find.
+
+**Why it matters:** It helps Google discover your pages, especially new ones and pages with few links.
+
+**How to check:** Visit `yourwebsite.com/sitemap.xml` or `sitemap-index.xml`. Check that it lists your important pages and only pages that return a normal "200" status.
+
+**How to fix it:** Most platforms and SEO plugins create one automatically. Submit it in Search Console under Sitemaps. Google's [sitemaps overview](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview) explains the details.
+
+## 5. Find and fix broken links and error pages
+
+**What it is:** A broken link goes to a page that no longer exists, showing a "404 not found" error.
+
+**Why it matters:** Broken links frustrate visitors and waste the crawling time Google spends on your site. Broken pages that have backlinks also waste the authority those links carry.
+
+**How to check:** Run a crawl with Screaming Frog, or look at the Pages report in Search Console for "Not found (404)".
+
+![Screenshot placeholder: A crawl summary showing errors, redirects and other issues](/images/screenshots/screaming-frog-crawl-summary.png)
+
+*Figure 2: A crawl summary shows broken links and redirects at a glance.*
+
+**How to fix it:** Update the link to point to a working page. If a deleted page had traffic or links, redirect it to the closest relevant page. If it's gone for good and had no value, leave it as a 404, but remove links to it.
+
+## 6. Clean up redirects
+
+**What it is:** A redirect sends visitors and search engines from one address to another. A 301 is a permanent redirect.
+
+**Why it matters:** Chains of redirects (A to B to C) slow pages and can lose value. Redirect loops break pages entirely.
+
+**How to check:** A crawler lists redirects and chains. You can also use your browser's developer tools.
+
+**How to fix it:** Make each redirect a single step to the final address, and update internal links to point straight to the final page. Use permanent (301) redirects for permanent moves. Google explains them in its guide to [redirects](https://developers.google.com/search/docs/crawling-indexing/301-redirects).
+
+## 7. Deal with duplicate content and canonical tags
+
+**What it is:** Duplicate content means the same or very similar content on more than one address. A canonical tag tells search engines which version is the main one.
+
+**Why it matters:** Duplicates split ranking signals and can lead Google to pick a version you didn't want.
+
+**How to check:** Look for duplicate titles in a crawl, and for "Duplicate without user-selected canonical" in Search Console.
+
+**How to fix it:** Give each page a canonical tag pointing to its preferred address. Merge or redirect near-identical pages. Be careful with filters, tracking parameters and printer-friendly versions. Google's guide to [consolidating duplicate URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls) is clear and practical.
+
+## 8. Make your site work well on mobile
+
+**What it is:** Google mostly uses the mobile version of your pages to index and rank them. This is called mobile-first indexing.
+
+**Why it matters:** If your mobile site is missing content, hard to use or broken, your rankings and your customers suffer.
+
+**How to check:** Open your site on a phone. Can you read the text without zooming? Can you tap buttons easily? Does it show the same content as on desktop? Google's [mobile-first indexing guide](https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing) explains what to look for.
+
+**How to fix it:** Use a responsive design, avoid tiny text and tight buttons, and make sure important content and links appear on mobile too.
+
+## 9. Improve page speed and Core Web Vitals
+
+**What it is:** Core Web Vitals measure loading speed, responsiveness and visual stability.
+
+**Why it matters:** Slow pages lose visitors and are a weaker experience. It's part of Google's wider page experience signals.
+
+**How to check:** Run your main pages through PageSpeed Insights, starting with the mobile result. Our guide on [Core Web Vitals in plain English](/blog/core-web-vitals-explained/) explains each score.
+
+**How to fix it:** Compress and resize images, remove unused plugins and scripts, turn on caching and consider better hosting. These steps fix most speed problems.
+
+## 10. Add structured data (schema)
+
+**What it is:** Structured data is code that tells search engines exactly what a page is about: a business, a service, an article or a product.
+
+**Why it matters:** It helps search engines understand your content and may make some pages eligible for richer results.
+
+**How to check:** Use Google's [Rich Results Test](https://search.google.com/test/rich-results) on a key page.
+
+**How to fix it:** Add Organization or LocalBusiness data to your home page, and fitting types to other pages. Our [schema markup guide](/blog/schema-markup-guide/) walks through it step by step, and Google's [intro to structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data) is a helpful reference.
+
+## 11. Keep URLs and site structure clean
+
+**What it is:** Your URLs are the web addresses of your pages, and your structure is how pages are organised and linked.
+
+**Why it matters:** Clear structure helps visitors and search engines understand your site. Messy addresses and pages buried deep make crawling harder.
+
+**How to check:** Look at your URLs. Are they short and readable, like `/services/local-seo/`? Can visitors reach important pages in three clicks or fewer?
+
+**How to fix it:** Use short, descriptive, lowercase URLs with hyphens. Group related pages logically. Link to important pages from your menu and from related content. See our guide to [internal linking](/blog/internal-linking-guide/).
+
+## 12. Monitor with Search Console every week
+
+**What it is:** Search Console is Google's free tool that shows how your site performs in search and which problems exist.
+
+**Why it matters:** Technical problems often creep in unnoticed after a redesign, plugin update or content change. Regular monitoring catches them early.
+
+**How to set it up:** Verify your site, submit your sitemap and check these reports weekly: Pages (indexing), Core Web Vitals, and any warnings or manual action messages. Our [Search Console guide](/blog/how-to-use-google-search-console/) shows how to read each one.
+
+## Quick reference table
+
+| Fix | Free tool to check it | Typical time |
+|---|---|---|
+| HTTPS | Your browser | 30 minutes |
+| One site version | Your browser | 30 minutes |
+| Indexability | Search Console | 1 hour |
+| XML sitemap | Search Console | 30 minutes |
+| Broken links | Screaming Frog (free) | 1 to 2 hours |
+| Redirects | Screaming Frog | 1 hour |
+| Duplicates and canonicals | Search Console, crawler | 1 to 2 hours |
+| Mobile | Your phone | 1 hour |
+| Speed | PageSpeed Insights | 2 to several hours |
+| Schema | Rich Results Test | 1 hour |
+| URL and structure | Manual review | 1 to 2 hours |
+| Monitoring | Search Console | 20 minutes a week |
+
+## Common beginner mistakes
+
+- **Changing too many things at once.** You won't know what helped or broke something.
+- **Not backing up before big changes.** Always keep a copy of your site.
+- **Blocking your whole site by accident.** Always test robots.txt and noindex settings.
+- **Forgetting redirects after deleting pages.** You'll lose traffic and links.
+- **Chasing a perfect speed score.** Aim for good real-world experience, not 100/100.
+- **Ignoring warnings after a redesign.** Check Search Console for a few weeks afterwards.
+- **Fixing technical issues but never improving content.** Both matter.
+
+## A simple four-week plan
+
+**Week 1:** Fix HTTPS, choose one site version, check indexability and submit your sitemap.
+
+**Week 2:** Crawl your site, then fix broken links and redirect chains.
+
+**Week 3:** Check canonicals and duplicates, and test and improve mobile usability.
+
+**Week 4:** Improve speed, add structured data and set up your weekly Search Console routine.
+
+## Frequently asked questions
+
+### Do I need a developer for technical SEO?
+Not for everything. Many fixes can be done through your website platform or an SEO plugin. Bring in a developer for speed, code changes and anything you're not comfortable with.
+
+### Which technical SEO fix matters most?
+Making sure your important pages can be crawled and indexed. Nothing else works if Google can't see your pages.
+
+### How often should I check my site?
+A quick look at Search Console weekly, and a full crawl once a month or after any major change.
+
+### Can technical SEO alone make me rank?
+No. It removes obstacles. You also need helpful content, a good reputation and links. Technical SEO makes sure those efforts can pay off.
+
+### What if I use a website builder?
+Most builders handle many basics, such as HTTPS and sitemaps. Check their SEO settings, and still review indexing, speed and mobile.
+
+## Next steps
+
+Start with fixes 1 to 4 this week. They take about two hours in total and clear the biggest blockers. If you'd like an expert to run a full technical check, request a [free SEO audit](/free-seo-audit/), try our [SEO audit tool](/seo-audit-tool/) or read about our [technical SEO service](/services/technical-seo/). You can also use our [technical SEO checklist](/guides/technical-seo-checklist/).
+
+## Sources and further reading
+
+- [Why HTTPS matters](https://web.dev/articles/why-https-matters): the case for a secure site.
+- [Sitemaps overview](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview): building and submitting a sitemap.
+- [Redirects and Google Search](https://developers.google.com/search/docs/crawling-indexing/301-redirects): how to use them correctly.
+- [Consolidate duplicate URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls): canonical tags and duplicates.
+- [Mobile-first indexing](https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing): what Google expects from mobile pages.
+- [Web Vitals](https://web.dev/articles/vitals): the official definitions and thresholds.
+- [Introduction to structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data): Google's overview.
