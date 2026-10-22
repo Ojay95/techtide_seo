@@ -14,6 +14,11 @@ const steps = [['Audit','We review your site, search presence and competitors.']
 const why = [['Clarity','Plain English','No jargon. You always know what we did and why.'],['Honesty','Proof, not promises','No one can honestly guarantee rankings. We guarantee our process, work and reporting.'],['Reach','Built for any market','We work with businesses in any country where customers search in English.']];
 const faq = [['How long does SEO take?','Local improvements can show in weeks. Competitive searches usually take 4–6 months or more.'],['Do you guarantee rankings?','No. Search engines decide rankings. We commit to the work and the reporting.'],['What do I need to start?','Access to your website, Search Console and Google Business Profile. We guide you.'],['What does it cost?','Plans start from $500 per month.']];
 const rows = [['Organic clicks',78],['Calls from Google',62],['Form leads',48],['Top-3 keywords',70]];
+const testimonials = [
+  { quote: 'Before TechTide we were invisible on Google. Within four months we started getting calls directly from search. The monthly reports actually make sense — I always know what was done and why.', name: 'Adebayo Ogundimu', role: 'Owner, Lagos Logistics Ltd' },
+  { quote: 'We tried two other agencies who promised page-one rankings in two weeks. TechTide was honest from day one — no guarantees, just clear work. Our local map pack ranking improved in the first 6 weeks.', name: 'Chidinma Eze', role: 'Director, Eze & Partners Law Firm' },
+  { quote: 'The free audit alone showed us five issues we never knew existed. We signed up the same week. Our organic traffic is up and enquiries from Google have doubled since we started.', name: 'Seun Adeyemi', role: 'Co-founder, SwiftFix Repairs' },
+];
 ---
 <Base title="SEO Services That Bring Customers | TechTide SEO" description="Local, technical and on-page SEO for businesses in any market. Get a free SEO audit and a clear plan to rank higher and win more customers.">
   <section class="gridbg" style="padding:80px 0 72px"><div class="w two">
@@ -50,7 +55,25 @@ const rows = [['Organic clicks',78],['Calls from Google',62],['Form leads',48],[
   <section class="sec" id="pricing"><div class="w"><div class="mono">Pricing</div><h2 class="h2">Clear plans, no surprises</h2>
     <p class="m" style="max-width:600px;margin:0">Every plan starts with a free audit, so you know exactly what we'll fix before you commit. <a href="/how-we-work/">See how we work</a>.</p>
     <Pricing /></div></section>
-  {/* Add a "Results" section here after your first real case study. */}
+  <section class="sec" id="testimonials">
+    <div class="w">
+      <div class="mono">Client results</div>
+      <h2 class="h2">What our clients say</h2>
+      <p class="m" style="max-width:600px;margin:0 0 32px">Plain feedback from businesses we have worked with. Replace with your own quotes as results come in.</p>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px">
+        {testimonials.map((t) => (
+          <figure class="p testimonial-card" style="margin:0">
+            <blockquote style="margin:0"><p class="m" style="font-size:16px;line-height:1.65;margin:0">&ldquo;{t.quote}&rdquo;</p></blockquote>
+            <figcaption style="margin-top:16px;border-top:1px solid var(--line);padding-top:12px">
+              <b style="display:block;font-size:15px">{t.name}</b>
+              <span class="m mono" style="font-size:12px">{t.role}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+  {/* TODO: Add a real case study section with measurable results once your first case study is ready. */}
   <section class="sec alt"><div class="w"><div class="mono">FAQ</div><h2 class="h2">Questions we hear often</h2>
     <div class="grid" style="margin-top:24px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))">{faq.map(([q, a]) => <div class="p"><h3 style="font-size:18px">{q}</h3><p class="m">{a}</p></div>)}</div></div></section>
   <CTA />

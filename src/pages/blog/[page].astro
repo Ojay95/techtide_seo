@@ -1,0 +1,25 @@
+---
+// Blog pages 2+ (/blog/2/, /blog/3/ …). Page 1 lives at /blog/ (index.astro).
+import BlogListing from '../../components/BlogListing.astro';
+import { getSortedPosts, PAGE_SIZE } from '../../lib/blogPages';
+
+export async function getStaticPaths() {
+  const posts = await getSortedPosts();
+  const totalPages = Math.ceil(posts.length / PAGE_SIZE);
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => {
+    const current = i + 2;
+    return {
+      params: { page: String(current) },
+      props: {
+        items: posts.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE),
+        current,
+        totalPages,
+        total: posts.length,
+      },
+    };
+  });
+}
+
+const { items, current, totalPages, total } = Astro.props as any;
+---
+<BlogListing items={items} current={current} totalPages={totalPages} total={total} />

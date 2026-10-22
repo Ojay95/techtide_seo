@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+import CTA from './CTA.astro';
+import PostCard from './PostCard.astro';
+import { pageUrl } from '../lib/blogPages';
+
+interface Props { items: any[]; current: number; totalPages: number; total: number; }
+const { items, current, totalPages, total } = Astro.props;
+const isFirst = current === 1;
+const featured = isFirst ? items[0] : null;
+const rest = isFirst ? items.slice(1) : items;
+const cats = [...new Set(items.map((e: any) => e.data.category))];
+const prev = current > 1 ? pageUrl(current - 1) : null;
+const next = current < totalPages ? pageUrl(current + 1) : null;
+
+const delta = 2;
+const left = Math.max(1, current - delta);
+const right = Math.min(totalPages, current + delta);
+const pages: number[] = [];
+for (let i = left; i <= right; i++) pages.push(i);
+---
+<Base
+  title={isFirst ? 'SEO Blog | TechTide SEO' : `SEO Blog — Page ${current} | TechTide SEO`}
+  description="Long-form SEO articles from TechTide SEO: practical how-tos on keyword research, local SEO, Core Web Vitals, schema, links and more."
+>
+  <section class="gridbg" style="padding:72px 0">
+    <div class="w">
+      <nav class="mono crumb" aria-label="Breadcrumb">
+        {isFirst
+          ? <><a href="/">Home</a> / Blog</>
+          : <><a href="/">Home</a> / <a href="/blog/">Blog</a> / Page {current}</>
+        }
+      </nav>
+      <h1 class="h1" style="max-width:780px">The TechTide SEO <span class="acc">blog</span></h1>
+      <p class="m lead">Long-form, practical articles on getting found on Google. Want step-by-step checklists? See our <a href="/guides/">guides</a>.</p>
+      <div class="mono m">{total} articles · Page {current} of {totalPages}</div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:48px">
+    <div class="w">
+      {featured && <PostCard entry={featured} kind="blog" featured />}
+
+      {cats.length > 1 && (
+        <div class="chips" role="group" aria-label="Filter by category">
+          <button class="chip" type="button" data-cat="all" aria-pressed="true">All</button>
+          {cats.map((c: any) => (
+            <button class="chip" type="button" data-cat={c} aria-pressed="false">{c}</button>
+          ))}
+        </div>
+      )}
+
+      <div class="cardgrid">
+        {rest.map((e: any) => <PostCard entry={e} kind="blog" />)}
+      </div>
+
+      {totalPages > 1 && (
+        <nav class="pagination" aria-label="Blog pagination">
+          {prev
+            ? <a class="pg-btn" href={prev} rel="prev" aria-label="Previous page">← Previous</a>
+            : <span class="pg-btn pg-disabled" aria-disabled="true">← Previous</span>
+          }
+          <div class="pg-pages">
+            {left > 1 && (
+              <>
+                <a class="pg-num" href={pageUrl(1)} aria-label="Page 1">1</a>
+                {left > 2 && <span class="pg-ellipsis" aria-hidden="true">…</span>}
+              </>
+            )}
+            {pages.map((p) => (
+              <a
+                class={`pg-num${p === current ? ' pg-active' : ''}`}
+                href={pageUrl(p)}
+                aria-label={`Page ${p}`}
+                aria-current={p === current ? 'page' : undefined}
+              >{p}</a>
+            ))}
+            {right < totalPages && (
+              <>
+                {right < totalPages - 1 && <span class="pg-ellipsis" aria-hidden="true">…</span>}
+                <a class="pg-num" href={pageUrl(totalPages)} aria-label={`Page ${totalPages}`}>{totalPages}</a>
+              </>
+            )}
+          </div>
+          {next
+            ? <a class="pg-btn" href={next} rel="next" aria-label="Next page">Next →</a>
+            : <span class="pg-btn pg-disabled" aria-disabled="true">Next →</span>
+          }
+        </nav>
+      )}
+    </div>
+  </section>
+
+  <CTA />
+</Base>
+
+<script is:inline>
+  document.querySelectorAll('.chip').forEach(function (c) {
+    c.addEventListener('click', function () {
+      var v = c.dataset.cat;
+      document.querySelectorAll('.chip').forEach(function (x) {
+        x.setAttribute('aria-pressed', x === c ? 'true' : 'false');
+      });
+      document.querySelectorAll('.cardgrid .post-card').forEach(function (p) {
+        p.hidden = !(v === 'all' || p.dataset.cat === v);
+      });
+    });
+  });
+</script>
+
+<style>
+  .pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 48px; flex-wrap: wrap; }
+  .pg-btn {
+    display: inline-flex; align-items: center; padding: 10px 20px;
+    border: 1px solid var(--field-line); border-radius: 10px;
+    font: 600 15px 'DM Sans Variable', sans-serif; color: var(--text);
+    text-decoration: none; background: var(--panel);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .pg-btn:hover { border-color: var(--accent); background: var(--bg2); }
+  .pg-disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+  .pg-pages { display: flex; align-items: center; gap: 4px; }
+  .pg-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 40px; height: 40px; border-radius: 10px; border: 1px solid transparent;
+    font: 600 15px 'DM Sans Variable', sans-serif; color: var(--text);
+    text-decoration: none; transition: border-color 0.15s, background 0.15s;
+  }
+  .pg-num:hover { border-color: var(--field-line); background: var(--bg2); }
+  .pg-active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .pg-active:hover { background: var(--accent); border-color: var(--accent); }
+  .pg-ellipsis { color: var(--muted); padding: 0 4px; font-size: 15px; }
+</style>
