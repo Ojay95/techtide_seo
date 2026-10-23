@@ -91,26 +91,25 @@ const ogImage = new URL(image, SITE.url).href;
             const r = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } });
             if (r.ok) {
               f.reset();
-              // Show confirmation with a clickable link to the checklist
               if (f.closest('#lead-popup')) {
-                var s = f.querySelector('.status');
+                // Popup form — show checklist link then auto-close
                 if (s) {
                   s.innerHTML = '✓ Subscribed! <a href="/seo-checklist.html" target="_blank" style="color:var(--teal);font-weight:700">Open your checklist →</a>';
                 }
                 setTimeout(function () {
-                  var d = document.getElementById('lead-popup');
+                  const d = document.getElementById('lead-popup') as HTMLDialogElement | null;
                   if (d && d.open) d.close();
                 }, 4000);
               } else {
-                var s2 = f.querySelector('.status');
-                if (s2) s2.textContent = f.dataset.done || 'Thank you. We have your details.';
+                // All other forms
+                if (s) s.textContent = f.dataset.done || 'Thank you. We have your details.';
               }
-            }
-            else { s.textContent = 'Something went wrong. Please try again.'; }
+            } else { s.textContent = 'Something went wrong. Please try again.'; }
           } catch { s.textContent = 'Network error. Please try again.'; }
           b.disabled = false;
         });
       });
+
     </script>
   </body>
 </html>
