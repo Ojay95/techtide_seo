@@ -1,0 +1,126 @@
+---
+// Exit-intent lead magnet popup — shown once per session on any page
+// except /contact/ and /free-seo-audit/.
+const id = import.meta.env.PUBLIC_FORMSPREE_ID;
+const action = id ? `https://formspree.io/f/${id}` : '';
+const path = Astro.url.pathname;
+const suppress = ['/contact/', '/free-seo-audit/'].some((p) => path.includes(p));
+if (suppress) return;
+---
+
+<!-- Lead popup dialog -->
+<dialog id="lead-popup" class="lead-popup" aria-label="Free SEO checklist" aria-modal="true">
+  <button id="lead-popup-close" class="lp-close" type="button" aria-label="Close">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+
+  <div class="lp-inner">
+    <!-- Left panel: illustration + badge -->
+    <div class="lp-visual" aria-hidden="true">
+      <div class="lp-glow"></div>
+      <div class="lp-doc">
+        <div class="lp-doc-header">
+          <span class="lp-dot r"></span><span class="lp-dot y"></span><span class="lp-dot g"></span>
+          <span class="lp-doc-title">SEO Checklist</span>
+        </div>
+        {[
+          ['Technical', 94],
+          ['On-page', 87],
+          ['Local', 82],
+          ['Content', 78],
+          ['Links', 71],
+        ].map(([label, pct]) => (
+          <div class="lp-row">
+            <span class="lp-row-label">{label}</span>
+            <div class="lp-bar"><i style={`width:${pct}%`}></i></div>
+            <span class="lp-row-pct">{pct}%</span>
+          </div>
+        ))}
+      </div>
+      <div class="lp-badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Free · Instant
+      </div>
+    </div>
+
+    <!-- Right panel: form -->
+    <div class="lp-form-wrap">
+      <p class="lp-eyebrow">Free download</p>
+      <h2 class="lp-heading">The TechTide SEO checklist</h2>
+      <p class="lp-sub">A practical, prioritised list of what to fix on your website — used by our own clients. Enter your email and we'll send it straight over.</p>
+
+      <form
+        id="lead-popup-form"
+        class="audit-form lp-form"
+        method="POST"
+        action={action || undefined}
+        data-ready={id ? 'yes' : 'no'}
+        data-done="✓ Subscribed! Your checklist is ready — /seo-checklist.html"
+      >
+        <label for="lp-email" class="sr-only">Email address</label>
+        <input
+          id="lp-email"
+          class="in"
+          name="email"
+          type="email"
+          autocomplete="email"
+          placeholder="your@email.com"
+          required
+        />
+        <input type="hidden" name="source" value="lead-popup-checklist" />
+        <input type="hidden" name="_subject" value="SEO Checklist download request" />
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
+        <button class="btn lp-btn" type="submit">Send me the checklist →</button>
+        <p class="status lp-status m" role="status" aria-live="polite"></p>
+        <p class="lp-legal">No spam. Unsubscribe any time. See our <a href="/privacy/">privacy policy</a>.</p>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<script is:inline>
+(function () {
+  var STORAGE_KEY = 'tt_lead_popup_seen';
+  // Only show once per browser session
+  if (sessionStorage.getItem(STORAGE_KEY)) return;
+
+  var dlg = document.getElementById('lead-popup');
+  var closeBtn = document.getElementById('lead-popup-close');
+  if (!dlg) return;
+
+  var opened = false;
+  var MIN_TIME = 3000; // don't fire in first 3 s
+  var start = Date.now();
+
+  function dismiss() {
+    dlg.close();
+    sessionStorage.setItem(STORAGE_KEY, '1');
+  }
+
+  function open() {
+    if (opened || dlg.open) return;
+    if (Date.now() - start < MIN_TIME) return;
+    opened = true;
+    dlg.showModal();
+    sessionStorage.setItem(STORAGE_KEY, '1');
+    // Focus the email input
+    setTimeout(function () {
+      var inp = document.getElementById('lp-email');
+      if (inp) inp.focus();
+    }, 100);
+  }
+
+  // --- Exit-intent: mouse leaves toward top of viewport ---
+  document.addEventListener('mouseleave', function (e) {
+    if (e.clientY < 20) open();
+  });
+
+  // --- Fallback: tab/window blur (catches mobile + trackpad users) ---
+  window.addEventListener('blur', open);
+
+  // --- Close handlers ---
+  closeBtn && closeBtn.addEventListener('click', dismiss);
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dismiss(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && dlg.open) dismiss(); });
+})();
+</script>

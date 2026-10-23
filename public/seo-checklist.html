@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The TechTide SEO Checklist — Complete 2025 Edition</title>
+<meta name="robots" content="noindex,follow" />
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --teal:   #19C3B5;
+  --amber:  #F5B83D;
+  --navy:   #071A2E;
+  --navy2:  #0A2036;
+  --panel:  #0D2742;
+  --line:   #1D3F63;
+  --text:   #E6EEF7;
+  --muted:  #7B9CB8;
+  --good:   #4FD08F;
+  --page-w: 900px;
+}
+
+/* ─── RESET / BASE ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--navy);
+  color: var(--text);
+  line-height: 1.65;
+  padding: 40px 20px 80px;
+}
+a { color: var(--teal); }
+
+/* ─── LAYOUT ─────────────────────────────────────────────── */
+.page { max-width: var(--page-w); margin: 0 auto; }
+
+/* ─── COVER ──────────────────────────────────────────────── */
+.cover {
+  position: relative;
+  background: linear-gradient(135deg, #0A2845 0%, #051525 100%);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 56px 52px 48px;
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: -60% 20% -60% -20%;
+  background: radial-gradient(ellipse, rgba(25,195,181,.18), transparent 65%);
+  pointer-events: none;
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  inset: -60% -20% -60% 60%;
+  background: radial-gradient(ellipse, rgba(245,184,61,.12), transparent 65%);
+  pointer-events: none;
+}
+.cover-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(25,195,181,.12);
+  border: 1px solid rgba(25,195,181,.3);
+  border-radius: 40px;
+  padding: 6px 14px;
+  font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 22px;
+}
+.cover h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  margin-bottom: 16px;
+  position: relative;
+}
+.cover h1 span { color: var(--teal); }
+.cover-sub {
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 560px;
+  margin-bottom: 32px;
+  position: relative;
+}
+.cover-meta {
+  display: flex; gap: 28px; flex-wrap: wrap;
+  position: relative;
+}
+.cover-meta-item {
+  display: flex; flex-direction: column;
+}
+.cover-meta-item b { font-size: 22px; font-weight: 900; color: var(--teal); }
+.cover-meta-item span { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+
+/* ─── HOW TO USE ─────────────────────────────────────────── */
+.how {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.how-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(25,195,181,.14);
+  border: 1px solid rgba(25,195,181,.25);
+  display: grid; place-items: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.how h2 { font-size: 15px; margin-bottom: 8px; color: var(--text); }
+.how p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+.priority {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 600;
+  padding: 2px 9px; border-radius: 20px;
+  margin: 0 3px;
+}
+.p1 { background: rgba(239,68,68,.15); color: #F87171; border: 1px solid rgba(239,68,68,.3); }
+.p2 { background: rgba(245,184,61,.15); color: var(--amber); border: 1px solid rgba(245,184,61,.3); }
+.p3 { background: rgba(79,208,143,.15); color: var(--good); border: 1px solid rgba(79,208,143,.3); }
+
+/* ─── SECTION ────────────────────────────────────────────── */
+.section {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.section-head {
+  display: flex; align-items: center; gap: 14px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(90deg, rgba(25,195,181,.06), transparent);
+}
+.section-icon {
+  width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  display: grid; place-items: center;
+  font-size: 18px;
+}
+.section-head h2 {
+  font-size: 17px; font-weight: 800; flex: 1;
+}
+.section-count {
+  font-size: 12px; font-weight: 700;
+  color: var(--muted);
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 3px 12px;
+}
+.section-intro {
+  padding: 16px 24px;
+  font-size: 13.5px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  background: rgba(0,0,0,.12);
+}
+
+/* ─── SUBSECTION ─────────────────────────────────────────── */
+.sub { border-bottom: 1px solid var(--line); }
+.sub:last-child { border-bottom: 0; }
+.sub-head {
+  padding: 14px 24px 4px;
+  font-size: 11.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--teal);
+}
+
+/* ─── CHECKLIST ITEMS ────────────────────────────────────── */
+.items { padding: 4px 0 12px; }
+.item {
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  gap: 12px;
+  align-items: start;
+  padding: 10px 24px;
+  border-bottom: 1px solid rgba(255,255,255,.03);
+  transition: background .12s;
+}
+.item:last-child { border-bottom: 0; }
+.item:hover { background: rgba(255,255,255,.025); }
+.item input[type=checkbox] {
+  width: 17px; height: 17px; margin-top: 2px;
+  border-radius: 5px;
+  border: 2px solid var(--line);
+  background: var(--navy2);
+  cursor: pointer;
+  accent-color: var(--teal);
+  flex-shrink: 0;
+}
+.item-body { display: flex; flex-direction: column; gap: 3px; }
+.item-title {
+  font-size: 14px; font-weight: 600; color: var(--text);
+  line-height: 1.4;
+}
+.item-desc {
+  font-size: 12.5px; color: var(--muted); line-height: 1.55;
+}
+.item-tip {
+  display: block;
+  font-size: 11.5px;
+  color: var(--teal);
+  margin-top: 4px;
+}
+.tag {
+  flex-shrink: 0; align-self: start; margin-top: 2px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .06em;
+  padding: 3px 8px; border-radius: 6px; text-transform: uppercase;
+}
+.t1 { background: rgba(239,68,68,.15); color: #F87171; }
+.t2 { background: rgba(245,184,61,.14); color: var(--amber); }
+.t3 { background: rgba(79,208,143,.13); color: var(--good); }
+.t-tool { background: rgba(25,195,181,.12); color: var(--teal); }
+
+/* ─── CALLOUT BOX ────────────────────────────────────────── */
+.callout {
+  margin: 0 24px 16px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border-left: 3px solid var(--teal);
+  background: rgba(25,195,181,.07);
+  font-size: 13px; color: var(--muted); line-height: 1.6;
+}
+.callout strong { color: var(--text); }
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+.footer {
+  margin-top: 48px;
+  background: linear-gradient(135deg, #0A2845 0%, #051525 100%);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 36px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 20px;
+}
+.footer-brand { font-size: 22px; font-weight: 900; }
+.footer-brand span { color: var(--teal); font-weight: 400; }
+.footer p { font-size: 13px; color: var(--muted); margin-top: 6px; }
+.footer-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--teal);
+  color: var(--navy);
+  font-weight: 700; font-size: 14px;
+  padding: 12px 22px; border-radius: 10px;
+  text-decoration: none;
+}
+.progress-bar {
+  height: 3px; background: var(--line); border-radius: 2px; margin: 8px 0 0;
+}
+.progress-bar i { display:block; height:100%; border-radius:2px; background: linear-gradient(90deg,var(--teal),var(--amber)); }
+
+/* ─── PRINT ──────────────────────────────────────────────── */
+@media print {
+  body { background: #fff !important; color: #111 !important; padding: 0; }
+  :root { --teal: #0A7A72; --amber: #9A6800; --navy: #fff; --navy2: #f8f8f8; --panel: #fff; --line: #ddd; --text: #111; --muted: #555; --good: #15803d; }
+  .cover { background: #F0F7FF; border-color: #ccc; border-radius: 0; }
+  .cover::before, .cover::after { display: none; }
+  .section { border: 1px solid #ddd; break-inside: avoid; border-radius: 0; }
+  .section-head { background: #F0F7FF; }
+  .item:hover { background: none; }
+  .footer { background: #F0F7FF; border-radius: 0; break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+  .how { break-inside: avoid; border-radius: 0; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      TechTide SEO — 2025 Edition
+    </div>
+    <h1>The Complete <span>SEO Checklist</span><br>for Any Business</h1>
+    <p class="cover-sub">150+ actionable checks across six pillars of SEO — prioritised by impact so you fix the right things first. Save as PDF, print it, and work through it with your team.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item"><b>150+</b><span>Checks</span></div>
+      <div class="cover-meta-item"><b>6</b><span>Pillars</span></div>
+      <div class="cover-meta-item"><b>3</b><span>Priority levels</span></div>
+      <div class="cover-meta-item"><b>2025</b><span>Edition</span></div>
+    </div>
+  </div>
+
+  <!-- HOW TO USE -->
+  <div class="how">
+    <div class="how-icon">📋</div>
+    <div>
+      <h2>How to use this checklist</h2>
+      <p>Work through each section in order — Technical first, then On-page, and so on. Each item has a priority tag:
+        <span class="priority p1">Critical</span> fix these before anything else,
+        <span class="priority p2">Important</span> high ROI once the Critical items are done,
+        <span class="priority p3">Ongoing</span> maintain these month-to-month.
+        Items marked <span class="priority" style="background:rgba(25,195,181,.12);color:#19C3B5;border:1px solid rgba(25,195,181,.3)">Tool</span> need a free or paid SEO tool to complete.
+        Check a box each time you complete or verify an item. Re-run the full list every six months.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 1. TECHNICAL SEO -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);">⚙️</div>
+      <h2>01 — Technical SEO</h2>
+      <span class="section-count">32 checks</span>
+    </div>
+    <p class="section-intro">If Google can't crawl and index your site correctly, none of your content or links will help. Fix this layer first — it's the foundation everything else stands on.</p>
+
+    <!-- Crawlability -->
+    <div class="sub">
+      <div class="sub-head">Crawlability &amp; Indexing</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Verify your site is indexed by Google</span><span class="item-desc">Type <code>site:yourdomain.com</code> in Google. If you see your pages, you're indexed. Zero results means a serious block.</span><span class="item-tip">↗ Fix: Check Google Search Console → Pages → "Not indexed" for reasons.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Check robots.txt is not blocking important pages</span><span class="item-desc">Visit <code>yourdomain.com/robots.txt</code>. Make sure no critical URLs (like /services/ or /blog/) are blocked with <code>Disallow: /</code>.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Submit an XML sitemap to Google Search Console</span><span class="item-desc">Your sitemap should list every important page. Go to Search Console → Sitemaps and submit the URL (usually /sitemap.xml or /sitemap_index.xml).</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Fix all pages returning 404 errors</span><span class="item-desc">Broken pages waste crawl budget and hurt user experience. In Search Console → Pages, look for "Not found (404)" and either restore the pages or redirect them.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Fix all 3xx redirect chains and loops</span><span class="item-desc">Every extra redirect step slows down loading and leaks authority. A redirect should go from A → B, never A → B → C.</span><span class="item-tip">↗ Tool: Screaming Frog (free for &lt;500 URLs) shows redirect chains.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Canonicalise duplicate content</span><span class="item-desc">Add a <code>&lt;link rel="canonical"&gt;</code> tag to each page pointing to the preferred version. Common duplicates: HTTP vs HTTPS, trailing slash vs no trailing slash, www vs non-www.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Ensure only one version of your domain works (www vs non-www)</span><span class="item-desc">Pick one version and redirect the other to it permanently (301). Check by typing both versions in a browser.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Check every page has a unique, crawlable URL</span><span class="item-desc">Avoid duplicate URLs generated by session IDs, filters or tracking parameters. Use URL parameters in Search Console to tell Google which ones to ignore.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">No important pages are blocked by noindex tags</span><span class="item-desc">Search for <code>noindex</code> in your CMS or page HTML. Service pages, blog posts, and location pages should never have a noindex directive unless intentional.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Verify pagination is handled correctly</span><span class="item-desc">If your blog or category pages paginate (/blog/2/, /blog/3/ etc.), each page should have a self-referencing canonical. Avoid infinite-scroll without proper URL updates.</span></div><span class="tag t2">Important</span></div>
+      </div>
+    </div>
+
+    <!-- HTTPS & Security -->
+    <div class="sub">
+      <div class="sub-head">HTTPS &amp; Security</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Your entire site runs on HTTPS</span><span class="item-desc">Every page — not just the homepage — should start with https://. Google treats HTTPS as a light ranking signal and Chrome warns users on HTTP pages.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">SSL certificate is valid and not expiring soon</span><span class="item-desc">Check your certificate expiry date at <a href="https://www.sslshopper.com/ssl-checker.html" target="_blank">SSLShopper</a>. Expired certificates destroy trust and may block crawling.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">HTTP pages redirect permanently to HTTPS (301)</span><span class="item-desc">Test: type http://yourdomain.com in a browser. You should be redirected to https:// automatically.</span></div><span class="tag t1">Critical</span></div>
+      </div>
+    </div>
+
+    <!-- Speed -->
+    <div class="sub">
+      <div class="sub-head">Page Speed &amp; Core Web Vitals</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Run PageSpeed Insights on your homepage and top 5 pages</span><span class="item-desc">Visit <a href="https://pagespeed.web.dev" target="_blank">pagespeed.web.dev</a>. Aim for a score above 70 on mobile. Note each failing audit — prioritise LCP, INP and CLS.</span></div><span class="tag t-tool">Tool</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Largest Contentful Paint (LCP) under 2.5 seconds</span><span class="item-desc">LCP measures how long the main content (usually your hero image or headline) takes to appear. Common fixes: preload the hero image, use a CDN, optimise server response time.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Cumulative Layout Shift (CLS) below 0.1</span><span class="item-desc">Layout shift happens when elements move after loading (e.g. images without set dimensions). Always set width and height on every image and embedded video.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Interaction to Next Paint (INP) below 200ms</span><span class="item-desc">Replaces FID in 2024. Measures how quickly the page reacts to clicks and taps. Fix by reducing JavaScript execution time and splitting long tasks.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">All images are compressed and in a modern format (WebP or AVIF)</span><span class="item-desc">JPEG and PNG files are typically 2–5× larger than WebP. Use <a href="https://squoosh.app" target="_blank">Squoosh</a> or your CMS to convert. Never upload images wider than 2000px for a blog post.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Images have explicit width and height attributes</span><span class="item-desc">Prevents layout shift. Your CMS or framework should do this automatically — check the source of your pages to verify.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Lazy-load images below the fold</span><span class="item-desc">Add <code>loading="lazy"</code> to every image not visible on page load. Do NOT add it to your hero image — that will delay LCP.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Render-blocking JavaScript is deferred or eliminated</span><span class="item-desc">Add <code>defer</code> or <code>async</code> to non-critical scripts. Move scripts to the bottom of the &lt;body&gt; or use a tag manager that loads asynchronously.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">CSS is minified and unused CSS is removed</span><span class="item-desc">Use a tool like PurgeCSS to remove CSS rules that aren't used. Minify the remaining stylesheet. Many page builders load thousands of unused CSS rules.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Server Time to First Byte (TTFB) is under 600ms</span><span class="item-desc">Measure in PageSpeed Insights under "Server response times". If it's slow, switch to a faster host, enable caching, or use a CDN like Cloudflare.</span></div><span class="tag t2">Important</span></div>
+      </div>
+    </div>
+
+    <!-- Mobile -->
+    <div class="sub">
+      <div class="sub-head">Mobile &amp; Accessibility</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Site passes Google's Mobile-Friendly Test</span><span class="item-desc">Google indexes mobile-first. Test at <a href="https://search.google.com/test/mobile-friendly" target="_blank">search.google.com/test/mobile-friendly</a>. Fix any viewport or tap-target issues.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">No horizontal scrolling on mobile</span><span class="item-desc">View your site on a real phone or using Chrome DevTools device mode. Any element wider than the viewport breaks layout and signals poor mobile experience.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Font sizes are at least 14px on mobile</span><span class="item-desc">Text smaller than 14px fails readability tests and will be flagged in PageSpeed Insights under "Text too small to read".</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Tap targets (buttons, links) are at least 44×44px</span><span class="item-desc">Too-small tap targets are a common mobile usability issue in Search Console. Buttons and links need enough space for a finger tap.</span></div><span class="tag t2">Important</span></div>
+      </div>
+    </div>
+
+    <!-- Structured Data -->
+    <div class="sub">
+      <div class="sub-head">Structured Data (Schema)</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Organization or LocalBusiness schema on every page</span><span class="item-desc">Tells Google your business name, address, phone, opening hours and logo. Validate at <a href="https://validator.schema.org" target="_blank">validator.schema.org</a>.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">WebSite schema with Sitelinks Search Box (optional)</span><span class="item-desc">Adds a search box to your Google result. Requires a working site search and the WebSite schema with <code>potentialAction</code>.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">BreadcrumbList schema on all interior pages</span><span class="item-desc">Breadcrumbs appear in Google results under the page title. They help users understand your site structure and can improve click-through rates.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Article or BlogPosting schema on every blog post</span><span class="item-desc">Include datePublished, dateModified, author (with name and URL), headline and image. Helps Google identify fresh content.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">FAQPage schema on pages with FAQ sections</span><span class="item-desc">Can unlock expanded FAQ results in Google — more space on the results page = more clicks. Only mark up questions that genuinely appear on the page.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Review schema only where genuine reviews appear on-page</span><span class="item-desc">Never mark up reviews from third-party platforms (Google, Trustpilot) or reviews that don't appear on the page itself — it violates Google's guidelines.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">All schema passes the Rich Results Test</span><span class="item-desc">Test every schema type at <a href="https://search.google.com/test/rich-results" target="_blank">search.google.com/test/rich-results</a>. Fix any errors or warnings before deploying.</span></div><span class="tag t-tool">Tool</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 2. ON-PAGE SEO -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:rgba(25,195,181,.12);border:1px solid rgba(25,195,181,.25);">📄</div>
+      <h2>02 — On-Page SEO</h2>
+      <span class="section-count">28 checks</span>
+    </div>
+    <p class="section-intro">Each page should be built around one primary search term and structured to match what the searcher expects to find. This section covers every on-page element Google reads.</p>
+
+    <div class="sub">
+      <div class="sub-head">Keyword Targeting</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Every important page targets one primary keyword</span><span class="item-desc">Avoid keyword cannibalisation — multiple pages fighting for the same term. Use a simple spreadsheet: URL → Primary keyword → Search volume → Current rank.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Primary keyword appears in the page title (title tag)</span><span class="item-desc">The title tag is the single most important on-page signal. The keyword should appear near the beginning if possible.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Primary keyword appears in the H1 heading</span><span class="item-desc">There should be exactly one H1 per page. It should be descriptive and contain your primary keyword naturally.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Primary keyword appears within the first 100 words</span><span class="item-desc">Google gives slightly more weight to text near the top of a page. State clearly what the page is about in the opening paragraph.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Related and semantic terms are used naturally throughout</span><span class="item-desc">Modern search engines understand synonyms and related concepts. Write naturally for humans — don't repeat the exact keyword phrase artificially.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Keyword appears in the URL slug</span><span class="item-desc">Keep URLs short, descriptive and lowercase, with hyphens between words: <code>/services/local-seo/</code> not <code>/page?id=42</code>.</span></div><span class="tag t2">Important</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-head">Title Tags &amp; Meta Descriptions</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Every page has a unique title tag (50–60 characters)</span><span class="item-desc">Titles over 60 characters get cut off in search results. Include your brand name at the end: "Primary Keyword | Brand Name".</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Every page has a unique meta description (140–160 characters)</span><span class="item-desc">Meta descriptions don't directly affect rankings but affect click-through rate significantly. Write them as a mini advertisement for the page.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">No two pages share the same title or meta description</span><span class="item-desc">Duplicate metadata dilutes authority and makes it harder for Google to understand how pages differ from each other.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Title tags include a clear value proposition or benefit</span><span class="item-desc">The best title tags answer: "Why should I click this?" Compare: "SEO Services" vs "SEO Services That Get More Calls | TechTide SEO".</span></div><span class="tag t2">Important</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-head">Content Quality</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Content matches the searcher's intent (informational, commercial, navigational, transactional)</span><span class="item-desc">Google the target keyword and study the top 3–5 results. Are they guides, product pages, comparison posts? Match that format exactly.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Content demonstrates E-E-A-T (Experience, Expertise, Authoritativeness, Trust)</span><span class="item-desc">Include the author's name, credentials or bio. Cite sources. Use real examples, data or case studies. Avoid generic, fluffy writing.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Content is more useful than the current top-ranking pages</span><span class="item-desc">Read your competitors' top pages. What questions do they not answer? What detail is missing? Your page should be the most complete answer available.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Key pages have been refreshed in the last 12 months</span><span class="item-desc">Stale content loses rankings over time. Set a quarterly reminder to update statistics, examples, screenshots and any outdated advice.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Long content uses clear H2 and H3 headings throughout</span><span class="item-desc">Headings break up content for readers and help Google understand structure. Use H2 for main sections, H3 for sub-points within those sections.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Every image has descriptive alt text</span><span class="item-desc">Alt text helps visually impaired users and tells Google what an image shows. Be descriptive and natural: "A Google Business Profile map showing a local business in Lagos" not "image1.jpg".</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">No thin content pages (under 300 words with no unique value)</span><span class="item-desc">Thin pages can drag down the overall quality of your site. Either expand them, merge them into a more comprehensive page, or add a noindex tag if they must exist.</span></div><span class="tag t2">Important</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-head">Internal Linking</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Every page links out to at least 2–3 related pages on your own site</span><span class="item-desc">Internal links pass authority between pages and help Google discover content. Guide users from blog posts to service pages and from service pages to the contact or audit form.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">No orphaned pages (pages with zero internal links pointing to them)</span><span class="item-desc">Google can struggle to find pages that aren't linked from anywhere. Check in Search Console → Links → Internal links.</span><span class="item-tip">↗ Tool: Screaming Frog — "Inlinks" column.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Internal links use descriptive anchor text (not "click here")</span><span class="item-desc">Anchor text signals what the linked page is about. "Read our local SEO guide" is far more informative to Google than "click here" or "learn more".</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Your most important pages receive the most internal links</span><span class="item-desc">Internal links act like votes between your own pages. Make sure your highest-value service pages are linked from the homepage, blog posts and other key pages.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">No broken internal links</span><span class="item-desc">Broken internal links waste crawl budget and create a poor user experience. Check using Screaming Frog or Search Console → Crawl → Links.</span></div><span class="tag t1">Critical</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-head">Calls to Action</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Every page has one clear primary call to action</span><span class="item-desc">What do you want a visitor to do when they finish reading? Book a call, request a quote, download the checklist? Make it obvious, above the fold where possible.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Long-form pages have a CTA at the mid-point and at the bottom</span><span class="item-desc">Many readers don't scroll to the end. A mid-page CTA catches those who are already convinced before they finish reading.</span></div><span class="tag t2">Important</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 3. LOCAL SEO -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:rgba(79,208,143,.12);border:1px solid rgba(79,208,143,.25);">📍</div>
+      <h2>03 — Local SEO</h2>
+      <span class="section-count">24 checks</span>
+    </div>
+    <p class="section-intro">Local SEO determines whether your business appears in the Google Maps pack — the three business results shown above organic results for searches with local intent. This is often the highest-value traffic source for service businesses.</p>
+
+    <div class="sub">
+      <div class="sub-head">Google Business Profile</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Profile is claimed, verified and ownership is confirmed</span><span class="item-desc">If you can't find your profile, search Google Maps for your business. Unclaimed profiles can be edited by anyone.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Business name exactly matches your real-world name</span><span class="item-desc">Do not stuff keywords into your business name ("Lagos Plumbers - Fast 24hr Service"). This violates Google's guidelines and risks suspension.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Primary and secondary categories are set correctly</span><span class="item-desc">Your primary category is the most important local SEO signal. Research which category your top competitors use. Add all relevant secondary categories.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Business description is complete (750 characters) with natural keywords</span><span class="item-desc">Write a genuine description of what you do, who you help and what makes you different. Include your main services and location naturally.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Opening hours are accurate and updated for holidays</span><span class="item-desc">Incorrect hours are a top cause of bad reviews and lost customers. Update special hours for public holidays in advance.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">At least 10 high-quality real photos added</span><span class="item-desc">Photos of your premises, team and work increase trust dramatically. Google prioritises profiles with more photos. Add new ones monthly.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">All services listed with descriptions and prices where applicable</span><span class="item-desc">The Services section acts as a secondary keyword source. List each service with a short, accurate description.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Q&amp;A section is populated with real common questions</span><span class="item-desc">Add and answer your own Q&As before customers do. Questions and answers are indexed by Google and appear in your profile.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Google Posts published at least twice a month</span><span class="item-desc">Posts keep your profile fresh and can feature offers, events or new blog articles. They appear directly in your Google result.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Booking or appointment link added (if applicable)</span><span class="item-desc">Adding a booking link directly in your profile reduces friction and increases conversion. Use your scheduling tool URL.</span></div><span class="tag t2">Important</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-head">Reviews</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You have a direct review link to share with customers</span><span class="item-desc">In your Google Business Profile dashboard, find and copy your review link. Shorten it with a QR code for print or WhatsApp messages.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You have a process for asking every happy customer for a review</span><span class="item-desc">The best time to ask is immediately after a successful job. A simple WhatsApp message with your review link works for most service businesses.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Every review — positive or negative — has a reply within 48 hours</span><span class="item-desc">Replying to reviews shows potential customers and Google that you're active and engaged. Never argue with a negative reviewer publicly.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Your replies to reviews mention services and your location naturally</span><span class="item-desc">Review replies are indexed by Google. "Thank you for choosing our [service] in [city]" adds keyword signals to your profile.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You have more reviews than your nearest competitors</span><span class="item-desc">Review volume (not just rating) is a significant local ranking factor. Aim for at least 10–20 reviews before you expect to appear in the map pack.</span></div><span class="tag t2">Important</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-head">Local Citations &amp; Consistency</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">NAP (name, address, phone) is identical everywhere online</span><span class="item-desc">Even small differences ("St." vs "Street", "+234" vs "0234") confuse Google's local algorithm. Run a citation audit to find inconsistencies.</span><span class="item-tip">↗ Tools: BrightLocal, Whitespark, or manual searches.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Listed on the key directories for your country and industry</span><span class="item-desc">Nigeria: VConnect, ConnectNigeria, Nairaland business listings. Worldwide: Yelp, Bing Places, Apple Maps, Facebook Business. Industry directories relevant to your niche.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">LocalBusiness schema on your website matches your Google profile exactly</span><span class="item-desc">Your website's structured data should mirror your Google Business Profile: same name, address, phone and opening hours.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Address and phone number visible on your website (not just in an image)</span><span class="item-desc">Put your NAP in plain text in the footer and on the contact page. Text is crawlable; text inside images is not.</span></div><span class="tag t1">Critical</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-head">Location Pages</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Dedicated location or area page for each area you serve</span><span class="item-desc">If you serve Lagos, Abuja and Port Harcourt, each city should have its own page with unique, locally relevant content — not copy-pasted text with the city name swapped.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Location pages include local landmarks, neighbourhoods or specific references</span><span class="item-desc">Genuine local references (nearby streets, local events, community context) signal to Google that your page serves that area authentically.</span></div><span class="tag t2">Important</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 4. CONTENT SEO -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:rgba(245,184,61,.12);border:1px solid rgba(245,184,61,.25);">✍️</div>
+      <h2>04 — Content SEO</h2>
+      <span class="section-count">22 checks</span>
+    </div>
+    <p class="section-intro">Content is how you earn rankings for the searches your potential customers make before they're ready to buy. A good content strategy builds compounding traffic over time.</p>
+
+    <div class="sub">
+      <div class="sub-head">Keyword Research</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You have a master keyword list for your business</span><span class="item-desc">Minimum: your core service keywords, location modifiers, competitor brand terms and 10–20 question-style keywords ("how to…", "what is…", "best…").</span><span class="item-tip">↗ Tools: Google Keyword Planner (free), Ahrefs, Semrush, Ubersuggest.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Each keyword is mapped to exactly one page on your site</span><span class="item-desc">Use a keyword map spreadsheet: URL | Primary keyword | Monthly searches | Current position. Update it every 3 months.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You target long-tail and question keywords, not just head terms</span><span class="item-desc">Head terms ("SEO services") are competitive and broad. Long-tail terms ("affordable SEO for small businesses in Lagos") are easier to rank and more likely to convert.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You've checked what keywords you already rank for in Search Console</span><span class="item-desc">Go to Search Console → Performance → Queries. Look for keywords where you rank positions 4–20 — these are your best quick-win opportunities.</span></div><span class="tag t-tool">Tool</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-head">Content Strategy</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You have pillar pages for each core topic your business covers</span><span class="item-desc">A pillar page is a comprehensive guide on a broad topic (e.g. "Complete Guide to Local SEO in Nigeria") with links to more specific supporting articles.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You publish new content on a consistent, realistic schedule</span><span class="item-desc">Consistency matters more than volume. Two high-quality pieces a month, every month, beats ten pieces in January and nothing for six months.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Content covers the full customer journey (awareness → consideration → decision)</span><span class="item-desc">Awareness: "What is SEO?" | Consideration: "Local SEO vs PPC — which is better?" | Decision: "Best SEO agency in Lagos". All three stages need content.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Every piece of content has a clear goal (traffic, leads, links, brand)</span><span class="item-desc">Before writing, define what success looks like. Content written without a clear goal tends to be unfocused and underperforms.</span></div><span class="tag t2">Important</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-head">Content Quality &amp; Maintenance</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">All statistics and data in your content are current and sourced</span><span class="item-desc">Outdated stats (especially years-old percentages) make your content look unreliable. Link to the primary source, not a secondary site that linked to the original.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You have a content refresh schedule for pages ranking positions 4–20</span><span class="item-desc">Pages in these positions have proven they can rank — they just need improvement. Updating them is usually faster and higher ROI than creating new content.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">No keyword stuffing — keyword density stays natural (1–2%)</span><span class="item-desc">Write for humans first. If the keyword sounds forced or awkward, rephrase using a synonym. Google's algorithms are sophisticated enough to recognise over-optimisation.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Content written by or reviewed by a genuine subject matter expert</span><span class="item-desc">Google's E-E-A-T guidelines reward first-hand experience. AI-generated content published without expert review, fact-checking or unique perspective risks ranking poorly on competitive topics.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Each article has an author bio linking to their credentials or social profile</span><span class="item-desc">Author information is a key trust signal. A named, credentialed author (with a LinkedIn link) is significantly more trustworthy than "the team".</span></div><span class="tag t2">Important</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-head">Optimising for AI Search (AEO)</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Content directly and concisely answers common questions</span><span class="item-desc">AI tools (ChatGPT, Gemini, Perplexity) summarise information from pages that answer questions clearly. Structure answers in the first paragraph, then expand with detail.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Your brand and services are mentioned on reputable third-party sites</span><span class="item-desc">AI assistants draw from sites they trust. Being featured in industry directories, local news, award sites and partner pages increases your chance of being named in AI answers.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">FAQs on service pages use the exact phrasing customers type into AI tools</span><span class="item-desc">Ask ChatGPT or Gemini what questions people ask about your service category. Write FAQs that answer those exact questions word-for-word.</span></div><span class="tag t3">Ongoing</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 5. LINK BUILDING -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.25);">🔗</div>
+      <h2>05 — Link Building &amp; Authority</h2>
+      <span class="section-count">18 checks</span>
+    </div>
+    <p class="section-intro">Links from trustworthy, relevant sites tell Google your site deserves to rank. Quality always beats quantity — one link from a respected local newspaper is worth more than 50 links from unrelated directories.</p>
+
+    <div class="sub">
+      <div class="sub-head">Link Profile Audit</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You know how many sites link to you and who they are</span><span class="item-desc">Check in Search Console → Links → Top linking sites. For more detail, use Ahrefs (free tier), Semrush or Moz Link Explorer.</span><span class="item-tip">↗ Tool: Google Search Console → Links (free).</span></div><span class="tag t-tool">Tool</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">No manual action or penalty is applied to your site</span><span class="item-desc">Check Search Console → Security &amp; Manual Actions. A manual action for unnatural links means you have toxic backlinks that need to be removed or disavowed.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Toxic or spammy links have been disavowed</span><span class="item-desc">If you've received links from link farms, adult sites or irrelevant foreign directories, use Google's Disavow tool (Search Console) to tell Google to ignore them.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Your link profile has diversity in anchor text</span><span class="item-desc">Healthy profiles have a mix of branded anchors ("TechTide SEO"), generic ("click here", "website"), and keyword-rich anchors. Over-optimised anchors (100% keyword anchors) are a red flag.</span></div><span class="tag t2">Important</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-head">Link Acquisition</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You have identified your top 10 competitors' best links</span><span class="item-desc">Sites that link to your competitors but not to you are your best link opportunities. Filter by relevance and authority, then pursue each one systematically.</span><span class="item-tip">↗ Tool: Ahrefs Link Intersect or Semrush Backlink Gap.</span></div><span class="tag t-tool">Tool</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Your business is listed on industry-specific directories and associations</span><span class="item-desc">Trade associations, chamber of commerce pages, professional bodies and industry platforms often give followed links to members. These are some of the safest and most relevant links available.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Partners, suppliers and clients have linked to your website</span><span class="item-desc">Ask people you already have a relationship with to link to you. A supplier's "trusted partners" page or a client's "resources" page are natural and easy wins.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You have at least one piece of linkable content (data, tools, guides)</span><span class="item-desc">Content that earns links naturally includes original research, free tools, comprehensive guides, and unique data. Generic blog posts rarely earn links.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You monitor brand mentions that don't link back to you</span><span class="item-desc">Set up Google Alerts for your brand name. When someone mentions you without a link, reach out politely and ask them to add one.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You never buy links or participate in link exchange schemes</span><span class="item-desc">Paid links and reciprocal link schemes violate Google's guidelines. Penalties — manual or algorithmic — can take months to recover from and can be catastrophic for rankings.</span></div><span class="tag t1">Critical</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-head">Digital PR</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">You have pitched expert commentary to at least one journalist or publication</span><span class="item-desc">Journalists constantly need expert sources. A brief, helpful response to a relevant query (HARO, ResponseSource, or direct outreach) can earn high-authority editorial links.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Your company milestones, data or insights have been pitched as news stories</span><span class="item-desc">Business wins, survey data, staff hires, and community involvement can all be newsworthy at the local or industry level. Build a relationship with local journalists.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Guest articles have been published on relevant industry sites</span><span class="item-desc">Genuine guest articles on sites your customers read are valuable — both for links and for reaching new audiences. Avoid low-quality guest post farms.</span></div><span class="tag t3">Ongoing</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 6. MEASUREMENT & REPORTING -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:rgba(25,195,181,.12);border:1px solid rgba(25,195,181,.25);">📊</div>
+      <h2>06 — Measurement &amp; Monthly Reporting</h2>
+      <span class="section-count">16 checks</span>
+    </div>
+    <p class="section-intro">If you can't measure it, you can't improve it. This section covers the tools to set up once and the reports to review every month so you know whether your SEO is working.</p>
+
+    <div class="sub">
+      <div class="sub-head">Tools Setup (one-time)</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Google Search Console is installed and verified</span><span class="item-desc">Free from Google. Provides keyword rankings, click-through rates, crawl errors, index coverage and link data. Install before anything else.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Google Analytics 4 (GA4) is installed and tracking correctly</span><span class="item-desc">Set up conversion events for phone clicks, form submissions, and any "thank you" pages. Without conversions tracked, you can't connect SEO to business results.</span></div><span class="tag t1">Critical</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Google Business Profile Insights are being reviewed monthly</span><span class="item-desc">Your Profile dashboard shows how many people called, clicked for directions, visited your website or viewed your photos from Google. Track trends month-to-month.</span></div><span class="tag t2">Important</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Rank tracking is set up for your top 20 keywords</span><span class="item-desc">Track your priority keywords weekly. Search Console is good for broad trends; a dedicated rank tracker (SerpRobot, AccuRanker, or Semrush) is better for daily precision.</span><span class="item-tip">↗ Tools: SerpRobot (low cost), Google Search Console (free).</span></div><span class="tag t-tool">Tool</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Backlink monitoring is active</span><span class="item-desc">You need to know when you gain or lose important links. Set up alerts in Ahrefs, Semrush or Google Search Console (Links report, checked monthly).</span></div><span class="tag t2">Important</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="sub-head">Monthly Review Checklist</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Review organic clicks and impressions vs previous month</span><span class="item-desc">In Search Console → Performance → Search results. Are clicks trending up? If impressions rise but clicks don't, your titles and meta descriptions need work.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Identify which pages gained or lost the most rankings</span><span class="item-desc">Sort your rank tracker by position change. Investigate pages that dropped significantly — was there a content change, a technical issue, or a Google algorithm update?</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Check Search Console for new crawl errors or indexing issues</span><span class="item-desc">Go to Pages → All pages → filter by "Not indexed". New issues can appear after site updates. Address them within the same month.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Track conversions: calls, form submissions, map direction requests</span><span class="item-desc">Rankings are vanity — conversions are reality. Report on actual business results: how many leads came from organic search this month vs last month?</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Check Core Web Vitals report for any new failing pages</span><span class="item-desc">In Search Console → Experience → Core Web Vitals. Site updates, new embeds and third-party scripts can cause previously passing pages to fail.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Review Google Business Profile review count and rating</span><span class="item-desc">Are you gaining reviews? Is your average rating stable? An unexpected drop in reviews or rating needs immediate attention — possible fake review attack or customer service issue.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Identify quick-win keywords ranking positions 4–20</span><span class="item-desc">These pages have proven intent-match and are close to the top. Pick the two or three with the highest potential and refresh or expand them that month.</span></div><span class="tag t3">Ongoing</span></div>
+        <div class="item"><input type="checkbox" /><div class="item-body"><span class="item-title">Check for and respond to any manual actions in Search Console</span><span class="item-desc">Search Console → Security &amp; Manual Actions. Manual actions are rare but serious — they require a reconsideration request after the issue is fixed.</span></div><span class="tag t3">Ongoing</span></div>
+      </div>
+    </div>
+
+    <!-- Callout -->
+    <div class="callout">
+      <strong>Pro tip — build a one-page monthly SEO report:</strong> Pull three numbers from each tool — clicks (Search Console), leads (GA4) and map views (Business Profile). Compare to the previous month. Note what you worked on and what you plan to do next month. This is more useful than a 40-page PDF and takes 20 minutes to produce.
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>
+      <div class="footer-brand">TechTide <span>SEO</span></div>
+      <p>SEO services for businesses in any market.<br>techtideseo.com · info@techtideseo.com</p>
+    </div>
+    <a href="https://techtideseo.com/free-seo-audit/" class="footer-cta">
+      Get your free SEO audit →
+    </a>
+  </div>
+
+</div>
+</body>
+</html>

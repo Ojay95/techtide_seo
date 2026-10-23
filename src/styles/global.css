@@ -566,3 +566,133 @@ html { scroll-padding-top: 84px; }
   box-shadow: 0 0 0 3px var(--panel), 0 0 0 4px color-mix(in srgb, var(--accent) 50%, transparent);
 }
 @media (prefers-reduced-motion: reduce) { .tst-card, .search-dlg[open] { transition: none; animation: none; } }
+
+/* ============================================================
+   LEAD POPUP — exit-intent lead magnet
+   ============================================================ */
+.lead-popup {
+  /* Let the browser keep its default dialog centering */
+  padding: 0;
+  border: none;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  z-index: 200;
+}
+.lead-popup[open] {
+  display: block; /* needed for the animation to apply */
+  animation: lp-bg-in .25s ease forwards;
+}
+.lead-popup::backdrop {
+  background: rgb(4 12 22 / .65);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  animation: lp-fade .25s ease;
+}
+@keyframes lp-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lp-bg-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* Inner card */
+.lp-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  max-width: 780px;
+  width: calc(100vw - 40px);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 40px 100px -20px rgb(0 0 0 / .7), 0 0 0 1px rgb(255 255 255 / .04) inset;
+  animation: lp-in .3s cubic-bezier(.22,.68,0,1.2) forwards;
+}
+@keyframes lp-in { from { opacity: 0; transform: translateY(28px) scale(.96); } to { opacity: 1; transform: none; } }
+
+/* Close button */
+.lp-close {
+  position: absolute; top: 14px; right: 14px; z-index: 10;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgb(255 255 255 / .08); border: 1px solid var(--line);
+  color: var(--muted); cursor: pointer;
+  display: grid; place-items: center;
+  transition: background .15s, color .15s;
+}
+.lp-close:hover { background: rgb(255 255 255 / .15); color: var(--text); }
+
+/* LEFT visual panel */
+.lp-visual {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, #0A2845 0%, #071A2E 100%);
+  padding: 36px 28px;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px;
+  border-right: 1px solid var(--line);
+}
+.lp-glow {
+  position: absolute; inset: -40% -40% -40% -40%;
+  background: radial-gradient(ellipse at 60% 40%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%);
+  pointer-events: none;
+}
+
+/* Fake doc card */
+.lp-doc {
+  position: relative; width: 100%;
+  background: color-mix(in srgb, var(--panel) 85%, transparent);
+  border: 1px solid var(--line); border-radius: 14px;
+  padding: 14px 16px; display: flex; flex-direction: column; gap: 10px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px -8px rgb(0 0 0 / .5);
+}
+.lp-doc-header {
+  display: flex; align-items: center; gap: 6px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--line);
+  margin-bottom: 2px;
+}
+.lp-dot { width: 10px; height: 10px; border-radius: 50%; }
+.lp-dot.r { background: #FF5F57; }
+.lp-dot.y { background: #FFBD2E; }
+.lp-dot.g { background: #28C840; }
+.lp-doc-title { flex: 1; text-align: center; font: 600 12px 'IBM Plex Mono', monospace; color: var(--muted); margin-left: -28px; }
+.lp-row { display: grid; grid-template-columns: 60px 1fr 36px; align-items: center; gap: 8px; }
+.lp-row-label { font-size: 12px; color: var(--muted); }
+.lp-bar { height: 6px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.lp-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--amber)); border-radius: 4px; }
+.lp-row-pct { font: 600 12px 'IBM Plex Mono', monospace; color: var(--accent-text); text-align: right; }
+
+/* Badge */
+.lp-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border-radius: 40px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  color: var(--accent-text); font: 600 13px 'DM Sans Variable', sans-serif;
+}
+.lp-badge svg { color: var(--accent); }
+
+/* RIGHT form panel */
+.lp-form-wrap {
+  background: var(--panel);
+  padding: 44px 36px;
+  display: flex; flex-direction: column; gap: 0;
+}
+.lp-eyebrow {
+  font: 600 12px 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent-text); margin: 0 0 10px;
+}
+.lp-heading {
+  font: 800 clamp(22px, 3vw, 28px) 'Sora Variable', sans-serif;
+  color: var(--text); margin: 0 0 12px; line-height: 1.2;
+}
+.lp-sub { font-size: 14.5px; color: var(--muted); line-height: 1.65; margin: 0 0 24px; }
+.lp-form { display: flex; flex-direction: column; gap: 10px; }
+.lp-btn { width: 100%; justify-content: center; margin-top: 4px; }
+.lp-status { font-size: 14px; min-height: 20px; margin: 0; color: var(--good); }
+.lp-legal { font-size: 12px; color: var(--muted); margin: 4px 0 0; line-height: 1.5; }
+.lp-legal a { color: var(--muted); text-underline-offset: 2px; }
+
+/* Mobile: stack vertically, hide visual */
+@media (max-width: 640px) {
+  .lp-inner { grid-template-columns: 1fr; max-height: 90dvh; overflow-y: auto; }
+  .lp-visual { display: none; }
+  .lp-form-wrap { padding: 36px 24px 28px; }
+}
+@media (prefers-reduced-motion: reduce) { .lp-inner, .lead-popup { animation: none; } }
