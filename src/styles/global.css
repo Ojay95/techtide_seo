@@ -230,9 +230,20 @@ label { font-weight: 700; font-size: 15px; }
    HEADER & NAVIGATION
    ============================================================ */
 .site-head {
+  position: sticky;
+  top: 0;
+  z-index: 40;
   border-bottom: 1px solid var(--line);
-  background: var(--bg);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  backdrop-filter: saturate(160%) blur(12px);
+  transition: box-shadow 0.2s ease;
 }
+.site-head.scrolled { box-shadow: 0 6px 24px rgb(0 0 0 / 0.18); }
+@supports not (backdrop-filter: blur(1px)) {
+  .site-head { background: var(--bg); }
+}
+html { scroll-padding-top: 84px; }
 .site-head .w {
   display: flex;
   justify-content: space-between;
@@ -295,7 +306,6 @@ label { font-weight: 700; font-size: 15px; }
 .menu-btn[aria-expanded=true] .bars { display: none; }
 
 @media (max-width: 860px) {
-  .site-head { position: sticky; top: 0; z-index: 40; }
   .site-head .w { flex-wrap: nowrap; }
   .menu-btn { display: grid; }
   .site-head nav {
