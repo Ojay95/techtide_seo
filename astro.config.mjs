@@ -13,7 +13,10 @@ const isDev = process.argv.includes('dev');
 function rehypeImages() {
   return (tree) => {
     const walk = (n) => {
-      if (n.type === 'element' && n.tagName === 'img') n.properties = { ...n.properties, loading: 'lazy', decoding: 'async', width: 1280, height: 720 };
+      if (n.type === 'element' && n.tagName === 'img') {
+        const alt = String(n.properties?.alt || '').replace(/^\s*screenshot placeholder:\s*/i, '');
+        n.properties = { ...n.properties, alt: alt ? alt[0].toUpperCase() + alt.slice(1) : alt, loading: 'lazy', decoding: 'async', width: 1280, height: 720 };
+      }
       (n.children || []).forEach(walk);
     };
     walk(tree);

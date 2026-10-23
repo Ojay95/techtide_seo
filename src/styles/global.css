@@ -461,3 +461,108 @@ html { scroll-padding-top: 84px; }
   cursor: pointer;
 }
 .chip[aria-pressed=true] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+/* ============================================================
+   SEARCH — header button + modal dialog
+   ============================================================ */
+.search-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 40px; padding: 0 10px 0 12px;
+  background: color-mix(in srgb, var(--panel) 70%, transparent);
+  border: 1px solid var(--line); border-radius: 12px;
+  color: var(--muted); font: 500 14px 'DM Sans Variable', sans-serif;
+  cursor: pointer; transition: border-color .15s, color .15s, background .15s;
+}
+.search-btn:hover, .search-btn:focus-visible { border-color: var(--accent); color: var(--text); }
+.search-kbd {
+  font: 600 11px ui-monospace, SFMono-Regular, Menlo, monospace;
+  padding: 3px 6px; border-radius: 6px;
+  border: 1px solid var(--line); background: var(--bg2); color: var(--muted);
+}
+@media (max-width: 860px) { .search-kbd { display: none; } .search-btn { justify-content: flex-start; height: 48px; } }
+
+.search-dlg {
+  width: min(640px, calc(100vw - 32px)); max-height: min(70vh, 620px);
+  margin: 12vh auto auto; padding: 0;
+  border: 1px solid var(--line); border-radius: 20px;
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%);
+  color: var(--text);
+  box-shadow: 0 30px 80px rgb(0 0 0 / .45), 0 0 0 1px rgb(255 255 255 / .03) inset;
+  overflow: hidden;
+}
+.search-dlg[open] { display: flex; flex-direction: column; animation: sd-in .18s ease-out; }
+.search-dlg::backdrop { background: rgb(4 12 22 / .55); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+@keyframes sd-in { from { opacity: 0; transform: translateY(-8px) scale(.98); } to { opacity: 1; transform: none; } }
+.search-top { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-bottom: 1px solid var(--line); color: var(--muted); margin: 0; }
+.search-top input {
+  flex: 1; min-width: 0; background: transparent; border: 0; outline: 0;
+  color: var(--text); font: 500 17px 'DM Sans Variable', sans-serif;
+}
+.search-top input::-webkit-search-cancel-button { display: none; }
+.search-esc {
+  font: 600 11px ui-monospace, Menlo, monospace; padding: 4px 8px; border-radius: 6px;
+  border: 1px solid var(--line); background: var(--bg2); color: var(--muted); cursor: pointer;
+}
+.search-res { list-style: none; margin: 0; padding: 8px; overflow-y: auto; }
+.search-res:empty { display: none; }
+.search-res a {
+  display: grid; grid-template-columns: auto 1fr; column-gap: 12px; row-gap: 2px;
+  padding: 12px 14px; border-radius: 12px; text-decoration: none; color: var(--text);
+  border: 1px solid transparent;
+}
+.search-res a:hover, .search-res [aria-selected=true] a { background: var(--bg2); border-color: var(--line); }
+.search-res b { font-size: 15px; grid-column: 2; }
+.search-res small { grid-column: 2; color: var(--muted); font-size: 13px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.sr-kind {
+  grid-row: span 2; align-self: start; margin-top: 2px;
+  font: 600 10px ui-monospace, Menlo, monospace; letter-spacing: .06em; text-transform: uppercase;
+  padding: 4px 7px; border-radius: 6px; background: var(--pill-bg); color: var(--accent-text); border: 1px solid var(--pill-line);
+}
+.search-res mark { background: color-mix(in srgb, var(--accent) 28%, transparent); color: inherit; border-radius: 3px; padding: 0 1px; }
+.search-empty { padding: 22px 14px; color: var(--muted); }
+.search-hint { margin: 0; padding: 18px; color: var(--muted); font-size: 14px; }
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.tst-sec { position: relative; overflow: hidden; }
+.tst-sec::before {
+  content: ""; position: absolute; inset: auto -10% -40% -10%; height: 70%;
+  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--accent) 16%, transparent), transparent 65%);
+  pointer-events: none;
+}
+.tst-grid { position: relative; display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr)); align-items: stretch; }
+.tst-card {
+  position: relative; margin: 0; padding: 30px 28px 26px;
+  display: flex; flex-direction: column; gap: 18px;
+  border-radius: 22px; border: 1px solid var(--line);
+  background:
+    linear-gradient(var(--panel), var(--panel)) padding-box,
+    linear-gradient(140deg, color-mix(in srgb, var(--accent) 55%, transparent), var(--line) 40%, var(--line) 70%, color-mix(in srgb, var(--amber) 45%, transparent)) border-box;
+  border-color: transparent;
+  box-shadow: 0 1px 0 rgb(255 255 255 / .04) inset, 0 18px 40px -24px rgb(0 0 0 / .55);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.tst-card:hover { transform: translateY(-4px); box-shadow: 0 1px 0 rgb(255 255 255 / .05) inset, 0 28px 60px -26px color-mix(in srgb, var(--accent) 45%, transparent); }
+.tst-feature {
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--accent) 10%, var(--panel)), var(--panel) 55%) padding-box,
+    linear-gradient(140deg, var(--accent), var(--line) 45%, var(--amber)) border-box;
+}
+@media (min-width: 1000px) { .tst-feature { transform: translateY(-14px); } .tst-feature:hover { transform: translateY(-18px); } }
+.tst-mark { width: 38px; height: 28px; fill: var(--accent); opacity: .9; }
+.tst-stars { color: var(--amber); letter-spacing: 3px; font-size: 15px; line-height: 1; }
+.tst-card blockquote { margin: 0; flex: 1; }
+.tst-card blockquote p { margin: 0; font-size: 17px; line-height: 1.7; color: var(--text); }
+.tst-card figcaption { display: flex; align-items: center; gap: 14px; padding-top: 18px; border-top: 1px solid var(--line); }
+.tst-card figcaption b { display: block; font-size: 15px; }
+.tst-card figcaption small { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+.tst-avatar {
+  flex: none; width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center;
+  font: 700 15px 'Sora Variable', sans-serif; color: var(--accent-ink);
+  background: linear-gradient(135deg, var(--accent), var(--amber));
+  box-shadow: 0 0 0 3px var(--panel), 0 0 0 4px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+@media (prefers-reduced-motion: reduce) { .tst-card, .search-dlg[open] { transition: none; animation: none; } }

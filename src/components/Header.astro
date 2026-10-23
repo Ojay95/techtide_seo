@@ -14,6 +14,10 @@ const path = Astro.url.pathname;
     </button>
     <nav id="site-nav" aria-label="Main">
       {NAV.map((n) => <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}>{n.label}</a>)}
+      <button id="search-open" class="search-btn" type="button" aria-label="Search the site" aria-haspopup="dialog">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <span class="search-label">Search</span><kbd class="search-kbd">⌘K</kbd>
+      </button>
       <button id="theme-toggle" class="toggle" type="button" aria-label="Switch between light and dark mode">
         <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
         <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -22,6 +26,16 @@ const path = Astro.url.pathname;
     </nav>
   </div>
 </header>
+<dialog id="search-dlg" class="search-dlg" aria-label="Search TechTide SEO">
+  <form method="dialog" class="search-top" role="search" onsubmit="return false">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <label for="search-in" class="sr-only">Search articles, guides and services</label>
+    <input id="search-in" type="search" autocomplete="off" spellcheck="false" placeholder="Search articles, guides and services…" role="combobox" aria-expanded="false" aria-controls="search-res" aria-autocomplete="list" />
+    <button type="button" id="search-close" class="search-esc" aria-label="Close search">Esc</button>
+  </form>
+  <ul id="search-res" class="search-res" role="listbox" aria-label="Results"></ul>
+  <p id="search-hint" class="search-hint">Try “local SEO”, “Google reviews” or “keyword research”.</p>
+</dialog>
 <script is:inline>
   (function () {
     var b = document.getElementById('menu-btn'), n = document.getElementById('site-nav');
@@ -42,5 +56,79 @@ const path = Astro.url.pathname;
     function onScroll() { h.classList.toggle('scrolled', window.scrollY > 8); }
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+  (function () {
+    var dlg = document.getElementById('search-dlg'), inp = document.getElementById('search-in'),
+        res = document.getElementById('search-res'), hint = document.getElementById('search-hint'),
+        openBtn = document.getElementById('search-open'), closeBtn = document.getElementById('search-close');
+    if (!dlg || !inp || !res) return;
+    var data = null, active = -1, links = [];
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function load() {
+      if (data) return Promise.resolve(data);
+      return fetch('/search.json').then(function (r) { return r.json(); }).then(function (j) {
+        data = j.map(function (x) { x._t = x.t.toLowerCase(); x._d = (x.d || '').toLowerCase(); x._b = (x.b || '').toLowerCase(); return x; });
+        return data;
+      });
+    }
+    function mark(text, terms) {
+      var out = esc(text);
+      terms.forEach(function (t) { if (t.length > 1) out = out.replace(new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'), '<mark>$1</mark>'); });
+      return out;
+    }
+    function render(q) {
+      q = q.trim().toLowerCase();
+      active = -1;
+      if (!q) { res.innerHTML = ''; hint.hidden = false; inp.setAttribute('aria-expanded', 'false'); return; }
+      var terms = q.split(/\s+/);
+      var hits = data.map(function (x) {
+        var s = 0;
+        for (var i = 0; i < terms.length; i++) {
+          var t = terms[i], ts = 0;
+          if (x._t.indexOf(t) > -1) ts += 10;
+          if (x._d.indexOf(t) > -1) ts += 4;
+          if (x._b.indexOf(t) > -1) ts += 1;
+          if (!ts) return null;
+          s += ts;
+        }
+        if (x._t.indexOf(q) > -1) s += 15;
+        if (x.k === 'Service') s += 2;
+        return { x: x, s: s };
+      }).filter(Boolean).sort(function (a, b) { return b.s - a.s; }).slice(0, 8);
+      hint.hidden = true;
+      inp.setAttribute('aria-expanded', 'true');
+      if (!hits.length) { res.innerHTML = '<li class="search-empty">No results for “' + esc(q) + '”. <a href="/contact/">Ask us directly →</a></li>'; links = []; return; }
+      res.innerHTML = hits.map(function (h, i) {
+        return '<li role="option" id="sr-' + i + '"><a href="' + h.x.u + '"><span class="sr-kind">' + h.x.k + '</span><b>' + mark(h.x.t, terms) + '</b><small>' + mark(h.x.d || '', terms) + '</small></a></li>';
+      }).join('');
+      links = Array.prototype.slice.call(res.querySelectorAll('a'));
+    }
+    function setActive(i) {
+      links.forEach(function (a, j) { a.parentNode.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
+      active = i;
+      if (links[i]) { inp.setAttribute('aria-activedescendant', 'sr-' + i); links[i].scrollIntoView({ block: 'nearest' }); }
+    }
+    function open() {
+      if (dlg.open) return;
+      dlg.showModal();
+      inp.value = ''; render('');
+      inp.focus();
+      load().catch(function () { hint.textContent = 'Search is unavailable right now.'; });
+    }
+    openBtn && openBtn.addEventListener('click', open);
+    closeBtn && closeBtn.addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    inp.addEventListener('input', function () { load().then(function () { render(inp.value); }); });
+    inp.addEventListener('keydown', function (e) {
+      if (!links.length) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); setActive((active + 1) % links.length); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); setActive((active - 1 + links.length) % links.length); }
+      else if (e.key === 'Enter') { e.preventDefault(); (links[active] || links[0]).click(); }
+    });
+    document.addEventListener('keydown', function (e) {
+      var typing = /input|textarea|select/i.test((e.target && e.target.tagName) || '') || (e.target && e.target.isContentEditable);
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); open(); }
+      else if (e.key === '/' && !typing) { e.preventDefault(); open(); }
+    });
   })();
 </script>

@@ -28,14 +28,11 @@ const testimonials = [
       <p class="m lead">We fix what holds your site back, build pages people search for, and report on what matters: calls, leads and sales.</p>
       <a class="btn" href="/free-seo-audit/">Get your free SEO audit</a><a class="btn ghost" href="/services/">See our services</a>
     </div>
-    <div class="p" role="group" aria-label="Illustrative sample dashboard">
-      <div style="display:flex;justify-content:space-between;align-items:center"><span class="mono">Search visibility</span><span class="pill">Sample data</span></div>
+    <div class="p" role="group" aria-label="Illustrative search visibility dashboard">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="mono">Search visibility</span></div>
       <Visual kind="chart" />
       <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><span class="pill">LCP 2.1s</span><span class="pill">INP 120ms</span><span class="pill">CLS 0.05</span></div>
     </div>
-  </div></section>
-  <section class="alt" style="border-block:1px solid var(--line)"><div class="w grid" style="padding-top:26px;padding-bottom:26px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
-    {[['5','pillars, one plan'],['4','step process'],['Monthly','plain-language reports'],['0','ranking guarantees']].map(([a, b]) => <div class="stat"><b>{a}</b><span class="mono m">{b}</span></div>)}
   </div></section>
   <section class="sec"><div class="w">
     <div class="mono">The system</div><h2 class="h2">Five pillars. One dashboard.</h2>
@@ -46,7 +43,7 @@ const testimonials = [
     <div class="grid" style="margin-top:28px;gap:28px">{steps.map(([a, b], i) => <div class="step"><div class="mono">0{i + 1}</div><h3>{a}</h3><p class="m" style="margin:0">{b}</p></div>)}</div></div></section>
   <section class="sec"><div class="w two">
     <div><div class="mono">Reporting</div><h2 class="h2">A report built around leads</h2><p class="m" style="margin:0">Every month you see what changed, what it means and what we do next, in plain language. Clicks matter only when they turn into calls and customers.</p></div>
-    <div class="p"><div style="display:flex;justify-content:space-between"><b>Monthly report layout</b><span class="pill">Sample</span></div>
+    <div class="p"><div style="display:flex;justify-content:space-between"><b>Monthly report layout</b></div>
       {rows.map(([l, v]) => <div style="display:grid;grid-template-columns:140px 1fr 24px;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)"><span style="font-size:14px">{l}</span><div class="bar" style="margin:0"><i style={`width:${v}%`}></i></div><b style="color:var(--good)">▲</b></div>)}
     </div>
   </div></section>
@@ -55,25 +52,26 @@ const testimonials = [
   <section class="sec" id="pricing"><div class="w"><div class="mono">Pricing</div><h2 class="h2">Clear plans, no surprises</h2>
     <p class="m" style="max-width:600px;margin:0">Every plan starts with a free audit, so you know exactly what we'll fix before you commit. <a href="/how-we-work/">See how we work</a>.</p>
     <Pricing /></div></section>
-  <section class="sec" id="testimonials">
+  <section class="sec tst-sec" id="testimonials">
     <div class="w">
-      <div class="mono">Client results</div>
+      <div class="mono">Client stories</div>
       <h2 class="h2">What our clients say</h2>
-      <p class="m" style="max-width:600px;margin:0 0 32px">Plain feedback from businesses we have worked with. Replace with your own quotes as results come in.</p>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px">
-        {testimonials.map((t) => (
-          <figure class="p testimonial-card" style="margin:0">
-            <blockquote style="margin:0"><p class="m" style="font-size:16px;line-height:1.65;margin:0">&ldquo;{t.quote}&rdquo;</p></blockquote>
-            <figcaption style="margin-top:16px;border-top:1px solid var(--line);padding-top:12px">
-              <b style="display:block;font-size:15px">{t.name}</b>
-              <span class="m mono" style="font-size:12px">{t.role}</span>
+      <p class="m" style="max-width:600px;margin:0 0 40px">Businesses that trusted us with their search growth, in their own words.</p>
+      <div class="tst-grid">
+        {testimonials.map((t, i) => (
+          <figure class={`tst-card${i === 1 ? ' tst-feature' : ''}`}>
+            <svg class="tst-mark" viewBox="0 0 48 36" aria-hidden="true"><path d="M0 36V22C0 9 7 1 19 0l2 5c-6 2-9 6-9 12h8v19H0Zm27 0V22C27 9 34 1 46 0l2 5c-6 2-9 6-9 12h8v19H27Z" /></svg>
+            <div class="tst-stars" role="img" aria-label="5 out of 5">★★★★★</div>
+            <blockquote><p>{t.quote}</p></blockquote>
+            <figcaption>
+              <span class="tst-avatar" aria-hidden="true">{t.name.split(' ').map((w) => w[0]).join('').slice(0, 2)}</span>
+              <span><b>{t.name}</b><small>{t.role}</small></span>
             </figcaption>
           </figure>
         ))}
       </div>
     </div>
   </section>
-  {/* TODO: Add a real case study section with measurable results once your first case study is ready. */}
   <section class="sec alt"><div class="w"><div class="mono">FAQ</div><h2 class="h2">Questions we hear often</h2>
     <div class="grid" style="margin-top:24px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))">{faq.map(([q, a]) => <div class="p"><h3 style="font-size:18px">{q}</h3><p class="m">{a}</p></div>)}</div></div></section>
   <CTA />

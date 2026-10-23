@@ -34,7 +34,7 @@ const schema = [
       <p class="m lead">{s.intro}</p>
       <a class="btn" href="/free-seo-audit/">Get your free SEO audit</a>
     </div>
-    <div class="p" role="group" aria-label="Illustrative sample visual"><div style="display:flex;justify-content:space-between;margin-bottom:14px"><span class="mono">{s.name}</span><span class="pill">Sample data</span></div><Visual kind={visual[s.slug]} /></div>
+    <div class="p" role="group" aria-label="Illustrative visual"><div style="display:flex;justify-content:space-between;margin-bottom:14px"><span class="mono">{s.name}</span></div><Visual kind={visual[s.slug]} /></div>
   </div></section>
   <section class="sec"><div class="w"><div class="mono">What we do</div><h2 class="h2">{s.items.length} parts of {s.name.toLowerCase()}</h2>
     <div class="grid" style="margin-top:24px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))">{s.items.map(([a, b], i) => <div class="p"><div class="mono">0{i + 1}</div><h3>{a}</h3><p class="m">{b}</p></div>)}</div></div></section>

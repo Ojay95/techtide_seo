@@ -28,10 +28,7 @@ export const AUTHOR = {
 
 export const NAV = [
   { href: '/services/', label: 'Services' },
-  { href: '/how-we-work/', label: 'How we work' },
-  { href: '/guides/', label: 'Guides' },
   { href: '/blog/', label: 'Blog' },
-  { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
 ];
 
