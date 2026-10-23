@@ -10,14 +10,14 @@ export function getStaticPaths() {
   return SERVICES.map((s) => ({ params: { slug: s.slug }, props: { s } }));
 }
 const { s } = Astro.props;
-const visual: Record<string, string> = { 'local-seo': 'heat', 'technical-seo': 'tech', 'on-page-seo': 'serp', 'content-seo': 'bars', 'link-building': 'net', 'seo-audit': 'chart' };
+const visual: Record<string, string> = { 'local-seo': 'heat', 'google-business-profile-setup': 'heat', 'technical-seo': 'tech', 'on-page-seo': 'serp', 'content-seo': 'bars', 'link-building': 'net', 'seo-audit': 'chart' };
 const pricing: Record<string, { from: string; unit: string; included: string[] }> = {
   'local-seo': { from: '$500', unit: '/ month', included: ['Google Business Profile management', 'Citation cleanup', 'Review system', 'Core on-page fixes', 'Monthly report'] },
   'seo-audit': { from: '$500', unit: 'one time', included: ['Technical and on-page review', 'Content and keyword gaps', 'Local and link review', 'Prioritised action plan', 'Walkthrough call'] },
 };
 const price = pricing[s.slug];
 const live = new Set((await getCollection('guides')).filter((g) => !g.data.draft).map((g) => `/guides/${g.id}/`));
-const related = s.related.filter(([href]) => live.has(href));
+const related = s.related.filter(([href]) => live.has(href) || href.startsWith('/services/'));
 const schema = [
   { '@context': 'https://schema.org', '@type': 'Service', name: s.name, description: s.metaDescription, url: `${SITE.url}/services/${s.slug}/`, provider: { '@type': 'Organization', name: SITE.name, url: SITE.url } },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -42,6 +42,6 @@ const schema = [
   {price && <section class="sec"><div class="w"><div class="p two" style="padding:36px;border-color:var(--accent)">
     <div><div class="mono">Pricing</div><div style="font:800 52px 'Sora Variable',sans-serif;margin:8px 0">from {price.from}<span class="m" style="font-size:20px;font-weight:400"> {price.unit}</span></div><p class="m" style="margin:0 0 20px">The final price depends on your market and goals.</p><a class="btn" href="/free-seo-audit/">Get your free SEO audit</a></div>
     <div><div class="mono">Included</div><ul class="ul">{price.included.map((i) => <li>{i}</li>)}</ul></div></div></div></section>}
-  {related.length > 0 && <section class="sec alt"><div class="w"><div class="mono">Related guides</div><div class="grid" style="margin-top:16px">{related.map(([href, label]) => <a class="p" href={href} style="text-decoration:none;color:var(--text)"><h3>{label}</h3></a>)}</div></div></section>}
+  {related.length > 0 && <section class="sec alt"><div class="w"><div class="mono">Related</div><div class="grid" style="margin-top:16px">{related.map(([href, label]) => <a class="p" href={href} style="text-decoration:none;color:var(--text)"><h3>{label}</h3></a>)}</div></div></section>}
   <CTA />
 </Base>

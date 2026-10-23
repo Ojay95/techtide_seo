@@ -16,7 +16,6 @@ export const GET: APIRoute = async () => {
   const [blog, guides] = await Promise.all([getCollection('blog'), getCollection('guides')]);
   const items = [
     ...SERVICES.map((s) => ({ t: s.name, d: s.short, u: `/services/${s.slug}/`, k: 'Service', b: '' })),
-    { t: 'Google Business Profile Setup', d: 'Set up and optimise your Google Business Profile to win the map pack.', u: '/services/local-seo/', k: 'Service', b: 'GBP maps local' },
     ...guides.filter((e) => !e.data.draft).map((e) => ({ t: e.data.title, d: e.data.description, u: `/guides/${e.id}/`, k: 'Guide', b: strip(e.body) })),
     ...blog.filter((e) => !e.data.draft).map((e) => ({ t: e.data.title, d: e.data.description, u: `/blog/${e.id}/`, k: 'Blog', b: strip(e.body) })),
     { t: 'Free SEO audit', d: 'Get a free, prioritised list of what to fix on your website.', u: '/free-seo-audit/', k: 'Page', b: '' },
