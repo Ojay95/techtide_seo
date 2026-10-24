@@ -85,8 +85,13 @@ const ogImage = new URL(image, SITE.url).href;
           e.preventDefault();
           const s = f.querySelector('.status') as HTMLElement;
           const b = f.querySelector('button[type=submit]') as HTMLButtonElement;
-          if (f.dataset.ready !== 'yes') { s.textContent = 'This form is not connected yet.'; return; }
-          b.disabled = true; s.textContent = 'Sending…';
+          // Guard: form must have a valid action URL (set when PUBLIC_FORMSPREE_ID is defined)
+          if (!f.action || !f.action.includes('formspree.io')) {
+            if (s) s.textContent = 'Setup needed: add your Formspree ID to .env and restart the dev server.';
+            return;
+          }
+          b.disabled = true;
+          if (s) s.textContent = 'Sending…';
           try {
             const r = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } });
             if (r.ok) {
@@ -104,8 +109,13 @@ const ogImage = new URL(image, SITE.url).href;
                 // All other forms
                 if (s) s.textContent = f.dataset.done || 'Thank you. We have your details.';
               }
-            } else { s.textContent = 'Something went wrong. Please try again.'; }
-          } catch { s.textContent = 'Network error. Please try again.'; }
+            } else {
+              // Formspree returns JSON errors on 4xx
+              let msg = 'Something went wrong. Please try again.';
+              try { const j = await r.json(); if (j?.error) msg = j.error; } catch {}
+              if (s) s.textContent = msg;
+            }
+          } catch { if (s) s.textContent = 'Network error — please check your connection and try again.'; }
           b.disabled = false;
         });
       });
