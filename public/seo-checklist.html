@@ -256,6 +256,49 @@ a { color: var(--teal); }
 }
 .progress-bar i { display:block; height:100%; border-radius:2px; background: linear-gradient(90deg,var(--teal),var(--amber)); }
 
+/* ─── STICKY DOWNLOAD BAR ────────────────────────────────── */
+.dl-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 10px 24px;
+  background: color-mix(in srgb, #071A2E 92%, transparent);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.dl-bar-brand { font-size: 15px; font-weight: 800; color: var(--text); }
+.dl-bar-brand span { color: var(--teal); font-weight: 400; }
+.dl-bar-right { display: flex; align-items: center; gap: 10px; }
+.dl-bar p { font-size: 13px; color: var(--muted); }
+.dl-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--teal); color: #071A2E;
+  font-weight: 700; font-size: 13px;
+  padding: 9px 18px; border-radius: 8px;
+  border: none; cursor: pointer; white-space: nowrap;
+  text-decoration: none;
+  transition: opacity .15s;
+}
+.dl-btn:hover { opacity: .88; }
+
+/* ─── WELCOME BANNER ─────────────────────────────────────── */
+.welcome-banner {
+  display: none; /* shown via JS when ?ref=popup */
+  align-items: center; gap: 16px;
+  background: linear-gradient(90deg, rgba(25,195,181,.12), rgba(79,208,143,.08));
+  border: 1px solid rgba(25,195,181,.3);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin-bottom: 28px;
+}
+.welcome-banner.show { display: flex; }
+.wb-icon {
+  font-size: 28px; flex-shrink: 0;
+}
+.wb-text h2 { font-size: 15px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+.wb-text p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+.wb-text strong { color: var(--teal); }
+
 /* ─── PRINT ──────────────────────────────────────────────── */
 @media print {
   body { background: #fff !important; color: #111 !important; padding: 0; }
@@ -268,11 +311,34 @@ a { color: var(--teal); }
   .footer { background: #F0F7FF; border-radius: 0; break-inside: avoid; }
   a { color: inherit; text-decoration: none; }
   .how { break-inside: avoid; border-radius: 0; }
+  .dl-bar, .welcome-banner { display: none !important; }
 }
 </style>
 </head>
 <body>
-<div class="page">
+
+<!-- STICKY DOWNLOAD BAR -->
+<div class="dl-bar">
+  <div class="dl-bar-brand">TechTide <span>SEO</span> Checklist</div>
+  <div class="dl-bar-right">
+    <p class="hide-sm">150+ checks &middot; 2025 Edition</p>
+    <button class="dl-btn" onclick="window.print()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Save as PDF
+    </button>
+  </div>
+</div>
+
+<div class="page" style="margin-top:56px">
+
+  <!-- WELCOME BANNER (shown when arriving from popup) -->
+  <div class="welcome-banner" id="welcome-banner">
+    <div class="wb-icon">🎉</div>
+    <div class="wb-text">
+      <h2>You're subscribed &mdash; here's your checklist!</h2>
+      <p>Work through it at your own pace. To save it, click <strong>Save as PDF</strong> above &rarr; in the print dialog choose <strong>Save as PDF</strong> as the destination. Check your inbox too &mdash; we've sent you a copy of this link.</p>
+    </div>
+  </div>
 
   <!-- COVER -->
   <div class="cover">
@@ -657,5 +723,27 @@ a { color: var(--teal); }
   </div>
 
 </div>
+
+<script>
+// Show welcome banner when arriving from the popup
+if (new URLSearchParams(location.search).get('ref') === 'popup') {
+  var banner = document.getElementById('welcome-banner');
+  if (banner) banner.classList.add('show');
+}
+
+// Persist checkbox state in localStorage so progress is saved
+var KEY = 'tt_checklist_v1';
+var boxes = document.querySelectorAll('.item input[type=checkbox]');
+var saved = {};
+try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) {}
+boxes.forEach(function(cb, i) {
+  if (saved[i]) cb.checked = true;
+  cb.addEventListener('change', function() {
+    saved[i] = cb.checked;
+    try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e) {}
+  });
+});
+</script>
+
 </body>
 </html>

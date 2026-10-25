@@ -97,14 +97,11 @@ const ogImage = new URL(image, SITE.url).href;
             if (r.ok) {
               f.reset();
               if (f.closest('#lead-popup')) {
-                // Popup form — show checklist link then auto-close
-                if (s) {
-                  s.innerHTML = '✓ Subscribed! <a href="/seo-checklist.html" target="_blank" style="color:var(--teal);font-weight:700">Open your checklist →</a>';
-                }
+                // Popup form — confirm then redirect straight to the checklist
+                if (s) s.textContent = '✓ Subscribed! Taking you to your checklist…';
                 setTimeout(function () {
-                  const d = document.getElementById('lead-popup') as HTMLDialogElement | null;
-                  if (d && d.open) d.close();
-                }, 4000);
+                  window.location.href = '/seo-checklist.html?ref=popup';
+                }, 1500);
               } else {
                 // All other forms
                 if (s) s.textContent = f.dataset.done || 'Thank you. We have your details.';

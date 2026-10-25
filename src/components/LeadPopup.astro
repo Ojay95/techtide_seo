@@ -68,7 +68,8 @@ if (suppress) return;
           required
         />
         <input type="hidden" name="source" value="lead-popup-checklist" />
-        <input type="hidden" name="_subject" value="SEO Checklist download request" />
+        <input type="hidden" name="_subject" value="Your TechTide SEO Checklist is ready 📋" />
+        <input type="hidden" name="_replyto" value="" />{/* filled by JS below */}
         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
         <button class="btn lp-btn" type="submit">Send me the checklist →</button>
         <p class="status lp-status m" role="status" aria-live="polite"></p>
@@ -117,6 +118,16 @@ if (suppress) return;
 
   // --- Fallback: tab/window blur (catches mobile + trackpad users) ---
   window.addEventListener('blur', open);
+
+  // --- Mirror email into _replyto before submit ---
+  var form = document.getElementById('lead-popup-form');
+  if (form) {
+    form.addEventListener('submit', function () {
+      var emailInp = document.getElementById('lp-email');
+      var replyTo = form.querySelector('input[name="_replyto"]');
+      if (emailInp && replyTo) replyTo.value = emailInp.value;
+    });
+  }
 
   // --- Close handlers ---
   closeBtn && closeBtn.addEventListener('click', dismiss);
