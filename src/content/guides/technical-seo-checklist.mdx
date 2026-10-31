@@ -1,65 +1,381 @@
 ---
-title: "Technical SEO checklist"
-metaTitle: "Technical SEO Checklist for Your Website | TechTide SEO"
-description: "A practical technical SEO checklist covering crawling, indexing, speed, mobile, security, structure and structured data."
+title: "Technical SEO Checklist: Every Fix That Helps Google Find and Rank Your Site"
+metaTitle: "Technical SEO Checklist 2026: Complete Website Audit Guide | TechTide SEO"
+description: "A comprehensive technical SEO checklist covering crawling, indexing, Core Web Vitals, mobile, security, site structure and structured data — with explanations for each item."
 category: "Technical SEO"
-updated: 2026-10-09
+updated: 2026-10-31
 draft: false
+---
+
+## What is technical SEO and why does it matter?
+
+Technical SEO is the practice of ensuring that search engines can find, access, crawl, interpret and index your website without obstacles. No matter how good your content is, if Google cannot reach your pages or cannot understand what they are about, they will not rank.
+
+Think of technical SEO as the foundation of a building. Without a solid foundation, everything built on top — the content, the links, the local optimisation — is less stable and less effective. With a solid technical foundation, every other SEO effort produces better results.
+
+This checklist covers every major area of technical SEO with clear explanations for each item and guidance on how to check and fix it. Work through the sections in order — crawling and indexing come first, because nothing else matters if Google cannot reach your pages.
+
 ---
 
 ## How to use this checklist
 
-Work through the sections in order. Crawling and indexing come first, because nothing else matters if Google can't reach your pages. Re-check monthly, since sites change.
+Use this checklist in two ways:
 
-## Crawling and indexing
+1. **For a one-time audit:** work through every item systematically, noting what passes, what needs attention and what is a priority fix.
+2. **For ongoing maintenance:** use it monthly or quarterly to re-check your site after changes, updates or new content is added.
 
-- Your most important pages are indexed. Check in Google Search Console under Indexing, then Pages.
-- Your robots.txt file does not block key pages, styles or scripts.
-- You have an XML sitemap listing only live, indexable pages, and it is submitted in Search Console.
-- No important page has an accidental noindex tag, which often survives from a staging site.
-- Every page has a canonical tag pointing to its preferred address.
+Mark each item as ✅ Pass, ⚠️ Needs attention, or ❌ Critical issue. Address critical issues before anything else.
 
-## Redirects and errors
+**Tools you will need:**
+- [Google Search Console](https://search.google.com/search-console) (free, essential)
+- [Google PageSpeed Insights](https://pagespeed.web.dev/) (free)
+- [Screaming Frog SEO Spider](https://www.screamingfrog.co.uk/seo-spider/) (free up to 500 URLs)
+- [Google's Rich Results Test](https://search.google.com/test/rich-results) (free)
+- [Google Mobile-Friendly Test](https://search.google.com/test/mobile-friendly) (free)
 
-- Broken pages (404 errors) with links or traffic redirect to the closest relevant page.
-- Redirects are single steps, not chains.
-- The site uses one version of the address: https, and either www or non-www.
-- There are no server errors (5xx) in your crawl.
+---
 
-## Speed and Core Web Vitals
+## Section 1: Crawling
 
-- Largest Contentful Paint is 2.5 seconds or better.
-- Interaction to Next Paint is 200 milliseconds or better.
-- Cumulative Layout Shift is 0.1 or lower.
-- Images are compressed, in a modern format such as WebP, and have set dimensions.
-- Unused plugins and scripts are removed, and caching is on.
+Crawling is the first step in the process that leads to ranking. If a crawler cannot reach a page, that page cannot be indexed, and it cannot rank.
 
-Test with PageSpeed Insights and check the field data in Search Console.
+### ✅ Google can access your most important pages
 
-## Mobile and security
+**How to check:** Open Google Search Console, navigate to Indexing → Pages and review the "Indexed" count versus the "Not indexed" count. For pages listed as not indexed, click through to understand the reason.
 
-- The site works well on a phone, with readable text and spaced tap targets.
-- The whole site loads over HTTPS with no mixed content warnings.
-- Intrusive popups don't block the content.
+**Common reasons for crawl failure:**
+- Blocked by robots.txt
+- Low internal link equity (orphan pages)
+- Server errors (5xx responses)
+- Redirect chains that are too long
 
-## Structure and links
+### ✅ Your robots.txt is configured correctly
 
-- Important pages are within three clicks of the home page.
-- URLs are short, readable and lowercase.
-- Every page can be reached through internal links, with no orphan pages.
-- Breadcrumbs show where a page sits in the site.
+**What it is:** The robots.txt file at the root of your domain (e.g. yourdomain.com/robots.txt) tells crawlers which pages they are allowed to visit.
 
-## Structured data
+**How to check:** Visit your robots.txt file directly in a browser. Look for any `Disallow` rules that block important pages, CSS or JavaScript files. Google uses CSS and JavaScript to render your pages — blocking these can prevent Google from seeing your page correctly.
 
-- Your business has Organization or LocalBusiness markup with accurate details.
-- Pages use fitting markup, such as Service, Article or Breadcrumb.
-- Markup validates in Google's Rich Results Test and matches what visitors see.
+**How to fix:** Remove `Disallow` rules that block important resources. If you have a staging site blocked by robots.txt, confirm the rule does not accidentally apply to your live site.
 
-## Monitoring
+### ✅ Your XML sitemap is submitted and accurate
 
-- Search Console is set up and checked weekly for errors.
-- You re-crawl the site monthly with a tool such as Screaming Frog.
+**What it is:** An XML sitemap is a file that lists all the pages on your site that you want Google to index. It helps Google discover pages faster, especially on large sites.
 
-## Need a hand?
+**How to check:** Your sitemap is usually at /sitemap.xml or /sitemap-index.xml. Verify it is submitted in Search Console under Indexing → Sitemaps. Check the reported URL count against your actual page count.
 
-Our [technical SEO service](/services/technical-seo/) fixes these problems, and a [free SEO audit](/free-seo-audit/) shows where to start.
+**Common errors:**
+- Pages in the sitemap that return 404 or redirect
+- Pages blocked by robots.txt that are also in the sitemap
+- Pages set to `noindex` that are still in the sitemap
+- Sitemap not submitted in Search Console
+
+Only include live, indexable pages in your sitemap.
+
+### ✅ Google is crawling your site at a healthy rate
+
+**How to check:** In Search Console, go to Settings → Crawl stats. Review the total daily crawl requests and any crawl errors over the past 90 days. A sudden drop in crawl rate can signal a technical problem.
+
+---
+
+## Section 2: Indexing
+
+A page can be crawled but still not indexed if Google decides it does not meet its quality standards or if technical signals prevent indexing.
+
+### ✅ No important page has an accidental noindex tag
+
+**What it is:** A `<meta name="robots" content="noindex">` tag on a page tells Google not to include it in the index. This is sometimes added intentionally (e.g. on login pages or admin areas) but can accidentally appear on important pages — especially after a site migration or staging deployment.
+
+**How to check:** In Search Console, the Pages report shows pages excluded due to noindex. You can also use Screaming Frog to crawl your site and filter by "noindex" pages.
+
+**How to fix:** Remove the noindex tag from any page you want to rank. Check your CMS settings — some platforms add noindex to new pages by default until you explicitly publish them.
+
+### ✅ Every page has a correct canonical tag
+
+**What it is:** A canonical tag (`<link rel="canonical" href="...">`) tells Google which version of a URL is the preferred one. Without canonical tags, Google may treat `yourdomain.com/page`, `yourdomain.com/page/` and `yourdomain.com/page?source=email` as three separate pages with duplicate content.
+
+**How to check:** View the source code of your pages and search for `rel="canonical"`. Check that the canonical URL matches the page's own URL (self-referencing canonical) or points to the correct preferred version.
+
+**Common errors:**
+- Canonical pointing to the wrong page
+- Multiple canonical tags on the same page
+- Canonical pointing to a redirected URL
+
+### ✅ Duplicate content is handled correctly
+
+Duplicate content — multiple pages with substantially similar text — confuses Google about which version to rank and can dilute the ranking power of both. Common causes include:
+
+- Product pages accessible with multiple URL parameters
+- www and non-www versions of the site both accessible
+- HTTP and HTTPS versions both returning content
+- Pagination duplicates
+
+**How to fix:** Canonical tags are the primary solution for most duplication scenarios. For parameter-based duplicates, Google Search Console allows you to specify how URL parameters should be handled.
+
+---
+
+## Section 3: Redirects and URL health
+
+### ✅ Broken pages (404 errors) with inbound links redirect to relevant pages
+
+**How to check:** In Screaming Frog, filter by "Client Error (4xx)" response codes. In Search Console, check the "Not found (404)" section in the Pages report.
+
+**How to fix:** Set up 301 redirects from broken URLs to the closest relevant page. A 301 redirect preserves the original page's link equity (authority). If no closely relevant page exists, redirect to the nearest parent category or homepage.
+
+### ✅ No redirect chains or loops
+
+**What they are:** A redirect chain occurs when Page A redirects to Page B, which redirects to Page C. Google follows chains but may not pass full link equity through each hop. Redirect loops — where pages redirect in a circle — cause crawl errors.
+
+**How to check:** Screaming Frog shows redirect chains and loops. Filter by "Redirect" response codes and check the redirect path column.
+
+**How to fix:** Update all redirects to point directly to the final destination, eliminating intermediate hops.
+
+### ✅ The site uses a single, consistent URL format
+
+**What this means:** Your site should use one and only one version of its address. Mixing `http://` and `https://`, or `www.` and non-`www.`, creates duplicate content and splits link equity.
+
+**How to check:** Try all four variations in your browser:
+- `http://yourdomain.com`
+- `https://yourdomain.com`
+- `http://www.yourdomain.com`
+- `https://www.yourdomain.com`
+
+All four should redirect to a single preferred version (ideally `https://www.yourdomain.com` or `https://yourdomain.com`).
+
+### ✅ No server errors (5xx) on key pages
+
+**How to check:** In Search Console, check the Pages report for pages with server errors. Screaming Frog also identifies 5xx responses during a crawl.
+
+**How to fix:** 5xx errors are server-side — they mean your server failed to deliver the page. Work with your hosting provider or developer to identify the root cause.
+
+---
+
+## Section 4: Speed and Core Web Vitals
+
+Google officially uses page experience signals — including Core Web Vitals — as ranking factors. Sites with better Core Web Vitals tend to rank higher than equivalent sites with poor performance, and they convert significantly better.
+
+### Understanding the three Core Web Vitals
+
+**Largest Contentful Paint (LCP)** measures how long it takes for the largest visible element (usually a hero image or heading) to load. Target: 2.5 seconds or faster.
+
+**Interaction to Next Paint (INP)** measures how quickly the page responds to a user input, like a click or tap. Target: 200 milliseconds or faster.
+
+**Cumulative Layout Shift (CLS)** measures visual stability — how much the page layout shifts unexpectedly as it loads. Target: 0.1 or lower.
+
+### ✅ LCP is 2.5 seconds or better
+
+**How to check:** PageSpeed Insights shows your LCP score with both lab data (simulated) and field data (real user experience). Search Console's Core Web Vitals report shows field data from actual visitors.
+
+**How to improve LCP:**
+- Ensure your hero image or main heading loads first (use `fetchpriority="high"` on the hero image)
+- Use a fast hosting provider
+- Serve images in modern formats like WebP or AVIF
+- Use a content delivery network (CDN)
+- Preload critical resources
+
+### ✅ INP is 200 milliseconds or better
+
+**How to improve INP:**
+- Reduce the amount of JavaScript that runs on the main thread
+- Break up long tasks into smaller ones
+- Defer non-critical JavaScript
+- Avoid heavy third-party scripts (chat widgets, analytics, ad scripts)
+
+### ✅ CLS is 0.1 or lower
+
+**How to improve CLS:**
+- Set explicit `width` and `height` attributes on all images and videos
+- Avoid inserting content above existing content after load
+- Reserve space for ads and embeds before they load
+- Avoid using web fonts that cause Flash of Invisible Text (FOIT)
+
+### ✅ Images are optimised correctly
+
+**Checklist:**
+- Compressed to minimum file size without visible quality loss
+- Served in WebP or AVIF format (convert JPEGs and PNGs)
+- Have explicit `width` and `height` attributes to prevent layout shifts
+- Use `loading="lazy"` for images below the fold
+- Use `loading="eager"` and `fetchpriority="high"` for the hero/above-fold image
+
+### ✅ Unused JavaScript and CSS are minimised
+
+**How to check:** PageSpeed Insights shows "Reduce unused JavaScript" and "Reduce unused CSS" as opportunities. These are files being loaded by your page but not used.
+
+**How to fix:** Remove unused plugins or widgets, defer non-critical scripts, and use a bundler or minifier for your CSS and JavaScript.
+
+---
+
+## Section 5: Mobile experience
+
+Google uses mobile-first indexing, meaning it primarily uses the mobile version of your site for indexing and ranking — even for users on desktop.
+
+### ✅ The site is fully functional on mobile
+
+**How to check:** Use your actual phone to browse your site. Test every key page. Also use [Google's Mobile-Friendly Test](https://search.google.com/test/mobile-friendly).
+
+**Common mobile problems:**
+- Text too small to read without zooming
+- Buttons or links too close together to tap accurately
+- Content wider than the screen (horizontal scrolling)
+- Intrusive interstitials or popups that cover content
+
+### ✅ Tap targets are appropriately sized
+
+Google recommends that interactive elements (buttons, links) be at least 48 x 48 pixels. Elements closer together than 8 pixels make it easy to tap the wrong thing on mobile.
+
+**How to check:** PageSpeed Insights flags "Tap targets are not sized appropriately" as an issue.
+
+### ✅ No intrusive interstitials block main content
+
+Google penalises pages where a popup or interstitial makes it difficult for users to access the main content on mobile. A cookie consent banner that is easy to dismiss is acceptable. A full-screen popup that appears immediately and cannot be easily closed is not.
+
+---
+
+## Section 6: Security
+
+### ✅ The entire site uses HTTPS
+
+HTTPS is a basic ranking signal and, more importantly, a trust signal. Browsers warn users when they visit non-HTTPS sites. All pages on your site — not just the homepage — should use HTTPS.
+
+**How to check:** Visit your site and look for the padlock icon in your browser's address bar. Check that no pages on your site load over HTTP.
+
+### ✅ No mixed content warnings
+
+Mixed content occurs when an HTTPS page loads resources (images, scripts, stylesheets) over HTTP. This triggers browser warnings and can break page functionality.
+
+**How to check:** Open your browser's developer tools, go to the Console tab and look for mixed content warnings.
+
+**How to fix:** Update all resource links to use HTTPS, or use protocol-relative URLs (// instead of http:// or https://).
+
+---
+
+## Section 7: Site structure and internal links
+
+### ✅ Important pages are within three clicks of the homepage
+
+**Why it matters:** Pages that are deeply buried in your site structure receive fewer crawl visits and less internal link equity. Key pages should be accessible easily.
+
+**How to check:** In Screaming Frog, check the "Crawl Depth" column. Pages at depth four or greater may need internal links added to bring them closer to the surface.
+
+### ✅ Every important page is linked from at least one other page
+
+**Orphan pages** are pages that have no internal links pointing to them. Google can only discover them through the sitemap, and they receive no internal link equity.
+
+**How to check:** Screaming Frog can identify orphan pages when you cross-reference the crawl with your sitemap.
+
+**How to fix:** Add links to orphan pages from related content, navigation or a related posts section.
+
+### ✅ URLs are short, clean and descriptive
+
+A good URL is:
+- Lowercase: `/local-seo-guide/` not `/Local-SEO-Guide/`
+- Descriptive: `/blog/how-to-get-backlinks/` not `/blog/post-1234/`
+- Free of unnecessary parameters: `/services/` not `/services/?ref=home`
+- Uses hyphens, not underscores: `/on-page-seo/` not `/on_page_seo/`
+
+### ✅ Breadcrumbs are present on interior pages
+
+Breadcrumbs (e.g., Home > Services > Local SEO) serve two purposes: they help users navigate and they communicate your site structure to Google. They can also appear in search results, improving your listing's click-through rate.
+
+---
+
+## Section 8: Structured data (Schema markup)
+
+Structured data is code you add to your pages that explicitly tells Google what type of content a page contains and what specific information it includes. Well-implemented structured data can earn **rich results** — enhanced search listings with ratings, FAQs, event dates, prices and more.
+
+### ✅ LocalBusiness or Organisation schema is present on key pages
+
+For most businesses, this is the most important structured data. It explicitly tells Google:
+- Your business name, address and phone number
+- Your business type
+- Your opening hours
+- Your geographic area served
+- Links to your social profiles
+
+**How to validate:** Use [Google's Rich Results Test](https://search.google.com/test/rich-results) and paste in your homepage URL.
+
+### ✅ Service pages use Service schema
+
+Each service page should include `Service` schema with the service name, description, provider and areaServed. This helps Google understand what you offer and can contribute to your appearance in local search.
+
+### ✅ Blog posts use Article or BlogPosting schema
+
+Article schema on blog posts enables Google to understand the published date, author, headline and description, which can contribute to better presentation in search results and Google News.
+
+### ✅ Breadcrumbs use BreadcrumbList schema
+
+Adding `BreadcrumbList` schema to your breadcrumb navigation enables Google to show your breadcrumbs in search results, which can improve click-through rates by giving searchers more context about where the page sits on your site.
+
+### ✅ Markup validates in Google's Rich Results Test
+
+All structured data should validate without errors. Warnings can usually be ignored unless they relate to required fields. Errors prevent rich results from being generated.
+
+---
+
+## Section 9: Monitoring
+
+Technical SEO is not a one-time task. Sites change: new pages are added, plugins are updated, servers are migrated. A regular monitoring routine catches problems before they affect rankings.
+
+### ✅ Google Search Console is configured and monitored weekly
+
+Search Console is the most important free tool for technical SEO monitoring. Check at minimum:
+- **Coverage:** new indexing errors or pages flagged as not indexed
+- **Core Web Vitals:** pages with poor or failing scores
+- **Manual actions:** any penalties applied to your site
+- **Security issues:** any malware or hacked content detected
+
+### ✅ Monthly crawl with a dedicated crawler
+
+Tools like [Screaming Frog](https://www.screamingfrog.co.uk/seo-spider/) or [Sitebulb](https://sitebulb.com) crawl your site the way Google does and surface technical issues you might not notice through manual checking. Run a full crawl once a month and compare against your previous crawl to identify new issues.
+
+### ✅ Uptime monitoring is in place
+
+If your site goes down, Google will encounter errors when attempting to crawl it. Extended downtime can cause pages to lose their indexed status. Set up uptime monitoring with a free tool like [UptimeRobot](https://uptimerobot.com) to receive immediate alerts if your site becomes unavailable.
+
+---
+
+## Priority order for fixing technical issues
+
+When you complete this audit, you will likely have a list of issues to address. Here is how to prioritise:
+
+| Priority | Issue type | Example |
+|---|---|---|
+| Critical | Indexing blocked | noindex on key pages, robots.txt blocking the site |
+| Critical | Site unreachable | Server errors, site down |
+| High | Core Web Vitals failing | LCP > 4s, major layout shifts |
+| High | Redirect chains on key pages | Homepage redirecting through multiple hops |
+| High | Missing canonical tags | Causing widespread duplicate content |
+| Medium | Mobile usability issues | Small text, cramped tap targets |
+| Medium | Missing structured data | No LocalBusiness schema |
+| Low | Minor speed improvements | Removing one unused script |
+| Low | Aesthetic URL improvements | Changing URL format on new pages |
+
+---
+
+## Frequently asked questions about technical SEO
+
+### How often should I do a technical SEO audit?
+
+A full technical audit should be done at least annually, and after any major site change: a redesign, a CMS migration, a server move or a significant content overhaul. Monthly monitoring of Search Console and a quarterly crawl is a good routine maintenance schedule.
+
+### Do I need a developer to fix technical SEO issues?
+
+Some issues — like writing better title tags or submitting a sitemap — require no development. Others — like fixing server-side redirect chains, implementing schema markup or resolving Core Web Vitals issues — typically require developer involvement. A good SEO agency provides a prioritised list of fixes with enough technical detail for a developer to implement.
+
+### Can a bad technical SEO problem cause a ranking penalty?
+
+Some technical problems — like a site accidentally set to noindex after a migration — can cause rankings to collapse effectively overnight. Others — like slow page speed or missing alt text — cause a gradual disadvantage rather than a sudden penalty. Google does issue manual penalties for some technical violations (like cloaking or sneaky redirects), but most technical issues are ranking disadvantages rather than explicit penalties.
+
+---
+
+## Need help with your technical SEO?
+
+Working through this checklist takes time and often reveals issues that require development expertise to fix. Our [technical SEO service](/services/technical-seo/) handles the full audit-and-fix process, with a prioritised action plan and implementation support.
+
+The fastest way to understand your current technical position is a [free SEO audit](/free-seo-audit/), which covers the highest-priority technical issues on your site, delivered within two business days.
+
+Related reading:
+- [How to do a full SEO audit](/guides/how-to-do-an-seo-audit/)
+- [On-page SEO checklist](/guides/on-page-seo-checklist/)
+- [What is SEO?](/guides/what-is-seo/)
+- [Core Web Vitals explained](/blog/core-web-vitals-explained/)
