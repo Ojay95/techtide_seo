@@ -1,0 +1,174 @@
+---
+// ImageLightbox.astro
+// Drop this into any layout — it auto-wires every .prose img with a lightbox.
+// Caption is read from the <img> alt attribute, and from the next <em>/<figcaption> sibling if present.
+---
+
+<!-- Lightbox overlay -->
+<div id="lb-overlay" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <button id="lb-close" aria-label="Close image viewer">&#x2715;</button>
+  <div id="lb-content">
+    <img id="lb-img" src="" alt="" />
+    <p id="lb-caption"></p>
+  </div>
+</div>
+
+<style>
+  /* ── Overlay ── */
+  #lb-overlay {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  #lb-overlay.lb-open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* ── Inner card ── */
+  #lb-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: min(92vw, 1100px);
+    max-height: 90vh;
+    transform: scale(0.92);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  #lb-overlay.lb-open #lb-content {
+    transform: scale(1);
+  }
+
+  /* ── Image ── */
+  #lb-img {
+    display: block;
+    max-width: 100%;
+    max-height: 78vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
+  }
+
+  /* ── Caption ── */
+  #lb-caption {
+    margin: 14px 0 0;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 14px;
+    line-height: 1.55;
+    text-align: center;
+    max-width: 680px;
+    font-style: italic;
+  }
+  #lb-caption:empty {
+    display: none;
+  }
+
+  /* ── Close button ── */
+  #lb-close {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.18s, transform 0.18s;
+    z-index: 10000;
+  }
+  #lb-close:hover {
+    background: rgba(255, 255, 255, 0.22);
+    transform: rotate(90deg);
+  }
+
+  /* Prose image hover/cursor styles live in global.css — nothing to override here */
+</style>
+
+<script>
+  (function () {
+    const overlay = document.getElementById('lb-overlay');
+    const lbImg   = document.getElementById('lb-img') as HTMLImageElement;
+    const lbCap   = document.getElementById('lb-caption');
+    const lbClose = document.getElementById('lb-close');
+
+    if (!overlay || !lbImg || !lbCap || !lbClose) return;
+
+    function open(src: string, alt: string, caption: string) {
+      lbImg.src = src;
+      lbImg.alt = alt;
+      lbCap.textContent = caption;
+      overlay.removeAttribute('aria-hidden');
+      overlay.classList.add('lb-open');
+      document.body.style.overflow = 'hidden';
+      lbClose.focus();
+    }
+
+    function close() {
+      overlay.classList.remove('lb-open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    // Wire every prose image
+    document.querySelectorAll<HTMLImageElement>('.prose img').forEach((img) => {
+      img.setAttribute('tabindex', '0');
+      img.setAttribute('role', 'button');
+      img.title = 'Click to enlarge';
+
+      function getCaption(): string {
+        // 1. Try next sibling <em> (our MDX pattern: *caption text*)
+        let next: Element | null = img.nextElementSibling;
+        if (next && next.tagName === 'EM') return next.textContent?.trim() ?? '';
+        // 2. Try parent <p>'s next sibling <p> containing only <em>
+        const parent = img.parentElement;
+        if (parent) {
+          let sib = parent.nextElementSibling;
+          if (sib && sib.tagName === 'P') {
+            const em = sib.querySelector('em');
+            if (em && sib.childNodes.length === 1) return em.textContent?.trim() ?? '';
+          }
+          // 3. Try figcaption
+          const fig = parent.closest('figure');
+          if (fig) {
+            const cap = fig.querySelector('figcaption');
+            if (cap) return cap.textContent?.trim() ?? '';
+          }
+        }
+        return img.alt ?? '';
+      }
+
+      function trigger() {
+        open(img.src, img.alt, getCaption());
+      }
+
+      img.addEventListener('click', trigger);
+      img.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); }
+      });
+    });
+
+    // Close handlers
+    lbClose.addEventListener('click', close);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('lb-open')) close();
+    });
+  })();
+</script>

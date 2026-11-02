@@ -387,10 +387,37 @@ html { scroll-padding-top: 84px; }
   object-fit: contain;
   border-radius: 14px;
   border: 1px solid var(--line);
-  margin: 28px 0 8px;
+  margin: 32px 0 0;
   background: #fff;
+  cursor: zoom-in;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
-.prose p > em:only-child { display: block; text-align: center; font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+.prose img:hover {
+  transform: translateY(-3px) scale(1.008);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+}
+/* Caption: the <em> paragraph that immediately follows an image paragraph */
+.prose p > em:only-child {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 6px 0 32px;
+  padding: 10px 14px;
+  background: var(--bg2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  font-size: 13.5px;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.prose p > em:only-child::before {
+  content: '\1F4F7';
+  font-style: normal;
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
 .prose a[target=_blank]::after { content: " \2197"; font-size: .8em; }
 
 .toc a {

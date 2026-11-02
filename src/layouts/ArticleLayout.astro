@@ -1,6 +1,7 @@
 ---
 import Base from './Base.astro';
 import CTA from '../components/CTA.astro';
+import ImageLightbox from '../components/ImageLightbox.astro';
 import { render, getCollection } from 'astro:content';
 import { SITE, AUTHOR } from '../data/site';
 
@@ -38,6 +39,7 @@ const schema = [
     <article>
       <div class="p" style="border:2px solid var(--accent);margin-bottom:32px;max-width:720px"><div class="mono">In short</div><p style="margin:8px 0 0;font-size:18px">{d.description}</p></div>
       <div class="prose"><Content /></div>
+      <ImageLightbox />
       {AUTHOR.name && <div class="p" style="margin-top:40px;max-width:720px"><div class="mono">About the author</div><h3 style="font-size:18px;margin:8px 0 4px">{AUTHOR.url ? <a href={AUTHOR.url} rel="author noopener" target="_blank">{AUTHOR.name}</a> : AUTHOR.name}</h3>{AUTHOR.role && <div class="m" style="font-size:14px">{AUTHOR.role}, {SITE.name}</div>}{AUTHOR.bio && <p class="m" style="margin:8px 0 0">{AUTHOR.bio}</p>}</div>}
       <div class="p" style="margin-top:40px;max-width:720px;border-color:var(--accent)"><div class="mono">Want this done for you?</div><p class="m" style="margin:8px 0 18px">See how our SEO services work, or start with a free audit.</p><a class="btn" href="/services/">See our services</a><a class="btn ghost" href="/free-seo-audit/">Free SEO audit</a></div>
       {more.length > 0 && <div style="margin-top:44px;max-width:720px"><div class="mono">Keep reading</div><div class="grid" style="margin-top:14px">{more.map((e: any) => <a class="p" href={`/${section}/${e.id}/`} style="text-decoration:none;color:var(--text)"><h3 style="font-size:18px">{e.data.title}</h3></a>)}</div></div>}
