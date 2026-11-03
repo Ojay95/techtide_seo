@@ -1,0 +1,193 @@
+---
+title: "How to track SEO results with Google Analytics 4 and Search Console"
+metaTitle: "Track SEO Results With Google Analytics 4 and Search Console"
+description: "A step-by-step guide to setting up Google Analytics 4 and Search Console, tracking calls, forms and WhatsApp clicks, and reading your SEO results."
+category: "SEO basics"
+published: 2026-10-01
+updated: 2026-10-01
+draft: false
+---
+
+Imagine paying for a shop to be built, then never counting how many people walk in or what they buy. That's what many businesses do with their websites. They invest in SEO, wait, and have no clear way to tell whether it's working.
+
+Tracking changes everything. When you can see which searches bring visitors, which pages produce enquiries and how many of those turn into customers, you stop guessing. You know what to do more of, what to fix and what to ignore.
+
+The good news is that the two best tools are free. Google Search Console shows what happens before the click, in search. Google Analytics shows what happens after, on your site. Together, they tell the full story. This guide shows you how to set both up, track the actions that matter and read your SEO results in plain language.
+
+## The two tools and what each one does
+
+**Google Search Console** answers: How do people find us in Google? It shows the searches that display your pages, how many people click, where you rank and whether Google can index your pages. See our [Search Console guide](/blog/how-to-use-google-search-console/).
+
+**Google Analytics (GA4)** answers: What do visitors do on our site? It shows where visitors come from, which pages they view and which actions they take, such as sending a form or tapping the call button.
+
+![Diagram: measuring SEO from Search Console before the click, to Analytics after, to key events, leads and reports](/images/diagrams/track-seo-results-ga4-search-console.svg)
+
+*Figure 1: Search Console shows visibility. Analytics shows results. You need both.*
+
+You'll also use your **Google Business Profile** for local actions such as calls and directions, and your own records, such as the phone log, WhatsApp chats and booking system.
+
+## Step 1: Set up Search Console
+
+1. Sign in at [Google Search Console](https://search.google.com/search-console) and add your site, ideally as a domain property.
+2. Verify ownership. For a domain property, add the DNS record Google gives you.
+3. Submit your sitemap.
+
+It starts collecting data within days. If you haven't done this, do it first, because Search Console only shows history from when you verify it.
+
+## Step 2: Set up Google Analytics 4
+
+1. Create an account and a property at [analytics.google.com](https://analytics.google.com).
+2. Create a **web data stream** for your website. Analytics gives you a measurement ID that starts with "G-".
+3. Add the tracking code to your site. You can use a plugin, your website builder's setting or [Google Tag Manager](https://tagmanager.google.com). On our own site, this is a single setting, and the tag loads only after a visitor accepts analytics.
+4. Open your site, then check Analytics' real-time report to see your own visit.
+
+Make sure the tag appears only once on each page. Two tags can double your numbers.
+
+### A note on consent
+
+In many countries, laws require consent before analytics cookies are used. Use a consent banner, and only load analytics after consent where required. This means your numbers may undercount visitors who decline, which is normal. Be aware of it when you compare tools. See [Google's help for Analytics](https://support.google.com/analytics) for current guidance.
+
+## Step 3: Connect Search Console and Analytics
+
+Linking them lets you see search queries and Analytics data together.
+
+1. In Analytics, open Admin, then Product links, then Search Console links.
+2. Choose your Search Console property and your data stream, and confirm.
+3. Add the Search Console reports to your Analytics menu, if offered.
+
+You need access to both accounts with the right permissions.
+
+## Step 4: Track the actions that matter (key events)
+
+Visits are interesting. Actions are valuable. In GA4, important actions are marked as **key events** (previously called conversions). Common ones for a service business:
+
+- **form_submit:** a contact or audit form was sent.
+- **phone_click:** someone tapped a phone number.
+- **whatsapp_click:** someone tapped the chat button.
+- **booking_start** or **purchase:** for hotels and shops.
+
+![Screenshot: an Analytics events list with form submissions, WhatsApp clicks, phone clicks and booking starts marked as key events](/images/screenshots/ga4-key-events-conversions.png)
+
+*Figure 2: Mark only the actions that matter to your business as key events.*
+
+How to set them up:
+
+1. Use Google Tag Manager or your platform's tools to send an event when each action happens. A "thank you" page after a form is a simple trigger.
+2. Give events clear names.
+3. In Analytics, mark the important ones as key events.
+4. Test each one yourself and check it appears.
+
+Don't mark everything. Page views and scrolls aren't goals.
+
+## Step 4b: Track calls, chat and your Google profile
+
+Many leads never touch a form.
+
+- **Phone and chat clicks** from your site, using the events above.
+- **Calls and messages from your Google Business Profile.** Add a tracking parameter to your profile's website link, so visits from it appear in Analytics. Profile performance also shows calls and directions inside the profile itself.
+- **Offline calls and walk-ins.** Ask every new customer how they found you, and record it in a simple sheet.
+
+## Step 5: Find your SEO traffic in Analytics
+
+In GA4, open **Reports**, then **Acquisition**, then **Traffic acquisition**. The table shows sessions by channel. **Organic Search** is traffic from search engines, which is the row to watch for SEO.
+
+![Screenshot: a traffic acquisition report showing Organic Search with sessions, engaged sessions and key events compared with other channels](/images/screenshots/ga4-organic-traffic-report.png)
+
+*Figure 3: The Organic Search row shows how much traffic and how many actions search brings.*
+
+Useful things to check:
+
+- **Sessions and engaged sessions** for Organic Search over time.
+- **Key events from organic traffic**: how many leads came from search.
+- **Landing pages** for organic visitors: which pages bring people in and which turn visitors into leads. You can add a filter for Organic Search in the landing page report.
+- **Comparison:** this month against last month and the same month last year.
+
+## Step 6: Use Search Console for the search side
+
+In the Performance report, check:
+
+- **Clicks, impressions, CTR and average position** over time.
+- **Queries:** the searches bringing visitors. Look for rising ones.
+- **Pages:** which pages get the clicks.
+- **Compare periods** to see gains and losses.
+
+Pair it with Analytics. Search Console tells you that a page gets clicks. Analytics tells you whether those clicks turn into enquiries. A page with many clicks and no actions needs better content or calls to action. A page with few clicks but many actions deserves more visibility.
+
+## Why the numbers don't match
+
+People often panic when Search Console and Analytics show different numbers. Here's why it's normal:
+
+- Search Console counts **clicks** from Google Search. Analytics counts **sessions** on your site.
+- Analytics can miss visitors who decline cookies or block tracking.
+- Search Console excludes other sources, such as direct and social traffic.
+- They use different definitions and timing.
+
+Don't expect them to match. Use each for what it does well, and look at trends.
+
+## Build a simple monthly dashboard
+
+A one-page summary makes reviewing easy. [Looker Studio](https://lookerstudio.google.com) is free, connects to Search Console and Analytics and updates by itself. Include:
+
+1. **Leads** from organic search (key events).
+2. **Calls and messages** from your Google profile.
+3. **Organic sessions** and top landing pages.
+4. **Clicks, impressions and top queries** from Search Console.
+5. **A short note** on what changed and what you'll do next.
+
+Our guide to [SEO metrics that matter](/blog/seo-metrics-that-matter/) explains which numbers deserve a place on the page.
+
+## A weekly and monthly routine
+
+**Weekly (15 minutes):**
+- Glance at Search Console for new errors.
+- Check leads and key events.
+- Look for any sudden drop or rise.
+
+**Monthly (45 minutes):**
+- Compare organic traffic and leads with the previous month and last year.
+- Review top queries and pages, and find pages to improve.
+- Check Core Web Vitals and indexing.
+- Update your dashboard and write your notes.
+
+## Common problems and fixes
+
+- **No data in Analytics.** Check the tag is installed once and the measurement ID is correct.
+- **Double the traffic.** Probably two tags on the page.
+- **Your own visits inflating numbers.** Filter internal traffic, or exclude your office.
+- **Key events not firing.** Test the trigger, and check the event name.
+- **Lots of "Direct" traffic.** Some visits, such as from apps or email, lose their source. Use tracking parameters on links you control.
+- **Unexpected traffic spikes.** Check for bots or referral spam.
+- **Numbers changed after a redesign.** Check that tags and events came across. See our [migration checklist](/blog/website-migration-seo-checklist/).
+
+## Privacy and trust
+
+Tell visitors what you track in your privacy and cookie policies, respect consent choices and don't collect more than you need. It protects you and builds trust.
+
+## Frequently asked questions
+
+### Is Google Analytics free?
+Yes, the standard version is free, and it's enough for most small businesses.
+
+### What are key events?
+Key events are the actions you mark as important, such as form submissions or call clicks. They used to be called conversions.
+
+### Can I track WhatsApp clicks?
+Yes. Send an event when someone taps the chat button, using Tag Manager or a plugin, then mark it as a key event.
+
+### How long until I see SEO results in the data?
+Local improvements can show within weeks, and competitive searches take months. Track steadily, and compare over time.
+
+### Do I need both tools?
+Yes. Search Console shows how people find you, and Analytics shows what they do afterwards.
+
+## Next steps
+
+If you haven't already, set up Search Console today, and add one key event, such as form submissions, this week. If you'd like help setting up reliable tracking and a clear monthly report, request a [free SEO audit](/free-seo-audit/), see our [plans](/how-we-work/) or read about our [SEO services](/services/).
+
+## Sources and further reading
+
+- [Google Search Console](https://search.google.com/search-console): search performance and indexing.
+- [Google Analytics Help](https://support.google.com/analytics): setup, key events and reports.
+- [Google Tag Manager](https://tagmanager.google.com): add tags and events without editing code.
+- [Looker Studio](https://lookerstudio.google.com): build a free dashboard.
+- [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide): Google's introduction to SEO.

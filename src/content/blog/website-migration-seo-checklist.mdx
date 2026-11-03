@@ -1,0 +1,217 @@
+---
+title: "Website migration SEO checklist: move without losing your traffic"
+metaTitle: "Website Migration SEO Checklist: Keep Your Traffic"
+description: "Redesigning or moving your website? Follow this SEO migration checklist for planning, redirects, launch day and monitoring so you keep your rankings."
+category: "Technical SEO"
+published: 2026-09-09
+updated: 2026-09-09
+draft: false
+---
+
+A new website is exciting. A fresh design, better photos, a cleaner menu, maybe a new platform. For a few weeks everyone on the team is happy, until the phone stops ringing.
+
+It's one of the most common and most expensive stories in SEO. A business launches a beautiful new site, and within weeks its traffic falls by a third, or half, or worse. Nothing was "wrong" with the design. The problem was what happened behind the scenes: addresses changed, redirects were missing, a hidden setting told Google to stay away.
+
+The good news is that migration problems are almost entirely preventable. This guide is a practical checklist for moving a website without losing the visibility you've built. It covers planning, preparation, launch day and the months after, in plain language.
+
+## What counts as a migration
+
+A migration is any big change that affects how search engines find and understand your site. Common types:
+
+- **Redesign** with new page layouts and URLs.
+- **New platform or CMS**, such as moving from one website builder to another.
+- **Domain change**, from one web address to another.
+- **Switching to HTTPS.**
+- **Merging sites** or moving a blog into the main site.
+- **Changing URL structure**, even on the same domain.
+
+The more addresses change, the bigger the risk. A design refresh that keeps every address the same is much safer than a rebuild that renames everything.
+
+Google has dedicated guides for the two main cases: [site moves with URL changes](https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes) and [site moves without URL changes](https://developers.google.com/search/docs/crawling-indexing/site-move-no-url-changes). They're worth reading before you start.
+
+![Diagram: five stages of a safe website migration from planning to monitoring](/images/diagrams/website-migration-seo-checklist.svg)
+
+*Figure 1: Plan, build in private, map redirects, launch and monitor.*
+
+## The golden rules
+
+1. **Change as little as you can.** Every changed address is a risk.
+2. **Keep what works.** Pages that rank, bring leads or earn links should keep their content, titles and headings, wherever possible.
+3. **Redirect every old address** that matters to its closest new page.
+4. **Test everything before launch.**
+5. **Monitor closely afterwards.**
+
+## Phase 1: Plan (4 to 8 weeks before)
+
+### 1. Set goals and a timeline
+
+Decide why you're migrating and what success looks like. Avoid launching during your busiest season, and don't schedule it right before a holiday when nobody is around to fix problems.
+
+### 2. Record your baseline
+
+Save how things look today, so you can compare later:
+
+- Organic clicks, impressions and positions from [Google Search Console](https://search.google.com/search-console).
+- Traffic and leads from Google Analytics.
+- Your top 50 pages by traffic and by links.
+- Rankings for your most important searches.
+- Core Web Vitals and speed scores.
+- A full crawl of the current site.
+
+### 3. List every current page
+
+Export all addresses from your sitemap, a crawler such as [Screaming Frog](https://www.screamingfrog.co.uk/seo-spider/) and Search Console. Add columns for traffic, backlinks and importance. This is your starting inventory.
+
+### 4. Decide what moves, merges or goes
+
+For each page, decide whether to keep it, improve it, merge it with another or retire it. Our guide to [content audits](/blog/how-to-do-a-content-audit/) helps you make those calls.
+
+## Phase 2: Build in private
+
+### 5. Use a staging site, and keep it hidden
+
+Build the new site on a separate test address. Protect it with a password, or block it with noindex, so Google doesn't index it. Many migrations go wrong because the test site was indexed, or because the hidden setting was left on at launch.
+
+### 6. Keep your SEO foundations
+
+Make sure the new site includes:
+
+- **The same or better content** on important pages.
+- **Unique titles and meta descriptions.** See [title tags and meta descriptions](/blog/title-tags-and-meta-descriptions-that-get-clicks/).
+- **Clear headings** and the same main topics.
+- **Internal links** between related pages. See [internal linking](/blog/internal-linking-guide/).
+- **Image alt text** and compressed images.
+- **Structured data**, such as Organization and Breadcrumb. See [schema markup](/blog/schema-markup-guide/).
+- **Mobile-friendly design.** See [mobile SEO](/blog/mobile-seo-guide/).
+- **Fast loading.** See [Core Web Vitals](/blog/core-web-vitals-explained/).
+
+### 7. Keep the URL structure where possible
+
+If your addresses were clean and sensible, keep them. If you must change them, keep them short, readable and consistent.
+
+### 8. Map every redirect
+
+This is the most important step. For every old address that has traffic, links or value, choose the matching new address. Record the pairs in a spreadsheet.
+
+![Screenshot: a redirect map spreadsheet listing old addresses, new addresses and the test status of each](/images/screenshots/redirect-map-spreadsheet.png)
+
+*Figure 2: A redirect map pairs every old address with its closest new page and records a test result.*
+
+Redirect rules:
+
+- Use **permanent (301) redirects**. Google explains them in its [redirect guide](https://developers.google.com/search/docs/crawling-indexing/301-redirects).
+- Send each old page to its **closest equivalent**, not everything to the home page.
+- Avoid **redirect chains** (A to B to C). Point straight to the final page.
+- Include **parameter and old-style addresses** if they received links or traffic.
+- If a page has no equivalent, redirect to the nearest relevant category or let it return "not found".
+
+### 9. Set up tracking
+
+Check that Analytics, tag manager, conversion events and call or chat tracking work on the new site before launch. Our guide to [tracking SEO results](/blog/track-seo-results-ga4-search-console/) explains how.
+
+## Phase 3: Pre-launch checks
+
+Before you flip the switch, test on the staging site:
+
+- Crawl it, and fix broken links, missing titles and errors.
+- Test every redirect in your map.
+- Check that robots.txt will allow search engines at launch, and that the staging protection can be removed.
+- Check canonical tags point to the new, final addresses.
+- Check forms, booking, checkout and phone links on desktop and mobile.
+- Check the XML sitemap lists only the new, working pages.
+- Check speed and mobile scores.
+- Prepare an updated list of your profiles and listings to change.
+
+## Phase 4: Launch day
+
+Choose a quiet time, and have your team ready.
+
+1. **Remove the staging protection and noindex settings.** This is the step people forget.
+2. **Switch the site live and activate redirects.**
+3. **Test the redirects again on the live site**, starting with your top pages.
+4. **Check robots.txt** and confirm important pages aren't blocked.
+5. **Submit the new sitemap** in Search Console.
+6. **If you changed domain,** use the Change of address tool in Search Console after redirects are working.
+
+![Screenshot: the Change of address tool with steps for selecting the new site and verifying redirects](/images/screenshots/search-console-change-of-address.png)
+
+*Figure 3: For a domain move, tell Google about it once the redirects are in place.*
+
+7. **Update links you control:** Google Business Profile, social profiles, email signatures, directories and advertising.
+8. **Check analytics** is recording visits and key events.
+9. **Request indexing** for key pages with URL inspection.
+
+## Phase 5: Monitor for three months
+
+The weeks after launch decide whether the migration succeeded.
+
+**Daily for the first week:**
+- Search Console: coverage and indexing errors.
+- Crawl errors and broken links.
+- Traffic and leads against your baseline.
+
+**Weekly for three months:**
+- Clicks, impressions and positions for key pages.
+- Pages that dropped, and why.
+- Indexed page counts.
+- Core Web Vitals.
+- New errors, redirect problems and broken links.
+- Calls, forms and bookings.
+
+**Fix problems quickly.** A missing redirect or a blocked page found in week one is easy to repair. Found in month three, it may have cost you thousands of visits.
+
+Keep redirects in place for at least a year, and ideally longer. Our [Search Console guide](/blog/how-to-use-google-search-console/) explains the reports to watch.
+
+## What's a normal dip?
+
+Some movement is common after a migration, as Google recrawls and reprocesses the site. A small, short dip that recovers within weeks can be normal. A large, lasting fall means something is wrong, and you should check redirects, indexing, content changes and technical settings first. Nobody can promise zero change, but careful work keeps it small.
+
+## Common mistakes
+
+- **Leaving noindex or password protection on after launch.**
+- **Not redirecting old addresses**, or redirecting everything to the home page.
+- **Changing every URL for no reason.**
+- **Removing content that ranked.**
+- **Changing titles and headings across the board** during the same project.
+- **Forgetting mobile and speed testing.**
+- **Launching without tracking.**
+- **Not telling the team** about the change.
+- **Launching in peak season or on a Friday afternoon.**
+- **Switching off the old site too soon.**
+
+## A quick checklist
+
+**Before:** baseline recorded, page list built, redirect map complete, staging protected, tracking ready, content preserved.
+
+**Launch:** protection removed, redirects live and tested, robots.txt checked, sitemap submitted, change of address done (if needed).
+
+**After:** daily checks first week, weekly checks for three months, fix issues fast, keep redirects for a year.
+
+## Frequently asked questions
+
+### How long does it take to recover after a migration?
+It varies. With careful redirects and content, many sites see only a short dip. If problems exist, recovery takes as long as it takes to find and fix them.
+
+### Do I need to redirect every old page?
+Redirect every page that has traffic, links or value. Pages with none can be dropped, though redirecting is usually harmless.
+
+### Should I change my domain?
+Only if you have a strong reason, such as a rebrand. Domain changes carry more risk than a redesign.
+
+### Can I migrate during a busy season?
+Avoid it. If something goes wrong, you'll feel it most when demand is highest.
+
+### Do I need an SEO specialist?
+For small, simple moves, you may manage with this checklist. For larger or high-value sites, an expert review of your plan before launch is worth the cost.
+
+## Next steps
+
+Before you approve any redesign, ask your developer for the redirect map and the staging plan. If you'd like an expert to review your migration plan, request a [free SEO audit](/free-seo-audit/), try our [SEO audit tool](/seo-audit-tool/) or read about our [technical SEO service](/services/technical-seo/). You can also use our [technical SEO checklist](/guides/technical-seo-checklist/).
+
+## Sources and further reading
+
+- [Site moves with URL changes](https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes): Google's step-by-step guide.
+- [Site moves without URL changes](https://developers.google.com/search/docs/crawling-indexing/site-move-no-url-changes): for hosting or platform changes.
+- [Redirects and Google Search](https://developers.google.com/search/docs/crawling-indexing/301-redirects): how to use them correctly.
+- [Google Search Console](https://search.google.com/search-console): monitor indexing and performance.
+- [Screaming Frog SEO Spider](https://www.screamingfrog.co.uk/seo-spider/): crawl before and after the move.

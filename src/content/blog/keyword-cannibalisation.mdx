@@ -1,0 +1,185 @@
+---
+title: "Keyword cannibalisation: how to find it and fix it"
+metaTitle: "Keyword Cannibalisation: How to Find and Fix It"
+description: "When two of your pages compete for the same search, both can lose. Learn how to find keyword cannibalisation, decide what to do and prevent it."
+category: "On-page SEO"
+published: 2026-08-20
+updated: 2026-08-20
+draft: false
+---
+
+Picture two shop assistants in the same shop, both trying to serve the same customer. They talk over each other, offer different advice and the customer leaves confused. Neither makes the sale.
+
+That's keyword cannibalisation. It happens when two or more pages on your website target the same search, so they end up competing with each other instead of with your competitors. Google doesn't always know which one to show. The result can be rankings that jump around, pages that never quite reach page one and effort that's wasted.
+
+It's one of the most common problems on sites that publish a lot of content, and it's often easy to fix. This guide explains what cannibalisation is, when it's actually a problem, how to find it with free tools, how to decide what to do and how to stop it coming back.
+
+## What cannibalisation means
+
+Cannibalisation means your own pages split attention for the same search intent. It's not just about using the same words. Two pages can share a keyword and be perfectly fine, if they serve different needs. A problem arises when both try to answer the same question for the same type of searcher.
+
+Examples:
+
+- A service page called "SEO services in Lagos" and a blog post called "Best SEO services in Lagos".
+- Three short posts titled "SEO tips for small business", "Top SEO tips" and "SEO tips part 2".
+- A product category and a guide, both written to rank for "solar inverter price".
+
+![Diagram: five steps to fix keyword cannibalisation: find, compare, choose, merge or split, redirect](/images/diagrams/keyword-cannibalisation.svg)
+
+*Figure 1: Find the competing pages, choose the winner and give each page a clear job.*
+
+## Why it hurts
+
+**Split signals.** Links, clicks and relevance get shared between pages instead of building up on one strong page.
+
+**Unstable rankings.** Google may swap the pages in and out. One week the guide ranks, the next week the blog post does, and neither settles.
+
+**Weaker pages.** If neither page is clearly the best answer, both can sit below competitors.
+
+**Confused visitors.** People may land on the wrong page for their need, such as a blog post when they wanted to buy.
+
+**Wasted effort.** You spend time writing and promoting pages that compete with each other.
+
+## When it isn't a problem
+
+It's worth knowing that not every overlap is harmful.
+
+- **Different intent.** A page that explains "what is local SEO" and a page that sells "local SEO services" target related searches, but serve different people. That's fine, and often smart.
+- **Two results for one site.** Google sometimes shows two pages from the same site for one search. If both are on page one, that's a win.
+- **Branded searches.** Several pages may appear for your name, and that's normal.
+
+So don't try to remove every overlap. Focus on cases where two pages fight over the same intent and neither ranks well.
+
+## How to find cannibalisation
+
+You don't need paid tools. Here are four methods, from simplest to most thorough.
+
+### Method 1: Search Console, query by query
+
+1. Open the Performance report in [Google Search Console](https://search.google.com/search-console).
+2. Add a filter for a query you care about, such as "how much does seo cost".
+3. Click the Pages tab. You'll see which of your pages appear for that search.
+
+If two or more pages show similar impressions and positions, and especially if their positions swap over time, you've found a likely case.
+
+![Screenshot: Search Console showing three pages that appear for the same query, with similar positions](/images/screenshots/search-console-query-multiple-pages.png)
+
+*Figure 2: One query, three pages. That's a signal to compare and decide.*
+
+Do this for your top ten to twenty queries. Our [Search Console guide](/blog/how-to-use-google-search-console/) explains the reports.
+
+### Method 2: Search Google for your own topic
+
+Type `site:yourwebsite.com "your keyword"` into Google. Every result is a page on your site that mentions it. If several look like they target the same search, note them.
+
+### Method 3: Check your titles and headings
+
+Crawl your site with a tool such as [Screaming Frog](https://www.screamingfrog.co.uk/seo-spider/) and sort titles and H1 headings. Pages with nearly identical titles are prime suspects.
+
+### Method 4: Build a keyword map
+
+List each page with its main keyword and search intent. Duplicates in the keyword column are your overlaps. This is also the best prevention tool. Our guide to [keyword research](/blog/how-to-do-keyword-research/) explains how to build one.
+
+## How to decide what to do
+
+For each overlap, compare the pages on four things:
+
+1. **Search intent.** Do they answer the same question for the same type of person?
+2. **Performance.** Clicks, impressions, positions and conversions.
+3. **Links.** Which page has more backlinks and internal links?
+4. **Quality.** Which is more accurate, complete and useful?
+
+Then choose one of these actions.
+
+| Situation | Best action |
+|---|---|
+| Two pages, same intent, one clearly stronger | **Merge** the weaker into the stronger and redirect |
+| Two pages, different intents but similar titles | **Differentiate**: retarget one page and change titles and content |
+| Near-identical pages, such as print versions or parameters | Use a **canonical tag** to the preferred page |
+| A weak page with no traffic, links or purpose | **Remove** and redirect |
+| Both pages serve different intents and rank well | **Keep**, and link them to each other clearly |
+
+![Screenshot: a keyword map spreadsheet listing keywords, ranking pages, the best page and the action for each](/images/screenshots/cannibalisation-spreadsheet.png)
+
+*Figure 3: A keyword map shows each overlap and the decision you made.*
+
+## How to fix it: step by step
+
+### Merging pages
+
+1. Choose the stronger page, usually the one with more links, traffic and better content.
+2. Move any useful content from the weaker page into it.
+3. Redirect the old address to the kept page with a permanent (301) redirect. Google explains how in its guide to [redirects](https://developers.google.com/search/docs/crawling-indexing/301-redirects).
+4. Update internal links to point directly to the kept page.
+5. Update your sitemap, and request indexing of the kept page.
+
+### Differentiating pages
+
+1. Decide what each page should be for: one informational, one commercial, for example.
+2. Rewrite titles, headings and introductions so the intent is clear.
+3. Change the main keyword of one page to a different, related search.
+4. Add links between them, using descriptive text, such as "see our local SEO service" from the guide.
+5. Remove duplicated sections.
+
+### Using canonical tags
+
+When pages are truly duplicates, point their canonical tag to the page you want to rank. Google's guide to [consolidating duplicate URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls) explains this.
+
+### Fix your internal links
+
+Internal links tell Google which page you consider most important for a topic. Make sure most links, with natural anchor text, point to your chosen page. See our guide to [internal linking](/blog/internal-linking-guide/).
+
+## A worked example
+
+A business has three pages about SEO prices:
+
+- a guide "How much does SEO cost?", with 12 backlinks,
+- a blog post "SEO pricing explained", with 2 backlinks,
+- a post "SEO prices in Nigeria", with none.
+
+Search Console shows all three appear for "how much does seo cost", with positions between 9 and 15, swapping each week. The decision: keep the guide, merge the best parts of the two posts into it, redirect both posts and update links. Within a couple of months, the guide settles in a stable position higher than any of the three had alone.
+
+## How to prevent it
+
+- **Keep a keyword map**, with one main target per page.
+- **Check before you write.** Search your own site for the topic first. If a page exists, update it.
+- **Plan content in clusters.** A pillar page, with supporting pages on specific questions, each with a different focus.
+- **Use clear, distinct titles.** See our guide to [title tags and meta descriptions](/blog/title-tags-and-meta-descriptions-that-get-clicks/).
+- **Run a content audit** once or twice a year. Our guide to [content audits](/blog/how-to-do-a-content-audit/) shows how.
+
+## Mistakes to avoid
+
+- **Deleting pages without redirects.**
+- **Merging pages that serve different intents.**
+- **Panicking over normal overlap.** Check performance first.
+- **Changing everything at once**, so you can't tell what worked.
+- **Forgetting to update internal links** after a merge.
+- **Stuffing the same keyword into every new page.**
+
+## Frequently asked questions
+
+### How do I know if two pages are cannibalising each other?
+Look in Search Console for a query where two of your pages appear with similar positions, especially if they swap places.
+
+### Will Google penalise me for it?
+No penalty. It's a quality and focus problem, not a rule violation. But it can hold back your rankings.
+
+### Should I delete one of the pages?
+Usually not delete, but merge and redirect, so you keep any links and traffic.
+
+### How long until I see improvement?
+Often a few weeks to a couple of months, after Google recrawls the changes.
+
+### Can two pages from my site rank for the same search?
+Yes, and sometimes it's a benefit. The problem is when they swap places and neither performs well.
+
+## Next steps
+
+Open Search Console, pick your three most important searches and check which pages show for each. If you find overlap, use the table above to decide. If you'd like an expert to review your site for cannibalisation, request a [free SEO audit](/free-seo-audit/) or explore our [on-page SEO service](/services/on-page-seo/).
+
+## Sources and further reading
+
+- [Consolidate duplicate URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls): canonical tags and duplicates.
+- [Redirects and Google Search](https://developers.google.com/search/docs/crawling-indexing/301-redirects): how to merge pages correctly.
+- [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide): Google's introduction to SEO.
+- [Google Search Console](https://search.google.com/search-console): find queries with several pages.

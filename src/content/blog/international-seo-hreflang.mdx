@@ -1,0 +1,203 @@
+---
+title: "International SEO and hreflang explained: how to target several countries"
+metaTitle: "International SEO and Hreflang Explained Simply"
+description: "How to target customers in more than one country or language: URL structures, hreflang tags, localisation and mistakes to avoid, in plain English."
+category: "Technical SEO"
+published: 2026-08-12
+updated: 2026-08-12
+draft: false
+---
+
+Many Nigerian businesses don't want to stay local. A hotel wants guests from the UK and the US. A fashion brand wants buyers in Ghana and Canada. A software company wants customers everywhere. Sooner or later someone asks the question: "Should we make a separate version of the site for each country?"
+
+The honest answer is "maybe, but not yet, and not like that". International SEO has a reputation for being complicated, mostly because of a strange-looking piece of code called hreflang. But the ideas behind it are simple, and for most businesses the right first step is much smaller than they expect.
+
+This guide explains international SEO in plain language. You'll learn when you actually need country versions, how to structure your site, what hreflang does, how to set it up and the mistakes that cause trouble. It's written for business owners, not engineers.
+
+## What international SEO means
+
+International SEO is making sure the right version of your website shows up for the right person in the right country or language. It covers three things:
+
+- **Targeting:** deciding which countries and languages you want to reach.
+- **Structure:** organising your site so search engines understand which page is for whom.
+- **Localisation:** adapting content so it genuinely suits each market, beyond translation.
+
+Google explains the basics in its guide to [managing multi-regional and multilingual sites](https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites).
+
+![Diagram: one site with several country and language versions pointing to Google through hreflang](/images/diagrams/international-seo-hreflang.svg)
+
+*Figure 1: Hreflang tells Google which version of a page to show to which searcher.*
+
+## Do you really need separate country versions?
+
+Often, not at first. Ask yourself:
+
+- **Do customers in other countries behave differently?** Different language, currency, prices, delivery or regulations?
+- **Do you have real demand there?** Check your data before building anything.
+- **Can you support it?** A version for the UK needs UK-appropriate prices, contact details, policies and ideally real customers.
+
+If the answer is no, one well-written English site can serve many countries. Many successful businesses work that way, adding specific pages only where they need them, such as "shipping to the UK" or "booking from the US".
+
+You can see which countries already bring visitors in Search Console's Performance report, under the Countries tab.
+
+![Screenshot: Search Console performance by country showing Nigeria, the UK, the US, Ghana, Canada and the UAE](/images/screenshots/search-console-international-countries.png)
+
+*Figure 2: The Countries report shows where your search visitors come from.*
+
+## Language or country: which are you targeting?
+
+This question confuses many people, and getting it right makes everything easier.
+
+- **Language targeting** means you serve people who speak a language, wherever they are. A French page for all French speakers.
+- **Country targeting** means you serve people in a place. A page for customers in Nigeria, with naira prices and local delivery.
+
+You can combine both, such as English for Nigeria and English for the UK. This is useful when the content genuinely differs: currency, spelling, contact details, shipping and legal information.
+
+## Three ways to structure your site
+
+Google describes three main options. Each has trade-offs.
+
+| Structure | Example | Pros | Cons |
+|---|---|---|---|
+| Country domains (ccTLDs) | example.ng, example.co.uk | Strong country signal, clear to users | Expensive, separate sites to build and promote |
+| Subdirectories | example.com/en-ng/, example.com/en-gb/ | Easy to manage, shares your site's strength | Weaker country signal than a ccTLD |
+| Subdomains | ng.example.com | Can be hosted separately | Often treated more separately, extra setup |
+
+**For most small and medium businesses, subdirectories are the best choice.** They're cheaper, easier to maintain and keep all your authority on one domain. That's what we use as a guide for our own site structure, with folders such as `/seo-services/nigeria/` for market pages.
+
+## What hreflang is
+
+Hreflang is a small piece of code that tells Google: "This page has other versions for other languages or countries, and here they are." It helps Google show the right version to the right searcher and reduces the chance of the wrong one appearing.
+
+It doesn't change rankings by itself. It helps with matching. If a visitor in the UK searches and you have an English version for the UK, hreflang helps Google choose that one.
+
+Google's guide to [localised versions of your pages](https://developers.google.com/search/docs/specialty/international/localized-versions) documents the rules.
+
+## What hreflang looks like
+
+The most common way is to add link tags in the head of each page. Here's an example for a page with three English versions and a French one:
+
+```html
+<link rel="alternate" hreflang="en-ng" href="https://www.example.com/en-ng/" />
+<link rel="alternate" hreflang="en-gb" href="https://www.example.com/en-gb/" />
+<link rel="alternate" hreflang="en-us" href="https://www.example.com/en-us/" />
+<link rel="alternate" hreflang="fr-fr" href="https://www.example.com/fr/" />
+<link rel="alternate" hreflang="x-default" href="https://www.example.com/" />
+```
+
+![Screenshot: hreflang link tags in a page's head, one for each version plus an x-default](/images/screenshots/hreflang-tags-in-code.png)
+
+*Figure 3: Every version lists all versions, including itself.*
+
+The pieces:
+
+- **hreflang value:** a language code, optionally followed by a country code, such as `en`, `en-ng`, `fr-fr`. Language codes come from ISO 639-1 and country codes from ISO 3166-1.
+- **href:** the full web address of that version.
+- **x-default:** the fallback for visitors who match none of your versions, often a language chooser or your main page.
+
+## The golden rules
+
+1. **Return links are required.** If the English page points to the French page, the French page must point back. Without return links, Google may ignore the tags.
+2. **Every version lists every version, including itself.**
+3. **Use full, absolute web addresses.**
+4. **Use correct codes.** `en-uk` is wrong, the code for the United Kingdom is `gb`, so use `en-gb`.
+5. **Point to pages that exist and return a normal status.** Don't list redirected or blocked pages.
+6. **Keep canonical tags consistent.** Each version should normally have a canonical tag pointing to itself, not to another language.
+7. **Use hreflang between equivalent pages.** The UK services page links to the Nigeria services page, not to the Nigeria home page.
+
+## Three ways to implement it
+
+**1. Link tags in the page head.** Best for smaller sites. Simple to see and check.
+
+**2. HTTP headers.** Useful for files such as PDFs that don't have an HTML head.
+
+**3. In your XML sitemap.** Good for large sites, because you manage everything in one place. Our site uses a sitemap, and you can add hreflang entries there when you add versions.
+
+Pick one method, and keep it consistent. Mixing them leads to conflicts.
+
+## Localisation: more than translation
+
+Hreflang is the technical half. The content half matters just as much.
+
+- **Language and spelling.** British, American and Nigerian English differ. Use the form your audience expects.
+- **Currency and prices.** Show prices people understand, and say which currency they're in.
+- **Contact details.** A local phone number, address or WhatsApp line builds trust.
+- **Shipping, payment and policies.** Delivery options, taxes, refunds and legal information vary by country.
+- **Examples and references.** Use cases, units and cultural references that fit the market.
+- **Reviews and proof.** Customers in each country want to see people like them.
+
+Machine translation alone is risky. Have a native speaker review anything customers read.
+
+## Avoiding duplicate content problems
+
+If your UK and Nigerian English pages are nearly identical, Google may treat them as duplicates and pick one. Hreflang helps, but it works best when the versions are genuinely different: local prices, local contact information and local examples. If they aren't, it may be better to have one page.
+
+## Common mistakes
+
+- **Building country versions before there's demand.**
+- **Missing return links.** The most common hreflang error.
+- **Wrong codes**, such as `en-uk` or `ng`, with no language.
+- **Pointing hreflang at the wrong page.**
+- **Canonical tags pointing to another language.** They conflict with hreflang.
+- **Automatic redirects by location.** They can block search engines and annoy users. Offer a language or country selector instead.
+- **Machine-translated pages with no review.**
+- **Forgetting to update hreflang** when pages are added or removed.
+- **Blocking versions in robots.txt.** Google must be able to crawl them.
+
+## How to test your setup
+
+- **Check the page source** and confirm the tags are present and complete.
+- **Crawl the site.** A crawler such as [Screaming Frog](https://www.screamingfrog.co.uk/seo-spider/) reports hreflang errors, including missing return links.
+- **Search as a local.** Use a private window and check results for the target country if possible.
+- **Monitor in [Google Search Console](https://search.google.com/search-console)** for indexing issues and country performance.
+
+## A sensible plan for a Nigerian business going global
+
+1. **Start with one strong English site.** Clear pages, prices and contact details.
+2. **Check your data.** Which countries already visit and enquire?
+3. **Add targeted pages**, not whole sites, for markets with demand, for example a page about delivery to the UK.
+4. **Create full country versions only when needed.** Use subdirectories, and add hreflang.
+5. **Localise properly.** Currency, details, examples and proof.
+6. **Build local trust.** Reviews, listings and mentions from that country.
+7. **Measure by country.** Calls, leads and sales, not just visits.
+
+Our guide to [SEO in Nigeria](/blog/seo-in-nigeria-practical-guide/) covers the home market, and our [Nigeria services page](/seo-services/nigeria/) shows how a market page can be built.
+
+## Checklist
+
+- Do I have real demand in this country or language?
+- Have I chosen subdirectories, domains or subdomains deliberately?
+- Does each version have a self-referencing canonical tag?
+- Does every version list all versions, with return links?
+- Are language and country codes correct?
+- Is the content truly localised?
+- Is there an x-default?
+- Have I tested with a crawler and Search Console?
+
+## Frequently asked questions
+
+### Do I need hreflang for a one-language site?
+Not unless you have multiple versions of pages for different languages or countries.
+
+### Does hreflang improve rankings?
+Not directly. It helps Google show the right version to the right person, which improves relevance for visitors.
+
+### Should I use a country domain like .ng?
+Only if you're committed to running a separate site for that country. For most businesses, subdirectories are simpler.
+
+### Can I use one page for several countries?
+Yes, if the content works for all of them. Add specific pages only where differences matter.
+
+### What if my versions are all in English?
+That's common. Hreflang with country codes, such as en-ng and en-gb, is useful when pages differ in currency, contact details or terms.
+
+## Next steps
+
+Check which countries already send you visitors in Search Console. If one stands out, plan one useful page for it, before building a whole new site. If you'd like help planning your international structure, request a [free SEO audit](/free-seo-audit/) or explore our [technical SEO service](/services/technical-seo/).
+
+## Sources and further reading
+
+- [Managing multi-regional and multilingual sites](https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites): Google's overview of structures and targeting.
+- [Localised versions of your pages](https://developers.google.com/search/docs/specialty/international/localized-versions): the hreflang rules.
+- [Google Search Console](https://search.google.com/search-console): performance by country.
+- [Screaming Frog SEO Spider](https://www.screamingfrog.co.uk/seo-spider/): check hreflang across your site.
