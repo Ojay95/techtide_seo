@@ -9,6 +9,7 @@ const schema = z.object({
   published: z.coerce.date().optional(),
   updated: z.coerce.date(),
   draft: z.boolean().default(false),
+  image: z.string().optional(),
 });
 
 export const collections = {

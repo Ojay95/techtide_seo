@@ -19,7 +19,7 @@ const author = AUTHOR.name
   ? { '@type': 'Person', name: AUTHOR.name, ...(AUTHOR.role ? { jobTitle: AUTHOR.role } : {}), ...(AUTHOR.url ? { url: AUTHOR.url, sameAs: [AUTHOR.url] } : {}), worksFor: { '@id': `${SITE.url}/#organization` } }
   : { '@type': 'Organization', name: SITE.name, url: SITE.url };
 const schema = [
-  { '@context': 'https://schema.org', '@type': 'Article', headline: d.title, description: d.description, datePublished: pub.toISOString(), dateModified: d.updated.toISOString(),
+  { '@context': 'https://schema.org', '@type': 'Article', headline: d.title, image: d.image ? [`${SITE.url}${d.image}`] : undefined, description: d.description, datePublished: pub.toISOString(), dateModified: d.updated.toISOString(),
     image: `${SITE.url}/images/og-default.jpg`,
     author, publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url, logo: { '@type': 'ImageObject', url: `${SITE.url}/favicon.svg` } }, mainEntityOfPage: url },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -28,7 +28,7 @@ const schema = [
     { '@type': 'ListItem', position: 3, name: d.title }] },
 ];
 ---
-<Base title={d.metaTitle ?? `${d.title} | ${SITE.name}`} description={d.description} schema={schema}>
+<Base title={d.metaTitle ?? `${d.title} | ${SITE.name}`} description={d.description} schema={schema} image={d.image}>
   <section class="gridbg" style="padding:56px 0 44px"><div class="w">
     <nav class="mono crumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href={`/${section}/`}>{kind === 'guides' ? 'Guides' : 'Blog'}</a> / {d.category}</nav>
     <h1 class="h1" style="font-size:clamp(32px,4.6vw,52px);max-width:820px;margin:14px 0">{d.title}</h1>
@@ -37,6 +37,7 @@ const schema = [
   <section class="sec" style="padding-top:48px"><div class="w art">
     <aside aria-label="Table of contents"><div class="p toc" style="position:sticky;top:16px"><div class="mono" style="margin-bottom:6px">In this {kind === 'guides' ? 'guide' : 'post'}</div>{toc.map((h: any) => <a href={`#${h.slug}`}>{h.text}</a>)}</div></aside>
     <article>
+      {d.image && <figure class="art-hero"><img src={d.image} alt={d.title} width="1200" height="630" fetchpriority="high" decoding="async" /></figure>}
       <div class="p" style="border:2px solid var(--accent);margin-bottom:32px;max-width:720px"><div class="mono">In short</div><p style="margin:8px 0 0;font-size:18px">{d.description}</p></div>
       <div class="prose"><Content /></div>
       <ImageLightbox />

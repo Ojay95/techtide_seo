@@ -11,13 +11,14 @@ const schema = {
     options: [
       { label: 'SEO basics', value: 'SEO basics' }, { label: 'Local SEO', value: 'Local SEO' },
       { label: 'Technical SEO', value: 'Technical SEO' }, { label: 'On-page SEO', value: 'On-page SEO' },
-      { label: 'Content', value: 'Content' }, { label: 'Link building', value: 'Link building' }, { label: 'Pricing', value: 'Pricing' },
+      { label: 'Content', value: 'Content' }, { label: 'Link building', value: 'Link building' }, { label: 'Pricing', value: 'Pricing' }, { label: 'AI and SEO', value: 'AI and SEO' },
     ],
     defaultValue: 'SEO basics',
   }),
   published: fields.date({ label: 'Published date' }),
   updated: fields.date({ label: 'Last updated' }),
   draft: fields.checkbox({ label: 'Draft (hidden from the site)', defaultValue: true }),
+  image: fields.text({ label: 'Featured image path (for example /images/featured/blog/my-post.jpg)' }),
   content: fields.mdx({ label: 'Content' }),
 };
 

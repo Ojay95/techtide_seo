@@ -2,13 +2,17 @@
 import Visual from './Visual.astro';
 const { entry, kind, featured = false } = Astro.props;
 const d = entry.data;
-const kinds: Record<string, string> = { 'SEO basics': 'chart', 'Local SEO': 'heat', 'Technical SEO': 'tech', 'On-page SEO': 'serp', Content: 'bars', 'Link building': 'net', Pricing: 'bars' };
+const kinds: Record<string, string> = { 'SEO basics': 'chart', 'Local SEO': 'heat', 'Technical SEO': 'tech', 'On-page SEO': 'serp', Content: 'bars', 'Link building': 'net', Pricing: 'bars', 'AI and SEO': 'net' };
 const date = d.published ?? d.updated;
 const when = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 const minutes = Math.max(1, Math.round((entry.body ?? '').split(/\s+/).length / 200));
 ---
 <a class={`post-card${featured ? ' featured' : ''}`} href={`/${kind}/${entry.id}/`} data-cat={d.category}>
-  <div class="pc-vis gridbg"><div class="pc-vis-in"><Visual kind={kinds[d.category] ?? 'chart'} /></div></div>
+  {d.image ? (
+    <div class="pc-vis pc-img"><img src={d.image} alt="" width="1200" height="630" loading={featured ? 'eager' : 'lazy'} decoding="async" /></div>
+  ) : (
+    <div class="pc-vis gridbg"><div class="pc-vis-in"><Visual kind={kinds[d.category] ?? 'chart'} /></div></div>
+  )}
   <div class="pc-body">
     <span class="pill">{d.category}</span>
     <h3>{d.title}</h3>

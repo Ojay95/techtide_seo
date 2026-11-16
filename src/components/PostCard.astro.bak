@@ -1,0 +1,19 @@
+---
+import Visual from './Visual.astro';
+const { entry, kind, featured = false } = Astro.props;
+const d = entry.data;
+const kinds: Record<string, string> = { 'SEO basics': 'chart', 'Local SEO': 'heat', 'Technical SEO': 'tech', 'On-page SEO': 'serp', Content: 'bars', 'Link building': 'net', Pricing: 'bars' };
+const date = d.published ?? d.updated;
+const when = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+const minutes = Math.max(1, Math.round((entry.body ?? '').split(/\s+/).length / 200));
+---
+<a class={`post-card${featured ? ' featured' : ''}`} href={`/${kind}/${entry.id}/`} data-cat={d.category}>
+  <div class="pc-vis gridbg"><div class="pc-vis-in"><Visual kind={kinds[d.category] ?? 'chart'} /></div></div>
+  <div class="pc-body">
+    <span class="pill">{d.category}</span>
+    <h3>{d.title}</h3>
+    <p class="m">{d.description}</p>
+    <div class="mono m">{when} · {minutes} min read</div>
+    <span class="pc-more">{kind === 'guides' ? 'Read the guide' : 'Read the article'} →</span>
+  </div>
+</a>
